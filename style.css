@@ -1,0 +1,79 @@
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('font/Poppins/Poppins-Regular.ttf');
+}
+
+* {
+    font-family: 'Poppins-Regular';
+}
+
+body {
+    background-color: #f8fafc;
+}
+#sidebar {
+    width: 280px;
+    min-height: 100vh;
+}
+
+.nav-link {
+    color: #64748b;
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.avatar-circle {
+    width: 48px;
+    height: 48px;
+    background-color: #2a8168;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.bg-blue-custom { background-color: #eef7ff; }
+.bg-green-custom { background-color: #f0fdf4; }
+
+.icon-square {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn-success {
+    background-color: #2a8168;
+    border: none;
+}
+
+.shadow-xs {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+@media (max-width: 992px) {
+    #sidebar {
+        display: none;
+    }
+}
