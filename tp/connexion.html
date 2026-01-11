@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - TutoAfrica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-5 d-none d-md-block text-center">
+            <img src="assets/image/PhotoInscription_124457.jpg"
+                 alt="Image connexion"
+                 class="img-fluid image-inscription shadow">
+        </div>
+
+        <div class="col-md-5 col-lg-4">
+            <div class="card carte-inscription">
+                <div class="text-center mb-4">
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="#2a8168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <span class="fw-bold text-secondary">TutoAfrica</span>
+                    </div>
+                    <h2 class="fw-bold h3 mb-1">Connexion</h2>
+                    <p class="text-muted small">Connectez-vous à votre compte</p>
+                </div>
+
+                <form id="form-connexion">
+                    <div class="mb-3">
+                        <label for="email-connexion" class="etiquette-formulaire">Adresse Email</label>
+                        <input type="email" id="email-connexion" class="form-control champ-formulaire" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password-connexion" class="etiquette-formulaire">Mot de passe</label>
+                        <input type="password" id="password-connexion" class="form-control champ-formulaire" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-inscription w-100 text-white mb-3">
+                        Se connecter
+                    </button>
+
+                    <div class="separateur-ou">
+                        <span>OU</span>
+                    </div>
+
+                    <button type="button" id="bouton-google" class="btn bouton-google w-100">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="me-2">
+                            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+                            <path d="M9.003 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9.003 18z" fill="#34A853"/>
+                            <path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.96H.957C.347 6.175 0 7.55 0 9.002c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                            <path d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.426 0 9.003 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill="#EA4335"/>
+                        </svg>
+                        Continuer avec Google
+                    </button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="small text-muted">
+                        Pas encore de compte ?
+                        <a href="inscriptionEtudiant.html" class="text-dark fw-bold text-decoration-none">S'inscrire</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/src/connexion.js"></script>
+</body>
+</html>
