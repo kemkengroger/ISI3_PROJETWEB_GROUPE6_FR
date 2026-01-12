@@ -1,259 +1,234 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
-    <title>Trouver un Tuteur</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
- 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutoAfrica - Nos Experts</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* ====== VARIABLES ====== */
         :root {
-            --primary-green: #1f8f5f;
-            --light-gray: #f5f6f7;
-            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --primary-green: #2D7D62;
+            --sidebar-width: 280px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body {
-            background-color: var(--light-gray);
-            font-family: "Segoe UI", sans-serif;
+        [data-bs-theme="light"] {
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --sidebar-bg: #ffffff;
+            --text-main: #1e293b;
+            --border-color: rgba(0,0,0,0.05);
         }
 
-        /* ====== entete ====== */
-        .app-header {
-            background: #fff;
-            padding: 16px 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        [data-bs-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --sidebar-bg: #111827;
+            --text-main: #f8fafc;
+            --border-color: rgba(255,255,255,0.1);
         }
 
-        .back-btn {
-            color: var(--primary-green);
-            font-weight: 500;
-            cursor: pointer;
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main);
+            transition: var(--transition);
         }
 
-        .filter-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            padding: 20px;
+        /* SIDEBAR SYNC */
+        .sidebar-wrapper { padding: 20px; height: 100vh; position: fixed; width: var(--sidebar-width); z-index: 1000; }
+        .sidebar { 
+            background: var(--sidebar-bg); border: 1px solid var(--border-color); border-radius: 24px; 
+            height: 100%; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-
-     
-        .info-text {
-            font-size: 1.1rem;
-            font-weight: 600;
+        .logo-area { padding: 30px 20px; text-align: center; }
+        .logo-area a { text-decoration: none; color: var(--primary-green); font-weight: 800; font-size: 1.4rem; }
+        
+        .profile-card-sidebar {
+            margin: 0 15px 25px; padding: 15px; background: var(--bg-body); border-radius: 18px;
+            display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;
+            transition: var(--transition); border: 1px solid var(--border-color);
         }
+        .avatar-sidebar { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
 
-       
+        .nav-link {
+            margin: 4px 15px; padding: 12px 18px; border-radius: 14px;
+            color: #94a3b8; font-weight: 600; transition: 0.3s;
+        }
+        .nav-link:hover { background: rgba(45, 125, 98, 0.1); color: var(--primary-green); }
+        .nav-link.active { background: var(--primary-green) !important; color: white !important; }
+
+        /* MAIN CONTENT */
+        .main-content { margin-left: var(--sidebar-width); padding: 40px; }
+
+        /* CARDS EXPERTS */
         .tutor-card {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: var(--card-shadow);
-            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 25px;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            transition: var(--transition);
+        }
+        .tutor-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--primary-green); }
+
+        .avatar-box {
+            width: 60px; height: 60px; border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary-green), #57cc99);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem; font-weight: 800;
         }
 
-        .avatar {
-            width: 48px;
-            height: 48px;
-            background-color: var(--primary-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 22px;
+        .status-badge {
+            font-size: 0.65rem; font-weight: 800; padding: 6px 12px; border-radius: 10px; text-transform: uppercase;
+        }
+        .online { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .offline { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
+
+        .subject-pill {
+            background: var(--bg-body); color: var(--primary-green);
+            padding: 6px 14px; border-radius: 10px; font-size: 0.75rem; font-weight: 700;
         }
 
-        .status-badge.active {
-            background-color: #d1f2e3;
-            color: var(--primary-green);
+        .btn-call {
+            background: var(--primary-green); color: white; border: none;
+            border-radius: 15px; padding: 12px; width: 100%; font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-call:hover:not(:disabled) { transform: scale(1.02); filter: brightness(1.1); }
+
+        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); margin-top: auto; }
+        .lang-select { 
+            background: var(--bg-body); border: 1px solid var(--border-color); 
+            color: inherit; border-radius: 12px; padding: 8px; width: 100%; font-size: 0.8rem; font-weight: 700;
         }
 
-        .status-badge.absent {
-            background-color: #e0e0e0;
-            color: #6c757d;
-        }
-
-        .subject-badge {
-            background-color: #e6f0ff;
-            color: #0d6efd;
-            border-radius: 20px;
-            padding: 5px 12px;
-            font-size: 0.8rem;
-            margin: 2px;
-            display: inline-block;
-        }
-
-        .btn-session {
-            background-color: var(--primary-green);
-            color: #fff;
-            border-radius: 10px;
-            padding: 10px;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-session:hover {
-            background-color: #176f4a;
-        }
-
-        .btn-disabled {
-            background-color: #ccc;
-            color: #666;
-            border-radius: 10px;
-            padding: 10px;
-            border: none;
-            cursor: not-allowed;
+        @media (max-width: 991px) {
+            .sidebar-wrapper { display: none; }
+            .main-content { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
-
 <body>
 
-<!-- ======entete ====== -->
-<header class="app-header d-flex align-items-center gap-3">
-    <span class="back-btn">← Retour</span>
-    <h4 class="mb-0">Trouver un Tuteur</h4>
-</header>
+<div class="sidebar-wrapper">
+    <aside class="sidebar">
+        <div class="logo-area">
+            <a href="index.html">TutoAfrica</a>
+        </div>
 
-<!-- ====== menu principal ====== -->
-<main class="container my-4">
+        <a href="profil.html" class="profile-card-sidebar">
+            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="avatar-sidebar" alt="Profil">
+            <div>
+                <div class="fw-bold text-truncate small">Étudiant Demo</div>
+                <div class="text-muted" style="font-size: 0.7rem;">Voir profil</div>
+            </div>
+        </a>
+        
+        <nav class="nav nav-pills flex-column">
+            <a href="epreuves.html" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i> <span>Épreuves</span></a>
+            <a href="tuteuriA.html" class="nav-link"><i class="bi bi-robot me-3"></i> <span>Tuteur IA</span></a>
+            <a href="tuteurD.html" class="nav-link active"><i class="bi bi-people me-3"></i> <span>Experts Tuteurs</span></a>
+        </nav>
 
-    <!-- listes des matieres -->
-    <div class="filter-card mb-4">
-        <label for="subjectFilter" class="form-label fw-semibold">Filtrer par matière</label>
-        <select id="subjectFilter" class="form-select">
-            <option value="all">Toutes les matières</option>
-            <option value="Mathématiques">Mathématiques</option>
-            <option value="Physique">Physique</option>
-            <option value="Informatique">Informatique</option>
-            <option value="Littérature camerounaise">Littérature camerounaise</option>
-            <option value="Français">Français</option>
-            <option value="Anglais">Anglais</option>
-            <option value="Histoire-Géographie">Histoire-Géographie</option>
-        </select>
+        <div class="sidebar-footer">
+            <div class="mb-3">
+                <select class="lang-select" id="langSelector" onchange="changeSystem(this.value)">
+                    <option value="fr">🇨🇲 Francophone</option>
+                    <option value="en">🇬🇧 Anglophone</option>
+                </select>
+            </div>
+            <a href="index.html" class="text-danger text-decoration-none fw-bold small ps-2">
+                <i class="bi bi-power me-2"></i> Déconnexion
+            </a>
+        </div>
+    </aside>
+</div>
+
+<main class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <a href="boardEtudiant.html" class="btn btn-light rounded-circle shadow-sm" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+        <div class="text-end">
+            <h2 class="fw-800 mb-0">Experts Tuteurs</h2>
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3" id="currentSubject">Général</span>
+        </div>
     </div>
 
-    
-    <p class="info-text mb-3" id="teacherCount"></p>
-
-    
-    <div class="row g-4" id="tutorList"></div>
-
+    <div class="row g-4" id="tutorGrid">
+        </div>
 </main>
 
 <script>
-    // ====== donnees======
     const tutors = [
-        {
-            name: "Prof. Jean Kamga",
-            status: "Actif",
-            sessions: 87,
-            description: "Enseignant en mathématiques, 10 ans d'expérience",
-            subjects: ["Mathématiques", "Physique"]
-        },
-        {
-            name: "Mme Clarisse Ndzié",
-            status: "Absent",
-            sessions: 42,
-            description: "Professeure de français et littérature",
-            subjects: ["Français", "Littérature camerounaise"]
-        },
-        {
-            name: "Prof. Alain Tchami",
-            status: "Actif",
-            sessions: 65,
-            description: "Spécialiste en informatique et algorithmique",
-            subjects: ["Informatique"]
-        },
-        {
-            name: "M. Daniel Mbah",
-            status: "Actif",
-            sessions: 53,
-            description: "Professeur d'anglais bilingue",
-            subjects: ["Anglais"]
-        },
-        {
-            name: "Mme Rose Ndzi",
-            status: "Absent",
-            sessions: 31,
-            description: "Enseignante en histoire-géographie",
-            subjects: ["Histoire-Géographie"]
-        },
-        {
-            name: "Prof. Eric Fouda",
-            status: "Actif",
-            sessions: 91,
-            description: "Physicien, ancien préparateur concours",
-            subjects: ["Physique"]
-        }
+        { name: "Pr. Jean Kamga", sys: "fr", subjects: ["Mathématiques", "Physique"], status: "online", exp: "12 ans" },
+        { name: "Dr. Sarah Sunjo", sys: "both", subjects: ["Mathematics", "Biology"], status: "online", exp: "9 ans" },
+        { name: "Mr. Elvis Teke", sys: "en", subjects: ["English", "History"], status: "online", exp: "10 ans" },
+        { name: "Mme Clarisse Njé", sys: "fr", subjects: ["Français", "Littérature"], status: "offline", exp: "6 ans" },
+        { name: "Ing. Steve Kamga", sys: "fr", subjects: ["Informatique", "Mathématiques"], status: "online", exp: "4 ans" }
     ];
 
-    const tutorList = document.getElementById("tutorList");
-    const teacherCount = document.getElementById("teacherCount");
-    const subjectFilter = document.getElementById("subjectFilter");
+    function updateTheme() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+    }
 
-    
-    function renderTutors(filter) {
-        tutorList.innerHTML = "";
+    function changeSystem(v) {
+        localStorage.setItem('appLang', v);
+        render();
+    }
 
-        const filteredTutors = tutors.filter(tutor =>
-            filter === "all" || tutor.subjects.includes(filter)
-        );
+    function render() {
+        updateTheme();
+        const urlParams = new URLSearchParams(window.location.search);
+        const subject = urlParams.get('subject') || "Toutes les matières";
+        const lang = localStorage.getItem('appLang') || 'fr';
+        
+        document.getElementById('langSelector').value = lang;
+        document.getElementById('currentSubject').innerText = subject;
 
-        teacherCount.textContent = `${filteredTutors.length} enseignants disponibles`;
+        const grid = document.getElementById('tutorGrid');
+        grid.innerHTML = "";
 
-        filteredTutors.forEach(tutor => {
-            const isActive = tutor.status === "Actif";
+        const filtered = tutors.filter(t => {
+            const matchLang = (t.sys === lang || t.sys === "both");
+            const matchSub = (subject === "all" || subject === "Toutes les matières" || t.subjects.includes(subject));
+            return matchLang && matchSub;
+        });
 
-            tutorList.innerHTML += `
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="tutor-card">
-                        <div>
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="avatar">👤</div>
-                                <div>
-                                    <div class="fw-bold">${tutor.name}</div>
-                                    <span class="badge status-badge ${isActive ? "active" : "absent"}">
-                                        ${tutor.status}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <p class="mb-1"><strong>${tutor.sessions}</strong> sessions</p>
-                            <p class="text-muted">${tutor.description}</p>
-
-                            <div class="mb-3">
-                                ${tutor.subjects.map(s => `<span class="subject-badge">${s}</span>`).join("")}
-                            </div>
+        filtered.forEach(t => {
+            const isOnline = t.status === 'online';
+            grid.innerHTML += `
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="tutor-card d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div class="avatar-box shadow-sm">${t.name.split(' ').pop().charAt(0)}</div>
+                            <span class="status-badge ${isOnline ? 'online' : 'offline'}">
+                                <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>
+                                ${isOnline ? (lang === 'fr' ? 'Disponible' : 'Online') : (lang === 'fr' ? 'Absent' : 'Offline')}
+                            </span>
                         </div>
-
-                        ${
-                            isActive
-                                ? `<button class="btn-session">🎥 Lancer la Session</button>`
-                                : `<button class="btn-disabled" disabled>Non disponible</button>`
-                        }
+                        <h5 class="fw-bold mb-1">${t.name}</h5>
+                        <p class="text-muted small mb-4"><i class="bi bi-mortarboard me-2"></i>${t.exp} d'expérience</p>
+                        <div class="d-flex flex-wrap gap-2 mb-4">
+                            ${t.subjects.map(s => `<span class="subject-pill">${s}</span>`).join('')}
+                        </div>
+                        <button class="btn-call mt-auto" ${!isOnline ? 'disabled style="opacity:0.3"' : ''}>
+                            ${lang === 'fr' ? 'Démarrer la session' : 'Start Session'}
+                        </button>
                     </div>
                 </div>
             `;
         });
     }
 
-    
-    subjectFilter.addEventListener("change", e => {
-        renderTutors(e.target.value);
-    });
-
-    
-    renderTutors("all");
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+    window.onload = render;
 </script>
-
 </body>
 </html>
