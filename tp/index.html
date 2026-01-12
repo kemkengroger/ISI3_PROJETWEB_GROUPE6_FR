@@ -16,17 +16,15 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* THEME LIGHT - BLEU PALE */
         [data-bs-theme="light"] {
-            --bg-body: #f1f5f9; /* Bleu pâle doux */
+            --bg-body: #f1f5f9;
             --bg-card: #ffffff;
             --text-main: #1e293b;
             --nav-bg: rgba(255, 255, 255, 0.9);
         }
 
-        /* THEME DARK - BLEU NUIT IA */
         [data-bs-theme="dark"] {
-            --bg-body: #0f172a; /* Bleu nuit profond */
+            --bg-body: #0f172a;
             --bg-card: #1e293b;
             --text-main: #f8fafc;
             --nav-bg: rgba(15, 23, 42, 0.9);
@@ -43,22 +41,33 @@
         .navbar { 
             background: var(--nav-bg) !important; 
             backdrop-filter: blur(10px);
-            height: 80px;
+            height: 85px;
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-
         .navbar-brand { color: var(--primary-green) !important; font-weight: 800; font-size: 1.5rem; }
+
+        /* BUTTONS */
+        .btn-login {
+            color: var(--text-main);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            padding: 10px 15px;
+        }
+        .btn-login:hover { color: var(--primary-green); }
 
         .btn-signup { 
             background: var(--primary-green); 
             color: white !important; 
-            border-radius: 12px; 
-            padding: 10px 24px; 
-            font-weight: 600;
+            border-radius: 14px; 
+            padding: 12px 24px; 
+            font-weight: 700;
             box-shadow: 0 4px 15px var(--primary-glow);
+            transition: var(--transition);
         }
+        .btn-signup:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* HERO SECTION */
+        /* HERO & CARDS */
         .hero-section { padding: 100px 0; }
         .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
         
@@ -67,49 +76,31 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); 
             transition: var(--transition);
         }
-        .img-hero:hover { transform: scale(1.02); }
 
         .btn-start { 
-            background: #3498DB; 
-            color: white; 
-            border-radius: 14px; 
-            padding: 16px 35px; 
-            font-weight: 700; 
-            border: none;
+            background: #3498DB; color: white; border-radius: 14px; 
+            padding: 16px 35px; font-weight: 700; border: none;
             transition: var(--transition);
         }
-        .btn-start:hover { background: #2980b9; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3); }
+        .btn-start:hover { background: #2980b9; transform: translateY(-3px); }
 
-        /* FEATURES CARDS */
         .card-feat {
-            background: var(--bg-card);
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 30px;
-            padding: 40px;
-            height: 100%;
-            transition: var(--transition);
+            background: var(--bg-card); border-radius: 30px; padding: 40px;
+            height: 100%; transition: var(--transition); border: 1px solid rgba(0,0,0,0.05);
         }
         .card-feat:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
         .icon-circle {
-            width: 60px; height: 60px;
-            border-radius: 18px;
+            width: 60px; height: 60px; border-radius: 18px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem; margin-bottom: 25px;
         }
 
-        /* FOOTER */
         footer { background: #070b14; color: #94a3b8; padding: 80px 0 30px; }
-        footer h6 { color: white; font-weight: 700; margin-bottom: 20px; }
 
         .lang-select-nav {
-            background: transparent;
-            border: 1px solid rgba(125,125,125,0.2);
-            border-radius: 10px;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            background: transparent; border: 1px solid rgba(125,125,125,0.2);
+            border-radius: 10px; padding: 5px 10px; font-size: 0.8rem; font-weight: 700; color: inherit;
         }
     </style>
 </head>
@@ -121,12 +112,19 @@
                 <i class="bi bi-mortarboard-fill me-2"></i>TutoAfrica
             </a>
 
-            <div class="d-flex align-items-center gap-3">
-                <select class="lang-select-nav me-2" onchange="changeLang(this.value)">
+            <div class="d-flex align-items-center gap-2 gap-md-4">
+                <select class="lang-select-nav d-none d-sm-block" onchange="changeLang(this.value)">
                     <option value="fr">FR</option>
                     <option value="en">EN</option>
                 </select>
-                <a href="boardEtudiant.html" class="btn btn-signup d-none d-md-block" data-fr="Mon Espace" data-en="My Space">Mon Espace</a>
+                
+                <a href="boardEtudiant.html" class="btn-login small" data-fr="Se connecter" data-en="Login">
+                    Se connecter
+                </a>
+                
+                <a href="inscription.html" class="btn-signup d-none d-md-block" data-fr="Créer un compte" data-en="Create account">
+                    Créer un compte
+                </a>
             </div>
         </div>
     </nav>
@@ -158,7 +156,7 @@
         <div class="container py-5">
             <div class="text-center mb-5">
                 <h2 class="fw-800 display-5 mb-3" data-fr="Pourquoi choisir TutoAfrica ?" data-en="Why choose TutoAfrica?">Pourquoi choisir TutoAfrica ?</h2>
-                <p class="text-muted" data-fr="Une approche hybride unique combinant humain et technologie." data-en="A unique hybrid approach combining human and technology.">Une approche hybride unique combinant humain et technologie.</p>
+                <p class="text-muted">Une approche hybride unique combinant humain et technologie.</p>
             </div>
             
             <div class="row g-4">
@@ -168,7 +166,7 @@
                             <i class="bi bi-robot"></i>
                         </div>
                         <h4 class="fw-bold" data-fr="Tuteur IA 24h/7" data-en="24/7 AI Tutor">Tuteur IA 24h/7</h4>
-                        <p class="text-muted" data-fr="Une intelligence artificielle entraînée sur les programmes africains pour répondre à toutes vos questions." data-en="An AI trained on African curricula to answer all your questions.">Une intelligence artificielle entraînée sur les programmes africains pour répondre à toutes vos questions.</p>
+                        <p class="text-muted" data-fr="Une intelligence artificielle entraînée sur les programmes africains." data-en="An AI trained on African curricula.">Une intelligence artificielle entraînée sur les programmes africains.</p>
                     </div>
                 </div>
 
@@ -178,7 +176,7 @@
                             <i class="bi bi-people"></i>
                         </div>
                         <h4 class="fw-bold" data-fr="Experts Bénévoles" data-en="Volunteer Experts">Experts Bénévoles</h4>
-                        <p class="text-muted" data-fr="Des enseignants passionnés disponibles pour des sessions de tutorat en direct." data-en="Passionate teachers available for live tutoring sessions.">Des enseignants passionnés disponibles pour des sessions de tutorat en direct.</p>
+                        <p class="text-muted" data-fr="Des enseignants passionnés pour des sessions en direct." data-en="Passionate teachers for live sessions.">Des enseignants passionnés pour des sessions en direct.</p>
                     </div>
                 </div>
 
@@ -188,7 +186,7 @@
                             <i class="bi bi-journal-check"></i>
                         </div>
                         <h4 class="fw-bold" data-fr="Épreuves & Examens" data-en="Tests & Exams">Épreuves & Examens</h4>
-                        <p class="text-muted" data-fr="Accédez à une vaste bibliothèque d'anciennes épreuves corrigées pour mieux vous préparer." data-en="Access a vast library of past corrected exam papers to better prepare yourself.">Accédez à une vaste bibliothèque d'anciennes épreuves corrigées pour mieux vous préparer.</p>
+                        <p class="text-muted" data-fr="Vaste bibliothèque d'anciennes épreuves corrigées." data-en="Vast library of past corrected exam papers.">Vaste bibliothèque d'anciennes épreuves corrigées.</p>
                     </div>
                 </div>
             </div>
@@ -196,35 +194,26 @@
     </section>
 
     <footer>
-        <div class="container">
+        <div class="container text-center text-md-start">
             <div class="row g-4">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <h5 class="text-white fw-800 mb-4">TutoAfrica</h5>
                     <p class="small">L'excellence académique à portée de main, partout sur le continent.</p>
                 </div>
-                <div class="col-md-4">
-                    <h6 data-fr="Navigation" data-en="Navigation">Navigation</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="boardEtudiant.html" class="text-decoration-none text-muted" data-fr="Tableau de bord" data-en="Dashboard">Tableau de bord</a></li>
-                        <li class="mb-2"><a href="tuteuriA.html" class="text-decoration-none text-muted" data-fr="Tuteur IA" data-en="AI Tutor">Tuteur IA</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <h6 data-fr="Communauté" data-en="Community">Communauté</h6>
-                    <div class="d-flex gap-3 justify-content-md-end">
+                <div class="col-md-6 text-md-end">
+                    <h6 data-fr="Suivez-nous" data-en="Follow us">Suivez-nous</h6>
+                    <div class="d-flex gap-3 justify-content-md-end justify-content-center">
                         <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="text-white fs-5"><i class="bi bi-whatsapp"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="my-5 opacity-10">
-            <div class="text-center small">© 2025 TutoAfrica. <span data-fr="Fait avec passion pour l'Afrique." data-en="Made with passion for Africa.">Fait avec passion pour l'Afrique.</span></div>
+            <div class="text-center small">© 2026 TutoAfrica. Fait avec passion pour l'Afrique.</div>
         </div>
     </footer>
 
     <script>
-        // DETECTION DU THEME SYSTEME
         const updateTheme = () => {
             const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
@@ -232,7 +221,6 @@
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
         updateTheme();
 
-        // CHANGEMENT DE LANGUE
         function changeLang(lang) {
             localStorage.setItem('appLang', lang);
             document.querySelectorAll('[data-en]').forEach(el => {
@@ -241,10 +229,10 @@
             });
         }
 
-        // Init au chargement
         window.onload = () => {
             const savedLang = localStorage.getItem('appLang') || 'fr';
-            document.querySelector('.lang-select-nav').value = savedLang;
+            const select = document.querySelector('.lang-select-nav');
+            if(select) select.value = savedLang;
             changeLang(savedLang);
         }
     </script>
