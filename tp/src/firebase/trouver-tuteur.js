@@ -1,8 +1,100 @@
-// trouver-tuteur.js
-import { TuteurManager } from "./src/tuteurs-backend.js";
+// src/trouver-tuteur.js
+import { onAuthChange, logoutUser } from './auth.js';
+import { getAllTutors, getTutorById, addToFavorites, isTutorFavorite } from './firestore-service.js';
 
+// Gestionnaire principal
+class TuteurManager {
+  constructor() {
+    this.currentUser = null;
+    this.userProfile = null;
+    this.initAuth();
+  }
+
+  // Initialiser l'authentification
+  initAuth() {
+    onAuthChange(async (user) => {
+      this.currentUser = user;
+      console.log('Utilisateur:', user ? user.email : 'Non connecté');
+      this.updateUIAfterAuth();
+    });
+  }
+
+  // Mettre à jour l'interface après authentification
+  updateUIAfterAuth() {
+    const authButtons = document.getElementById('authButtons');
+    const userInfo = document.getElementById('userInfo');
+    
+    if (this.currentUser) {
+      // Masquer boutons connexion/inscription
+      if (authButtons) authButtons.style.display = 'none';
+      
+      // Afficher info utilisateur
+      if (userInfo) {
+        userInfo.style.display = 'flex';
+        userInfo.innerHTML = `
+          <span class="me-2">👤 ${this.currentUser.email}</span>
+          <button class="btn btn-outline-danger btn-sm" id="logoutBtn">
+            Déconnexion
+          </button>
+        `;
+        
+        // Ajouter écouteur pour déconnexion
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+          try {
+            await logoutUser();
+            window.location.reload();
+          } catch (error) {
+            alert('Erreur déconnexion: ' + error.message);
+          }
+        });
+      }
+    } else {
+      // Afficher boutons connexion/inscription
+      if (authButtons) authButtons.style.display = 'block';
+      if (userInfo) userInfo.style.display = 'none';
+    }
+  }
+
+  // Récupérer tous les tuteurs
+  async getAllTuteurs(matiere = null) {
+    try {
+      return await getAllTutors(matiere);
+    } catch (error) {
+      console.error("Erreur récupération tuteurs:", error);
+      throw error;
+    }
+  }
+
+  // Ajouter aux favoris
+  async ajouterAuxFavoris(tuteurId) {
+    try {
+      if (!this.currentUser) {
+        throw new Error("Connectez-vous pour ajouter aux favoris");
+      }
+
+      await addToFavorites(this.currentUser.uid, tuteurId);
+      return { success: true, message: "Tuteur ajouté aux favoris" };
+    } catch (error) {
+      console.error("Erreur ajout favoris:", error);
+      throw error;
+    }
+  }
+
+  // Vérifier si un tuteur est dans les favoris
+  async isFavorite(tuteurId) {
+    if (!this.currentUser) return false;
+    
+    try {
+      return await isTutorFavorite(this.currentUser.uid, tuteurId);
+    } catch (error) {
+      console.error("Erreur vérification favoris:", error);
+      return false;
+    }
+  }
+}
+
+// Initialiser quand la page est chargée
 document.addEventListener('DOMContentLoaded', async function() {
-  // Initialiser le gestionnaire de tuteurs
   const tuteurManager = new TuteurManager();
   
   // Éléments DOM
@@ -13,7 +105,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Charger les tuteurs
   async function chargerTuteurs(matiere = "all") {
     try {
-      // Afficher un indicateur de chargement
       listestuteur.innerHTML = `
         <div class="col-12 text-center py-5">
           <div class="spinner-border text-primary" role="status">
@@ -23,39 +114,36 @@ document.addEventListener('DOMContentLoaded', async function() {
         </div>
       `;
       
-      // Récupérer les tuteurs depuis Firestore
       const tuteurs = await tuteurManager.getAllTuteurs(matiere);
       
-      // Afficher le nombre de tuteurs
-      nbre_enseignant.textContent = `${tuteurs.length} enseignant(s) disponible(s)`;
+      if (nbre_enseignant) {
+        nbre_enseignant.textContent = `${tuteurs.length} enseignant(s) disponible(s)`;
+      }
       
-      // Afficher les tuteurs
-      afficherTuteurs(tuteurs);
+      await afficherTuteurs(tuteurs);
       
     } catch (error) {
-      console.error("Erreur lors du chargement des tuteurs:", error);
+      console.error("Erreur chargement tuteurs:", error);
       
-      // Afficher un message d'erreur
       listestuteur.innerHTML = `
         <div class="col-12">
           <div class="alert alert-danger">
-            <strong>Erreur:</strong> Impossible de charger les tuteurs. ${error.message}
+            <strong>Erreur:</strong> ${error.message}
           </div>
-          <button class="btn btn-primary" onclick="location.reload()">
-            Réessayer
-          </button>
         </div>
       `;
     }
   }
   
-  // Fonction pour afficher les tuteurs
-  function afficherTuteurs(tuteurs) {
+  // Afficher les tuteurs
+  async function afficherTuteurs(tuteurs) {
+    if (!listestuteur) return;
+    
     if (tuteurs.length === 0) {
       listestuteur.innerHTML = `
         <div class="col-12">
           <div class="alert alert-info">
-            <strong>Info:</strong> Aucun tuteur disponible pour le moment.
+            <strong>Info:</strong> Aucun tuteur disponible.
           </div>
         </div>
       `;
@@ -64,43 +152,44 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     listestuteur.innerHTML = "";
     
-    tuteurs.forEach(tuteur => {
-      const estActif = tuteur.statut === "actif";
+    for (const tuteur of tuteurs) {
+      const estActif = tuteur.status === "active";
+      const isFavorite = await tuteurManager.isFavorite(tuteur.id);
       
       const tuteurCard = document.createElement("div");
-      tuteurCard.className = "col-12 col-md-6 col-lg-4";
+      tuteurCard.className = "col-12 col-md-6 col-lg-4 mb-4";
       tuteurCard.innerHTML = `
         <div class="tuteur-carre">
           <div>
             <div class="d-flex align-items-center gap-3 mb-3">
               <div class="avatar">
-                ${tuteur.nom ? tuteur.nom.charAt(0).toUpperCase() : '👤'}
+                ${tuteur.name ? tuteur.name.charAt(0).toUpperCase() : '👤'}
               </div>
               <div>
-                <div class="fw-bold">${tuteur.nom || "Tuteur"}</div>
+                <div class="fw-bold">${tuteur.name || "Tuteur"}</div>
                 <span class="badge status-badge ${estActif ? "active" : "absent"}">
                   ${estActif ? "Actif" : "Absent"}
                 </span>
               </div>
             </div>
             
-            <p class="mb-1">
-              <strong>${tuteur.sessionsEffectuees || 0}</strong> sessions
+            <p class="mb-2">
+              <strong>${tuteur.sessionsDone || 0}</strong> sessions
               ${tuteur.experience ? ` • ${tuteur.experience} ans d'exp` : ''}
             </p>
             
-            <p class="text-muted mb-2">${tuteur.description || ""}</p>
+            <p class="text-muted mb-2 small">${tuteur.description || ""}</p>
             
-            ${tuteur.note ? `
-              <div class="mb-2">
+            ${tuteur.rating ? `
+              <div class="mb-3">
                 <small>Note: </small>
-                ${'⭐'.repeat(Math.round(tuteur.note))}
-                <small class="text-muted">(${tuteur.note.toFixed(1)})</small>
+                ${'⭐'.repeat(Math.round(tuteur.rating))}
+                <small class="text-muted">(${tuteur.rating.toFixed(1)})</small>
               </div>
             ` : ''}
             
             <div class="mb-3">
-              ${(tuteur.matieres || []).map(matiere => 
+              ${(tuteur.subjects || []).map(matiere => 
                 `<span class="subject-badge">${matiere}</span>`
               ).join("")}
             </div>
@@ -114,54 +203,41 @@ document.addEventListener('DOMContentLoaded', async function() {
               `<button class="btn-absent" disabled>Non disponible</button>`
             }
             
-            <button class="btn btn-outline-primary btn-sm btn-favori" 
-                    data-tuteur-id="${tuteur.id}">
-              ❤️ Ajouter aux favoris
+            <button class="btn ${isFavorite ? 'btn-danger' : 'btn-outline-primary'} btn-sm btn-favori" 
+                    data-tuteur-id="${tuteur.id}"
+                    ${!tuteurManager.currentUser ? 'disabled' : ''}>
+              ${isFavorite ? '❤️ Retirer des favoris' : '🤍 Ajouter aux favoris'}
             </button>
+            
+            ${!tuteurManager.currentUser ? 
+              `<small class="text-muted text-center">Connectez-vous pour ajouter aux favoris</small>` : 
+              ''}
           </div>
         </div>
       `;
       
       listestuteur.appendChild(tuteurCard);
-    });
+    }
     
-    // Ajouter les écouteurs d'événements
     ajouterEcouteursEvenements();
   }
   
   // Ajouter les écouteurs d'événements
   function ajouterEcouteursEvenements() {
-    // Boutons pour démarrer une session
+    // Boutons session
     document.querySelectorAll('.btn-session').forEach(btn => {
-      btn.addEventListener('click', async function() {
+      btn.addEventListener('click', function() {
         const tuteurId = this.getAttribute('data-tuteur-id');
         
-        try {
-          // Vérifier la disponibilité avant de démarrer
-          const disponibilite = await tuteurManager.verifierDisponibilite(tuteurId);
-          
-          if (!disponibilite.disponible) {
-            alert(`Ce tuteur n'est pas disponible actuellement.\n${disponibilite.message}`);
-            return;
-          }
-          
-          // Demander confirmation
-          const confirmer = confirm(
-            "Êtes-vous sûr de vouloir démarrer une session avec ce tuteur?\n" +
-            "Vous serez redirigé vers la salle de tutorat."
-          );
-          
-          if (confirmer) {
-            // Démarrer la session
-            const result = await tuteurManager.demarrerSession(tuteurId);
-            alert(result.message);
-            
-            // Rediriger vers la session (à implémenter)
-            // window.location.href = `session.html?sessionId=${result.sessionId}`;
-          }
-          
-        } catch (error) {
-          alert(`Erreur: ${error.message}`);
+        if (!tuteurManager.currentUser) {
+          alert("Connectez-vous pour démarrer une session");
+          window.location.href = 'connexion.html';
+          return;
+        }
+        
+        const confirmer = confirm("Démarrer une session avec ce tuteur?");
+        if (confirmer) {
+          alert("Session démarrée! (Fonctionnalité à implémenter)");
         }
       });
     });
@@ -173,10 +249,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         try {
           await tuteurManager.ajouterAuxFavoris(tuteurId);
-          this.innerHTML = '❤️ Ajouté aux favoris';
-          this.disabled = true;
-          this.classList.remove('btn-outline-primary');
-          this.classList.add('btn-success');
+          
+          // Basculer l'état du bouton
+          if (this.classList.contains('btn-outline-primary')) {
+            this.classList.remove('btn-outline-primary');
+            this.classList.add('btn-danger');
+            this.innerHTML = '❤️ Retirer des favoris';
+          } else {
+            this.classList.remove('btn-danger');
+            this.classList.add('btn-outline-primary');
+            this.innerHTML = '🤍 Ajouter aux favoris';
+          }
         } catch (error) {
           alert(`Erreur: ${error.message}`);
         }
@@ -185,62 +268,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   
   // Filtrer par matière
-  sujetFiltrer.addEventListener("change", function(e) {
-    chargerTuteurs(e.target.value);
-  });
-  
-  // Initialisation: charger tous les tuteurs
-  chargerTuteurs("all");
-  
-  // Ajouter un champ de recherche
-  ajouterChampRecherche();
-  
-  function ajouterChampRecherche() {
-    const searchContainer = document.querySelector('.carre-filter');
-    
-    const searchHTML = `
-      <div class="mb-3">
-        <label for="searchTuteur" class="form-label fw-semibold">Rechercher un tuteur</label>
-        <div class="input-group">
-          <input type="text" 
-                 id="searchTuteur" 
-                 class="form-control" 
-                 placeholder="Nom ou matière...">
-          <button class="btn btn-outline-secondary" id="btnSearch">
-            🔍
-          </button>
-        </div>
-      </div>
-    `;
-    
-    searchContainer.insertAdjacentHTML('afterbegin', searchHTML);
-    
-    // Recherche en temps réel avec debounce
-    let searchTimeout;
-    const searchInput = document.getElementById('searchTuteur');
-    
-    searchInput.addEventListener('input', function() {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(async () => {
-        const searchTerm = this.value.trim();
-        if (searchTerm.length > 2) {
-          try {
-            const results = await tuteurManager.searchTuteurs(searchTerm);
-            afficherTuteurs(results);
-          } catch (error) {
-            console.error("Erreur recherche:", error);
-          }
-        } else if (searchTerm.length === 0) {
-          chargerTuteurs(sujetFiltrer.value);
-        }
-      }, 500);
-    });
-    
-    document.getElementById('btnSearch').addEventListener('click', function() {
-      const searchTerm = searchInput.value.trim();
-      if (searchTerm) {
-        tuteurManager.searchTuteurs(searchTerm).then(afficherTuteurs);
-      }
+  if (sujetFiltrer) {
+    sujetFiltrer.addEventListener("change", function(e) {
+      chargerTuteurs(e.target.value);
     });
   }
+  
+  // Initialisation
+  chargerTuteurs("all");
 });
