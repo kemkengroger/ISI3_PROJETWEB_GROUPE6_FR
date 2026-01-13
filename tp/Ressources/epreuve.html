@@ -168,11 +168,11 @@
 </div>
 
 <div class="conteneur-interieur">
-    <a href="boardEtudiant.html" class="btn-retour-flottant">
+    <a class="btn-retour-flottant">
         <i class="bi bi-arrow-left-circle-fill"></i>
-        <span data-fr="Retour au menu" data-en="Back to menu">Retour au menu</span>
+        <span data-fr="Retour au menu" data-en="Back to menu" id="backButton">Retour au menu</span>
     </a>
-
+    
     <h1 data-fr="RESSOURCES" data-en="RESOURCES">RESSOURCES</h1>
     <hr class="barre-separation">
 
@@ -318,6 +318,36 @@
         ajusterThemeAutomatique();
     });
 </script>
+ <script>
+        document.getElementById('backButton').addEventListener('click', function() {
+            const referrer = document.referrer;
+            
+            // Analyser l'URL de référence
+            if (referrer && referrer !== '') {
+                // Extraire le nom de fichier de l'URL
+                const referrerUrl = new URL(referrer);
+                const pathname = referrerUrl.pathname;
+                
+                // Détecter si on vient de pageA ou pageB
+                if (pathname.includes('boardEtudiant.html') || 
+                    pathname.endsWith('/boardEtudiant') ||
+                    referrer.includes('boardEtudiant.html')) {
+                    // Remonter d'un dossier pour atteindre pageA
+                    window.location.href = '../boardEtudiant.html';
+                } else if (pathname.includes('boardEnseignant.html') ||
+                          pathname.endsWith('/boardEnseignant') ||
+                          referrer.includes('boardEnseignant.html')) {
+                    window.location.href = '../boardEnseignant.html';
+                } else {
+                    // Si on ne reconnaît pas, utiliser history
+                    window.history.back();
+                }
+            } else {
+                // Fallback
+                window.history.back();
+            }
+        });
+    </script>
 
 </body>
 </html>
