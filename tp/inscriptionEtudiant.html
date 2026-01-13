@@ -1,71 +1,170 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - TutoAfrica</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Inscription Étudiant - TutoAfrica</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --vert-action: #2D7D62;
+            --transition-douce: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] {
+            --fond-ecran: #f1f5f9;
+            --fond-carte: #ffffff;
+            --texte-principal: #1e293b;
+            --fond-saisie: #f8fafc;
+        }
+
+        [data-bs-theme="dark"] {
+            --fond-ecran: #0f172a;
+            --fond-carte: #1e293b;
+            --texte-principal: #f8fafc;
+            --fond-saisie: #0f172a;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--fond-ecran); 
+            color: var(--texte-principal);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            transition: var(--transition-douce);
+        }
+
+        .carte-inscription {
+            background: var(--fond-carte);
+            border: 1px solid rgba(125,125,125,0.1);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-hero {
+            border-radius: 40px;
+            max-height: 580px;
+            object-fit: cover;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control, .form-select {
+            background-color: var(--fond-saisie);
+            border: 1px solid rgba(125,125,125,0.2);
+            color: var(--texte-principal);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .btn-principal {
+            background-color: var(--vert-action);
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 700;
+            transition: var(--transition-douce);
+        }
+
+        .btn-principal:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 10px 20px rgba(45, 125, 98, 0.3);
+        }
+
+        .separateur {
+            text-align: center; margin: 20px 0; position: relative;
+        }
+        .separateur::before {
+            content: ""; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1px; background: rgba(125,125,125,0.2);
+        }
+        .separateur span {
+            background: var(--fond-carte); padding: 0 15px; position: relative;
+            color: #94a3b8; font-size: 0.8rem; font-weight: 700;
+        }
+
+        .lang-switch {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="row align-items-center justify-content-center">
-        <div class="col-md-5 d-none d-md-block text-center">
-            <img src="assets/image/PhotoInscription_124457.jpg"
-                 alt="Image inscription"
-                 class="img-fluid image-inscription shadow">
+
+<div class="lang-switch">
+    <select class="form-select form-select-sm" onchange="changerLangue(this.value)" id="selectLangue">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+    </select>
+</div>
+
+<div class="container my-5">
+    <div class="row align-items-center justify-content-center g-5">
+        
+        <div class="col-md-6 d-none d-lg-block text-center">
+            <img src="/assets/image/PhotoInscription_124457.jpg" alt="Étudiant TutoAfrica" class="img-fluid image-hero">
         </div>
 
-        <div class="col-md-5 col-lg-4">
+        <div class="col-md-10 col-lg-5">
             <div class="card carte-inscription">
                 <div class="text-center mb-4">
                     <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="#2a8168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                        </svg>
-                        <span class="fw-bold text-secondary">TutoAfrica</span>
+                        <i class="bi bi-mortarboard-fill fs-3 text-success"></i>
+                        <span class="fw-bold fs-4">TutoAfrica</span>
                     </div>
-                    <h2 class="fw-bold h3 mb-1">Inscription Étudiant</h2>
-                    <p class="text-muted small">Créez votre compte étudiant</p>
+                    <h2 class="fw-800 h3 mb-1" data-fr="Inscription Étudiant" data-en="Student Registration">Inscription Étudiant</h2>
+                    <p class="text-muted small" data-fr="Créez votre compte pour commencer" data-en="Create your account to start">Créez votre compte pour commencer</p>
                 </div>
 
-                <form id="form-inscription">
+                <form id="form-inscription-etudiant">
                     <div class="mb-3">
-                        <label for="nom" class="etiquette-formulaire">Nom complet</label>
-                        <input type="text" id="nom" class="form-control champ-formulaire" required>
+                        <label class="small fw-bold mb-2" data-fr="Nom complet" data-en="Full Name">Nom complet</label>
+                        <input type="text" id="nom-complet" class="form-control" placeholder="John Doe" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="etiquette-formulaire">Adresse Email</label>
-                        <input type="email" id="email" class="form-control champ-formulaire" required>
+                        <label class="small fw-bold mb-2" data-fr="Adresse Email" data-en="Email Address">Adresse Email</label>
+                        <input type="email" id="email-etudiant" class="form-control" placeholder="john@example.com" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="niveau" class="etiquette-formulaire">Niveau</label>
-                        <select id="niveau" class="form-select liste-deroulante" required>
-                            <option value="" disabled selected>Sélectionnez votre Niveau</option>
-                            <option value="Universitaire">Universitaire</option>
-                            <option value="Secondaire">Secondaire</option>
+                        <label class="small fw-bold mb-2" data-fr="Niveau d'études" data-en="Education Level">Niveau d'études</label>
+                        <select class="form-select" id="niveau-etudes" required>
+                            <option value="" disabled selected data-fr="Sélectionnez votre niveau" data-en="Select your level">Sélectionnez votre niveau</option>
                             <option value="Primaire">Primaire</option>
+                            <option value="Secondaire">Secondaire</option>
+                            <option value="Universitaire">Universitaire</option>
                         </select>
                     </div>
 
                     <div class="mb-4">
-                        <label for="password" class="etiquette-formulaire">Mot de passe</label>
-                        <input type="password" id="password" class="form-control champ-formulaire" required>
+                        <label class="small fw-bold mb-2" data-fr="Mot de passe" data-en="Password">Mot de passe</label>
+                        <input type="password" id="passe-etudiant" class="form-control" placeholder="••••••••" required>
                     </div>
 
-                    <button type="submit" class="btn btn-inscription w-100 text-white">
+                    <button type="submit" class="btn btn-principal w-100 text-white mb-3" data-fr="Créer mon compte" data-en="Create my account">
                         Créer mon compte
+                    </button>
+
+                    <div class="separateur">
+                        <span data-fr="OU" data-en="OR">OU</span>
+                    </div>
+
+                    <button type="button" id="btn-google" class="btn border w-100 d-flex align-items-center justify-content-center gap-2 mb-4 py-2">
+                        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
+                        <span class="fw-bold text-secondary" data-fr="S'inscrire avec Google" data-en="Sign up with Google">S'inscrire avec Google</span>
                     </button>
                 </form>
 
-                <div class="text-center mt-4">
-                    <p class="small text-muted">
-                        Déjà un compte ?
-                        <a href="connexion.html" class="text-dark fw-bold text-decoration-none">Se connecter</a>
+                <div class="text-center">
+                    <p class="small text-muted mb-0">
+                        <span data-fr="Déjà un compte ?" data-en="Already have an account?">Déjà un compte ?</span>
+                        <a href="connexion.html" class="text-success fw-bold text-decoration-none ms-1" data-fr="Se connecter" data-en="Login">Se connecter</a>
                     </p>
                 </div>
             </div>
@@ -73,6 +172,83 @@
     </div>
 </div>
 
-<script type="module" src="/src/inscriptionEtudiant.js"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const configuration = {
+        apiKey: "AIzaSyAvjQaWPrA7M5b0XmDrrBwTKDlv5q-nXDM",
+        authDomain: "isi3projetwebgroupe6fr.firebaseapp.com",
+        projectId: "isi3projetwebgroupe6fr",
+        storageBucket: "isi3projetwebgroupe6fr.firebasestorage.app",
+        messagingSenderId: "1024122923638",
+        appId: "1:1024122923638:web:f1a367d84a567449494d57"
+    };
+
+    const app = initializeApp(configuration);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    // Fonction pour enregistrer le profil dans Firestore
+    async function creerProfilUtilisateur(user, nom, niveau) {
+        await setDoc(doc(db, "utilisateurs", user.uid), {
+            nom: nom || user.displayName,
+            email: user.email,
+            niveau: niveau || "Non spécifié",
+            role: "etudiant",
+            dateCreation: new Date().toISOString()
+        });
+        window.location.href = "boardEtudiant.html";
+    }
+
+    // Inscription Email/Password
+    document.getElementById('form-inscription-etudiant').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nom = document.getElementById('nom-complet').value;
+        const email = document.getElementById('email-etudiant').value;
+        const passe = document.getElementById('passe-etudiant').value;
+        const niveau = document.getElementById('niveau-etudes').value;
+
+        try {
+            const resultat = await createUserWithEmailAndPassword(auth, email, passe);
+            await creerProfilUtilisateur(resultat.user, nom, niveau);
+        } catch (erreur) {
+            alert("Erreur : " + erreur.message);
+        }
+    });
+
+    // Inscription Google
+    document.getElementById('btn-google').addEventListener('click', async () => {
+        try {
+            const resultat = await signInWithPopup(auth, googleProvider);
+            await creerProfilUtilisateur(resultat.user, resultat.user.displayName, "Universitaire");
+        } catch (erreur) {
+            console.error(erreur);
+        }
+    });
+
+    // Gestion Thème et Langue
+    window.changerLangue = (lang) => {
+        localStorage.setItem('langueApp', lang);
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const txt = el.getAttribute(`data-${lang}`);
+            if (txt) el.textContent = txt;
+        });
+    };
+
+    const rafraichirTheme = () => {
+        const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
+    };
+
+    window.onload = () => {
+        rafraichirTheme();
+        const lang = localStorage.getItem('langueApp') || 'fr';
+        document.getElementById('selectLangue').value = lang;
+        window.changerLangue(lang);
+    };
+</script>
 </body>
 </html>

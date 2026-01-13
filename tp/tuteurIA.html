@@ -11,65 +11,64 @@
     
     <style>
         :root {
-            --primary-green: #2D7D62;
-            --sidebar-width: 280px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --vert-afrique: #2D7D62;
+            --largeur-menu: 280px;
+            --vitesse: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-bs-theme="light"] {
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --sidebar-bg: #ffffff;
-            --chat-ai-bg: #e2e8f0;
-            --text-main: #1e293b;
-            --border-color: rgba(0,0,0,0.05);
+            --fond-ecran: #f1f5f9;
+            --fond-carte: #ffffff;
+            --fond-menu: #ffffff;
+            --fond-bulle-ia: #e2e8f0;
+            --texte-principal: #1e293b;
+            --bordure: rgba(0,0,0,0.05);
         }
 
         [data-bs-theme="dark"] {
-            --bg-body: #0f172a; /* Bleu nuit profond IA */
-            --bg-card: #1e293b;
-            --sidebar-bg: #111827;
-            --chat-ai-bg: #334155;
-            --text-main: #f8fafc;
-            --border-color: rgba(255,255,255,0.1);
+            --fond-ecran: #0f172a;
+            --fond-carte: #1e293b;
+            --fond-menu: #111827;
+            --fond-bulle-ia: #334155;
+            --texte-principal: #f8fafc;
+            --bordure: rgba(255,255,255,0.1);
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
-            transition: var(--transition);
+            background-color: var(--fond-ecran); 
+            color: var(--texte-principal);
+            transition: var(--vitesse);
             height: 100vh;
             overflow: hidden;
         }
 
-        /* SIDEBAR SYNC */
-        .sidebar-wrapper { padding: 20px; height: 100vh; position: fixed; width: var(--sidebar-width); z-index: 1000; }
-        .sidebar { 
-            background: var(--sidebar-bg); border: 1px solid var(--border-color); border-radius: 24px; 
+        .enveloppe-menu { padding: 20px; height: 100vh; position: fixed; width: var(--largeur-menu); z-index: 1000; }
+        .menu-lateral { 
+            background: var(--fond-menu); border: 1px solid var(--bordure); border-radius: 24px; 
             height: 100%; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .logo-area { padding: 30px 20px; text-align: center; }
-        .logo-area a { text-decoration: none; color: var(--primary-green); font-weight: 800; font-size: 1.4rem; }
         
-        .profile-card-sidebar {
-            margin: 0 15px 25px; padding: 15px; background: var(--bg-body); border-radius: 18px;
+        .zone-logo { padding: 30px 20px; text-align: center; }
+        .zone-logo a { text-decoration: none; color: var(--vert-afrique); font-weight: 800; font-size: 1.4rem; }
+        
+        .carte-profil-menu {
+            margin: 0 15px 25px; padding: 15px; background: var(--fond-ecran); border-radius: 18px;
             display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;
-            transition: var(--transition); border: 1px solid var(--border-color);
+            transition: var(--vitesse); border: 1px solid var(--bordure);
         }
-        .avatar-sidebar { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
+        .image-profil { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
 
-        .nav-link {
+        .lien-navigation {
             margin: 4px 15px; padding: 12px 18px; border-radius: 14px;
-            color: #94a3b8; font-weight: 600; transition: 0.3s;
+            color: #94a3b8; font-weight: 600; transition: 0.3s; text-decoration: none;
         }
-        .nav-link:hover { background: rgba(45, 125, 98, 0.1); color: var(--primary-green); }
-        .nav-link.active { background: var(--primary-green) !important; color: white !important; }
+        .lien-navigation:hover { background: rgba(45, 125, 98, 0.1); color: var(--vert-afrique); }
+        .lien-navigation.active { background: var(--vert-afrique) !important; color: white !important; }
 
-        /* ZONE DE CHAT */
-        .main-content { margin-left: var(--sidebar-width); height: 100vh; display: flex; flex-direction: column; padding: 40px; }
+        .contenu-principal { margin-left: var(--largeur-menu); height: 100vh; display: flex; flex-direction: column; padding: 40px; }
 
-        #chat-box { 
+        #boite-discussion { 
             flex: 1; 
             overflow-y: auto; 
             padding: 10px; 
@@ -79,20 +78,19 @@
             scrollbar-width: thin;
         }
 
-        .msg { padding: 16px 22px; border-radius: 22px; max-width: 80%; font-size: 0.95rem; line-height: 1.5; }
-        .msg-user { 
-            background: var(--primary-green); color: white; align-self: flex-end; 
+        .message { padding: 16px 22px; border-radius: 22px; max-width: 80%; font-size: 0.95rem; line-height: 1.5; position: relative; }
+        .message-utilisateur { 
+            background: var(--vert-afrique); color: white; align-self: flex-end; 
             border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(45, 125, 98, 0.2);
         }
-        .msg-ai { 
-            background: var(--chat-ai-bg); color: var(--text-main); align-self: flex-start; 
+        .message-ia { 
+            background: var(--fond-bulle-ia); color: var(--texte-principal); align-self: flex-start; 
             border-bottom-left-radius: 4px; 
         }
 
-        /* INPUT AREA */
-        .chat-input-wrapper {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        .barre-saisie {
+            background: var(--fond-carte);
+            border: 1px solid var(--bordure);
             border-radius: 24px;
             padding: 10px 15px;
             display: flex;
@@ -101,137 +99,150 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             margin-top: 20px;
         }
-        .chat-input-wrapper input {
-            flex: 1; border: none; background: transparent; padding: 12px; color: var(--text-main); outline: none;
+        .barre-saisie input {
+            flex: 1; border: none; background: transparent; padding: 12px; color: var(--texte-principal); outline: none;
         }
-        .btn-send {
-            background: var(--primary-green); color: white; border: none;
+        .bouton-envoi {
+            background: var(--vert-afrique); color: white; border: none;
             width: 48px; height: 48px; border-radius: 16px; transition: 0.3s;
         }
-        .btn-send:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .bouton-envoi:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); margin-top: auto; }
-        .lang-select { 
-            background: var(--bg-body); border: 1px solid var(--border-color); 
+        .pied-menu { padding: 20px; border-top: 1px solid var(--bordure); margin-top: auto; }
+        .choix-langue { 
+            background: var(--fond-ecran); border: 1px solid var(--bordure); 
             color: inherit; border-radius: 12px; padding: 8px; width: 100%; font-size: 0.8rem; font-weight: 700;
         }
 
         @media (max-width: 991px) {
-            .sidebar-wrapper { display: none; }
-            .main-content { margin-left: 0; padding: 20px; }
+            .enveloppe-menu { display: none; }
+            .contenu-principal { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="sidebar-wrapper">
-    <aside class="sidebar">
-        <div class="logo-area">
+<div class="enveloppe-menu">
+    <aside class="menu-lateral">
+        <div class="zone-logo">
             <a href="index.html">TutoAfrica</a>
         </div>
 
-        <a href="profil.html" class="profile-card-sidebar">
-            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="avatar-sidebar" alt="Profil">
+        <a href="profil.html" class="carte-profil-menu">
+            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="image-profil" alt="Profil">
             <div>
                 <div class="fw-bold text-truncate small">Étudiant Demo</div>
-                <div class="text-muted" style="font-size: 0.7rem;">Voir profil</div>
+                <div class="text-muted" style="font-size: 0.7rem;" data-fr="Voir profil" data-en="View profile">Voir profil</div>
             </div>
         </a>
         
-        <nav class="nav nav-pills flex-column">
-            <a href="Ressources/epreuve.html" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i> <span>Épreuves</span></a>
-            <a href="tuteuriA.html" class="nav-link active"><i class="bi bi-robot me-3"></i> <span>Tuteur IA</span></a>
-            <a href="tuteurD.html" class="nav-link"><i class="bi bi-people me-3"></i> <span>Experts Tuteurs</span></a>
+        <nav class="nav flex-column">
+            <a href="Ressources/epreuve.html" class="lien-navigation">
+                <i class="bi bi-file-earmark-text me-3"></i> <span data-fr="Épreuves" data-en="Exams">Épreuves</span>
+            </a>
+            <a href="tuteuriA.html" class="lien-navigation active">
+                <i class="bi bi-robot me-3"></i> <span data-fr="Tuteur IA" data-en="AI Tutor">Tuteur IA</span>
+            </a>
+            <a href="tuteurD.html" class="lien-navigation">
+                <i class="bi bi-people me-3"></i> <span data-fr="Experts" data-en="Experts">Experts</span>
+            </a>
         </nav>
 
-        <div class="sidebar-footer">
+        <div class="pied-menu">
             <div class="mb-3">
-                <select class="lang-select" id="langSelector" onchange="changeSystem(this.value)">
+                <select class="choix-langue" id="selecteurLangue" onchange="changerSysteme(this.value)">
                     <option value="fr">🇨🇲 Francophone</option>
                     <option value="en">🇬🇧 Anglophone</option>
                 </select>
             </div>
             <a href="index.html" class="text-danger text-decoration-none fw-bold small ps-2">
-                <i class="bi bi-power me-2"></i> Déconnexion
+                <i class="bi bi-power me-2"></i> <span data-fr="Déconnexion" data-en="Logout">Déconnexion</span>
             </a>
         </div>
     </aside>
 </div>
 
-<main class="main-content">
+<main class="contenu-principal">
     <div class="d-flex align-items-center mb-4">
         <a href="boardEtudiant.html" class="btn btn-light rounded-circle shadow-sm me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
             <i class="bi bi-chevron-left"></i>
         </a>
-        <h2 class="fw-800 mb-0">Tuteur IA</h2>
+        <h2 class="fw-800 mb-0" data-fr="Tuteur IA" data-en="AI Tutor">Tuteur IA</h2>
         <span class="ms-auto badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill small">
-            <i class="bi bi-patch-check-fill me-1"></i> MODE INTELLIGENT
+            <i class="bi bi-patch-check-fill me-1"></i> <span data-fr="MODE INTELLIGENT" data-en="SMART MODE">MODE INTELLIGENT</span>
         </span>
     </div>
 
-    <div id="chat-box">
-        <div class="msg msg-ai shadow-sm">
+    <div id="boite-discussion">
+        <div class="message message-ia shadow-sm" data-fr="Bonjour ! Je suis ton assistant TutoAfrica. Je connais parfaitement les programmes scolaires. Comment puis-je t'aider aujourd'hui ?" data-en="Hello! I am your TutoAfrica assistant. I know the school curriculum perfectly. How can I help you today?">
             Bonjour ! Je suis ton assistant TutoAfrica. Je connais parfaitement les programmes scolaires. Comment puis-je t'aider aujourd'hui ?
         </div>
     </div>
 
-    <form id="chat-form" class="chat-input-wrapper">
+    <form id="formulaire-chat" class="barre-saisie">
         <button type="button" class="btn text-muted"><i class="bi bi-paperclip fs-5"></i></button>
-        <input type="text" id="user-input" placeholder="Pose ta question (ex: Explique-moi Pythagore)..." autocomplete="off" required>
-        <button class="btn-send shadow-sm" type="submit">
+        <input type="text" id="entree-utilisateur" placeholder="Pose ta question..." autocomplete="off" required>
+        <button class="bouton-envoi shadow-sm" type="submit">
             <i class="bi bi-send-fill"></i>
         </button>
     </form>
 </main>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    function updateTheme() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+    function rafraichirTheme() {
+        const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
     }
 
-    function changeSystem(v) {
-        localStorage.setItem('appLang', v);
-        location.reload();
+    function changerSysteme(langue) {
+        localStorage.setItem('langueApp', langue);
+        appliquerTraduction(langue);
     }
 
-    const chatForm = document.getElementById('chat-form');
-    const chatBox = document.getElementById('chat-box');
-    const userInput = document.getElementById('user-input');
+    function appliquerTraduction(langue) {
+        $('[data-en]').each(function() {
+            $(this).text($(this).data(langue));
+        });
+        const placeholder = langue === 'fr' ? 'Pose ta question (ex: Explique-moi Pythagore)...' : 'Ask your question (e.g. Explain Pythagoras)...';
+        document.getElementById('entree-utilisateur').placeholder = placeholder;
+    }
 
-    chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const text = userInput.value.trim();
-        if(!text) return;
+    const formulaire = document.getElementById('formulaire-chat');
+    const boiteMsg = document.getElementById('boite-discussion');
+    const saisie = document.getElementById('entree-utilisateur');
 
-        // User Message
-        const userDiv = document.createElement('div');
-        userDiv.className = 'msg msg-user animate-fade-in';
-        userDiv.textContent = text;
-        chatBox.appendChild(userDiv);
+    formulaire.addEventListener('submit', (evenement) => {
+        evenement.preventDefault();
+        const texte = saisie.value.trim();
+        if(!texte) return;
+
+        const bulleUser = document.createElement('div');
+        bulleUser.className = 'message message-utilisateur';
+        bulleUser.textContent = texte;
+        boiteMsg.appendChild(bulleUser);
         
-        userInput.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight;
+        saisie.value = '';
+        boiteMsg.scrollTop = boiteMsg.scrollHeight;
 
-        // Simulate AI
         setTimeout(() => {
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'msg msg-ai shadow-sm';
-            aiDiv.innerHTML = `<div class="spinner-border spinner-border-sm text-success" role="status"></div>`;
-            chatBox.appendChild(aiDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            const bulleIA = document.createElement('div');
+            bulleIA.className = 'message message-ia shadow-sm';
+            bulleIA.innerHTML = `<div class="spinner-border spinner-border-sm text-success" role="status"></div>`;
+            boiteMsg.appendChild(bulleIA);
+            boiteMsg.scrollTop = boiteMsg.scrollHeight;
         }, 600);
     });
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', rafraichirTheme);
+    
     window.onload = () => {
-        updateTheme();
-        const lang = localStorage.getItem('appLang') || 'fr';
-        document.getElementById('langSelector').value = lang;
+        rafraichirTheme();
+        const languePreferee = localStorage.getItem('langueApp') || 'fr';
+        document.getElementById('selecteurLangue').value = languePreferee;
+        appliquerTraduction(languePreferee);
     };
 </script>
-
-<script type="module" src="/src/tuteurIA.js"></script>
 
 </body>
 </html>
