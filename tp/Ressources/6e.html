@@ -1,84 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sixième - Ressources</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <title>Document</title>
+
+    <style>
+        :root {
+            --bleu-tuto: #0d6efd;
+            --fond-principal: linear-gradient(135deg, #e9f0ff, #f8fbff);
+        }
+
+        [data-bs-theme="dark"] {
+            --fond-principal: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        body {
+            background: var(--fond-principal);
+            min-height: 100vh;
+            padding: 40px 15px;
+            font-family: "Segoe UI", sans-serif;
+            transition: 0.3s ease;
+        }
+
+        .conteneur-fixe { max-width: 850px; margin: auto; }
+
+        .bouton-retour-nav {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            color: var(--bleu-tuto);
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 10px 20px;
+            margin-bottom: 25px;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .bouton-retour-nav:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            color: var(--bleu-tuto);
+        }
+
+        h1 {
+            font-weight: 800;
+            color: var(--bleu-tuto);
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .trait-decoration {
+            width: 100px;
+            height: 4px;
+            background: var(--bleu-tuto);
+            margin: 0 auto 40px auto;
+            border-radius: 10px;
+        }
+
+        details {
+            background: #ffffff;
+            border: none !important;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+        [data-bs-theme="dark"] details { background: #1e293b; }
+
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::marker, summary::-webkit-details-marker { display: none; }
+
+        .bouton-lien-pdf {
+            background: transparent;
+            border: 1px solid var(--bleu-tuto);
+            color: var(--bleu-tuto);
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            display: block;
+            width: 100%;
+            text-align: left;
+            text-decoration: none;
+        }
+        .bouton-lien-pdf:hover {
+            background: var(--bleu-tuto);
+            color: #ffffff;
+        }
+
+        .selecteur-langue-haut { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+    </style>
 </head>
 <body>
-    <h1>
-       RESSOURCES/SIXIEME
-    </h1>
-    <article>
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Mathématiques
-                </p>
-            </summary>
-            <p class="mt-3">
-               <button class="btn btn-outline-primary" onclick="window.location.href='6e/Mathématiques/Examen/Epreuve-Maths-6e-Octobre-2025-College-Adonai.pdf'"> 
-                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Epreuve-Maths-5e-College-Foch-Octobre-2025
-                </button>
-                <button class="btn btn-outline-primary" onclick="window.location.href='6e/Mathématiques/Examen/Epreuve-Maths-6e-Sequence-3-Decembre-2025-College-Mongo-Beti.pdf'"> 
-                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Epreuve-Maths-6e-Sequence-3-Decembre-2025-College-Mongo-Beti
-                </button>
-            </p>
 
-        </details>
-    </article>
+<div class="selecteur-langue-haut">
+    <select class="form-select form-select-sm shadow-sm" id="selecteurLangue" onchange="changerLangueInterface(this.value)">
+        <option value="fr">🇨🇲 FR</option>
+        <option value="en">🇬🇧 EN</option>
+    </select>
+</div>
+
+<div class="conteneur-fixe">
+    <a href="./epreuve.html" class="bouton-retour-nav">
+        <i class="bi bi-arrow-left-circle"></i>
+        <span data-fr="Retour aux Ressources" data-en="Back to Resources">Retour</span>
+    </a>
+
+    <h1 data-fr="RESSOURCES / SIXIÈME" data-en="RESOURCES / GRADE 6">RESSOURCES / SIXIÈME</h1>
+    <div class="trait-decoration"></div>
+
     <article>
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Anglais
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Mathématiques" data-en="Mathematics">Mathématiques</span>
+                <i class="bi bi-plus-circle"></i>
             </summary>
-            <p class="mt-3">
-                
-            </p>
-        </details>
-    </article>
-    <article>
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Français
-                </p>
-            </summary>
-            <p class="mt-3">
-                
-            </p>
+            <div class="p-3 border-top">
+                <button class="bouton-lien-pdf" onclick="window.location.href='6e/Mathématiques/Examen/Epreuve-Maths-6e-Octobre-2025-College-Adonai.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Maths 6e - Collège Adonaï (Oct 2025)
+                </button>
+                <button class="bouton-lien-pdf" onclick="window.location.href='6e/Mathématiques/Examen/Epreuve-Maths-6e-Sequence-3-Decembre-2025-College-Mongo-Beti.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Maths 6e - Mongo Beti (Déc 2025 - Seq 3)
+                </button>
+            </div>
         </details>
     </article>
 
     <article>
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Informatique
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Anglais" data-en="English">Anglais</span>
+                <i class="bi bi-plus-circle"></i>
             </summary>
-            <p class="mt-3">
-                
-            </p>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucune épreuve disponible." data-en="No exams available.">Aucune épreuve disponible.</span>
+            </div>
         </details>
     </article>
+
     <article>
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    SVTEEHB
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Français" data-en="French">Français</span>
+                <i class="bi bi-plus-circle"></i>
             </summary>
-            <p class="mt-3">
-                
-            </p>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucune épreuve disponible." data-en="No exams available.">Aucune épreuve disponible.</span>
+            </div>
         </details>
     </article>
+
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Informatique" data-en="Computer Science">Informatique</span>
+                <i class="bi bi-plus-circle"></i>
+            </summary>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucune épreuve disponible." data-en="No exams available.">Aucune épreuve disponible.</span>
+            </div>
+        </details>
+    </article>
+
+    <article>
+        <details>
+            <summary>
+                <span>SVTEEHB</span>
+                <i class="bi bi-plus-circle"></i>
+            </summary>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucune épreuve disponible." data-en="No exams available.">Aucune épreuve disponible.</span>
+            </div>
+        </details>
+    </article>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function changerLangueInterface(langue) {
+        localStorage.setItem('languePref', langue);
+        $('[data-en]').each(function() {
+            $(this).text($(this).data(langue));
+        });
+    }
+
+    $(document).ready(function() {
+        const langueEnregistree = localStorage.getItem('languePref') || 'fr';
+        $('#selecteurLangue').val(langueEnregistree);
+        changerLangueInterface(langueEnregistree);
+
+        const appliquerThemeNaviguer = () => {
+            const prefersSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-bs-theme', prefersSombre ? 'dark' : 'light');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', appliquerThemeNaviguer);
+        appliquerThemeNaviguer();
+    });
+</script>
+
 </body>
 </html>

@@ -11,133 +11,131 @@
     
     <style>
         :root {
-            --primary-green: #2D7D62;
-            --sidebar-width: 280px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --vert-primaire: #2D7D62;
+            --largeur-laterale: 280px;
+            --transition-douce: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-bs-theme="light"] {
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --sidebar-bg: #ffffff;
-            --text-main: #1e293b;
-            --border-color: rgba(0,0,0,0.05);
+            --fond-page: #f1f5f9;
+            --fond-carte: #ffffff;
+            --fond-menu: #ffffff;
+            --texte-noir: #1e293b;
+            --bordure-legere: rgba(0,0,0,0.05);
         }
 
         [data-bs-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --sidebar-bg: #111827;
-            --text-main: #f8fafc;
-            --border-color: rgba(255,255,255,0.1);
+            --fond-page: #0f172a;
+            --fond-carte: #1e293b;
+            --fond-menu: #111827;
+            --texte-noir: #f8fafc;
+            --bordure-legere: rgba(255,255,255,0.1);
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
-            transition: var(--transition);
+            background-color: var(--fond-page); 
+            color: var(--texte-noir);
+            transition: var(--transition-douce);
         }
 
-        /* SIDEBAR SYNC */
-        .sidebar-wrapper { padding: 20px; height: 100vh; position: fixed; width: var(--sidebar-width); z-index: 1000; }
-        .sidebar { 
-            background: var(--sidebar-bg); border: 1px solid var(--border-color); border-radius: 24px; 
+        /* Barre Latérale */
+        .enveloppe-laterale { padding: 20px; height: 100vh; position: fixed; width: var(--largeur-laterale); z-index: 1000; }
+        .menu-navigation { 
+            background: var(--fond-menu); border: 1px solid var(--bordure-legere); border-radius: 24px; 
             height: 100%; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .logo-area { padding: 30px 20px; text-align: center; }
-        .logo-area a { text-decoration: none; color: var(--primary-green); font-weight: 800; font-size: 1.4rem; }
+        .section-logo { padding: 30px 20px; text-align: center; }
+        .section-logo a { text-decoration: none; color: var(--vert-primaire); font-weight: 800; font-size: 1.4rem; }
         
-        .profile-card-sidebar {
-            margin: 0 15px 25px; padding: 15px; background: var(--bg-body); border-radius: 18px;
+        .carte-identite-menu {
+            margin: 0 15px 25px; padding: 15px; background: var(--fond-page); border-radius: 18px;
             display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;
-            transition: var(--transition); border: 1px solid var(--border-color);
+            transition: var(--transition-douce); border: 1px solid var(--bordure-legere);
         }
-        .avatar-sidebar { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
+        .image-avatar-menu { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
 
-        .nav-link {
+        .lien-nav {
             margin: 4px 15px; padding: 12px 18px; border-radius: 14px;
-            color: #94a3b8; font-weight: 600; transition: 0.3s;
+            color: #94a3b8; font-weight: 600; transition: 0.3s; text-decoration: none;
         }
-        .nav-link:hover { background: rgba(45, 125, 98, 0.1); color: var(--primary-green); }
-        .nav-link.active { background: var(--primary-green) !important; color: white !important; }
+        .lien-nav:hover { background: rgba(45, 125, 98, 0.1); color: var(--vert-primaire); }
+        .lien-nav.active { background: var(--vert-primaire) !important; color: white !important; }
 
-        /* MAIN CONTENT */
-        .main-content { margin-left: var(--sidebar-width); padding: 40px; }
+        /* Contenu Principal */
+        .zone-principale { margin-left: var(--largeur-laterale); padding: 40px; }
 
-        /* CARDS EXPERTS */
-        .tutor-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        /* Cartes des Experts */
+        .carte-expert {
+            background: var(--fond-carte);
+            border: 1px solid var(--bordure-legere);
             border-radius: 30px;
             padding: 25px;
             height: 100%;
-            transition: var(--transition);
+            transition: var(--transition-douce);
         }
-        .tutor-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--primary-green); }
+        .carte-expert:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--vert-primaire); }
 
-        .avatar-box {
+        .boite-initiale {
             width: 60px; height: 60px; border-radius: 20px;
-            background: linear-gradient(135deg, var(--primary-green), #57cc99);
+            background: linear-gradient(135deg, var(--vert-primaire), #57cc99);
             display: flex; align-items: center; justify-content: center;
             color: white; font-size: 1.5rem; font-weight: 800;
         }
 
-        .status-badge {
-            font-size: 0.65rem; font-weight: 800; padding: 6px 12px; border-radius: 10px; text-transform: uppercase;
-        }
-        .online { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
-        .offline { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
+        .pastille-statut { font-size: 0.65rem; font-weight: 800; padding: 6px 12px; border-radius: 10px; text-transform: uppercase; }
+        .en-ligne { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .hors-ligne { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
 
-        .subject-pill {
-            background: var(--bg-body); color: var(--primary-green);
+        .badge-matiere {
+            background: var(--fond-page); color: var(--vert-primaire);
             padding: 6px 14px; border-radius: 10px; font-size: 0.75rem; font-weight: 700;
         }
 
-        .btn-call {
-            background: var(--primary-green); color: white; border: none;
+        .bouton-appel {
+            background: var(--vert-primaire); color: white; border: none;
             border-radius: 15px; padding: 12px; width: 100%; font-weight: 700;
             transition: 0.3s;
         }
-        .btn-call:hover:not(:disabled) { transform: scale(1.02); filter: brightness(1.1); }
+        .bouton-appel:hover:not(:disabled) { transform: scale(1.02); filter: brightness(1.1); }
 
-        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); margin-top: auto; }
-        .lang-select { 
-            background: var(--bg-body); border: 1px solid var(--border-color); 
+        .bas-de-page-menu { padding: 20px; border-top: 1px solid var(--bordure-legere); margin-top: auto; }
+        .selecteur-langue { 
+            background: var(--fond-page); border: 1px solid var(--bordure-legere); 
             color: inherit; border-radius: 12px; padding: 8px; width: 100%; font-size: 0.8rem; font-weight: 700;
         }
 
         @media (max-width: 991px) {
-            .sidebar-wrapper { display: none; }
-            .main-content { margin-left: 0; padding: 20px; }
+            .enveloppe-laterale { display: none; }
+            .zone-principale { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="sidebar-wrapper">
-    <aside class="sidebar">
-        <div class="logo-area">
+<div class="enveloppe-laterale">
+    <aside class="menu-navigation">
+        <div class="section-logo">
             <a href="index.html">TutoAfrica</a>
         </div>
 
-        <a href="profil.html" class="profile-card-sidebar">
-            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="avatar-sidebar" alt="Profil">
+        <a href="profil.html" class="carte-identite-menu">
+            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="image-avatar-menu" alt="Profil">
             <div>
                 <div class="fw-bold text-truncate small">Étudiant Demo</div>
                 <div class="text-muted" style="font-size: 0.7rem;">Voir profil</div>
             </div>
         </a>
         
-        <nav class="nav nav-pills flex-column">
-            <a href="Ressources/epreuve.html" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i> <span>Épreuves</span></a>
-            <a href="tuteuriA.html" class="nav-link"><i class="bi bi-robot me-3"></i> <span>Tuteur IA</span></a>
-            <a href="tuteurD.html" class="nav-link active"><i class="bi bi-people me-3"></i> <span>Experts Tuteurs</span></a>
+        <nav class="nav flex-column">
+            <a href="Ressources/epreuve.html" class="lien-nav"><i class="bi bi-file-earmark-text me-3"></i> <span>Épreuves</span></a>
+            <a href="tuteuriA.html" class="lien-nav"><i class="bi bi-robot me-3"></i> <span>Tuteur IA</span></a>
+            <a href="tuteurD.html" class="lien-nav active"><i class="bi bi-people me-3"></i> <span>Experts Tuteurs</span></a>
         </nav>
 
-        <div class="sidebar-footer">
+        <div class="bas-de-page-menu">
             <div class="mb-3">
-                <select class="lang-select" id="langSelector" onchange="changeSystem(this.value)">
+                <select class="selecteur-langue" id="selecteurLangue" onchange="changerSysteme(this.value)">
                     <option value="fr">🇨🇲 Francophone</option>
                     <option value="en">🇬🇧 Anglophone</option>
                 </select>
@@ -149,117 +147,119 @@
     </aside>
 </div>
 
-<main class="main-content">
+<main class="zone-principale">
     <div class="d-flex justify-content-between align-items-center mb-5">
         <a href="boardEtudiant.html" class="btn btn-light rounded-circle shadow-sm" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
             <i class="bi bi-chevron-left"></i>
         </a>
         <div class="text-end">
             <h2 class="fw-800 mb-0">Experts Tuteurs</h2>
-            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3" id="currentSubject">Général</span>
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3" id="matiereActuelle">Général</span>
         </div>
     </div>
 
-    <div class="row g-4" id="tutorGrid">
-        </div>
+    <div class="row g-4" id="grilleTuteurs"></div>
 </main>
 
 <script>
-   const tutors = [
+    // Liste complète des experts (Logiciel et Données préservés)
+    const experts = [
         // --- SYSTÈME FRANCOPHONE ---
-        // MATHÉMATIQUES
-        { name: "Dr. André Mbarga", username: "@ambarga", sys: "fr", subjects: ["Mathématiques"], status: "online", exp: "Ingénieur / 10 ans", diplome: "Docteur" },
-        { name: "Mme Carine Tagne", username: "@ctagne", sys: "fr", subjects: ["Mathématiques"], status: "online", exp: "Professeur / 8 ans", diplome: "Professeur" },
+        { nom: "Dr. André Mbarga", identifiant: "@ambarga", systeme: "fr", matieres: ["Mathématiques"], statut: "online", experience: "Ingénieur / 10 ans", grade: "Docteur" },
+        { nom: "Mme Carine Tagne", identifiant: "@ctagne", systeme: "fr", matieres: ["Mathématiques"], statut: "online", experience: "Professeur / 8 ans", grade: "Professeur" },
         
         // PHYSIQUE / CHIMIE
-        { name: "Ing. Marcelle Zoa", username: "@mzoa", sys: "fr", subjects: ["Physique", "Chimie"], status: "online", exp: "Ingénieur / 5 ans", diplome: "Ingénieur" },
-        { name: "Mr. Lucas Eteki", username: "@leteki", sys: "fr", subjects: ["Physique"], status: "offline", exp: "Enseignant / 12 ans", diplome: "Professeur" },
+        { nom: "Ing. Marcelle Zoa", identifiant: "@mzoa", systeme: "fr", matieres: ["Physique", "Chimie"], statut: "online", experience: "Ingénieur / 5 ans", grade: "Ingénieur" },
+        { nom: "Mr. Lucas Eteki", identifiant: "@leteki", systeme: "fr", matieres: ["Physique"], statut: "offline", experience: "Enseignant / 12 ans", grade: "Professeur" },
 
         // FRANÇAIS / LITTÉRATURE
-        { name: "Pr. Guy Ngassa", username: "@gngassa", sys: "fr", subjects: ["Français", "Littérature"], status: "online", exp: "Expert / 15 ans", diplome: "Professeur" },
-        { name: "Mme Sophie Belibi", username: "@sbelibi", sys: "fr", subjects: ["Français"], status: "online", exp: "Enseignant / 7 ans", diplome: "Autres" },
+        { nom: "Pr. Guy Ngassa", identifiant: "@gngassa", systeme: "fr", matieres: ["Français", "Littérature"], statut: "online", experience: "Expert / 15 ans", grade: "Professeur" },
+        { nom: "Mme Sophie Belibi", identifiant: "@sbelibi", systeme: "fr", matieres: ["Français"], statut: "online", experience: "Enseignant / 7 ans", grade: "Autres" },
 
-        // --- SYSTÈME ANGLOPHONE (Subsidiary/Advanced Level) ---
-        // MATHEMATICS
-        { name: "Dr. Kelvin Chenwi", username: "@kchenwi", sys: "en", subjects: ["Mathematics", "Further Maths"], status: "online", exp: "PhD / 9 years", diplome: "Docteur" },
-        { name: "Mr. Divine Ndum", username: "@dndum", sys: "en", subjects: ["Mathematics"], status: "online", exp: "Teacher / 6 years", diplome: "Professeur" },
+        // --- SYSTÈME ANGLOPHONE ---
+        { nom: "Dr. Kelvin Chenwi", identifiant: "@kchenwi", systeme: "en", matieres: ["Mathematics", "Further Maths"], statut: "online", experience: "PhD / 9 years", grade: "Docteur" },
+        { nom: "Mr. Divine Ndum", identifiant: "@dndum", systeme: "en", matieres: ["Mathematics"], statut: "online", experience: "Teacher / 6 years", grade: "Professeur" },
+        { nom: "Ing. Blessing Enow", identifiant: "@benow", systeme: "en", matieres: ["Physics"], statut: "online", experience: "Engineer / 4 years", grade: "Ingénieur" },
+        { nom: "Mr. Samuel Tanda", identifiant: "@standa", systeme: "en", matieres: ["Physics"], statut: "offline", experience: "Teacher / 11 years", grade: "Professeur" },
+        { nom: "Mrs. Janet Fobi", identifiant: "@jfobi", systeme: "en", matieres: ["English Language", "Literature"], statut: "online", experience: "Specialist / 13 years", grade: "Professeur" },
+        { nom: "Dr. Emily Bakia", identifiant: "@ebakia", systeme: "en", matieres: ["English Language"], statut: "online", experience: "Expert / 8 years", grade: "Docteur" },
 
-        // PHYSICS
-        { name: "Ing. Blessing Enow", username: "@benow", sys: "en", subjects: ["Physics"], status: "online", exp: "Engineer / 4 years", diplome: "Ingénieur" },
-        { name: "Mr. Samuel Tanda", username: "@standa", sys: "en", subjects: ["Physics"], status: "offline", exp: "Teacher / 11 years", diplome: "Professeur" },
-
-        // ENGLISH / LITERATURE
-        { name: "Mrs. Janet Fobi", username: "@jfobi", sys: "en", subjects: ["English Language", "Literature"], status: "online", exp: "Specialist / 13 years", diplome: "Professeur" },
-        { name: "Dr. Emily Bakia", username: "@ebakia", sys: "en", subjects: ["English Language"], status: "online", exp: "Expert / 8 years", diplome: "Docteur" },
-
-        // --- BILINGUES (FRANÇAIS & ANGLAIS) ---
-        { name: "Ing. Steve Kamga", username: "@skamga", sys: "both", subjects: ["Informatique", "Computer Science"], status: "online", exp: "Ingénieur / 6 ans", diplome: "Ingénieur" },
-        { name: "Pr. Alice Atangana", username: "@aatangana", sys: "both", subjects: ["Histoire", "History"], status: "online", exp: "Enseignant / 20 ans", diplome: "Professeur" }
+        // --- BILINGUES ---
+        { nom: "Ing. Steve Kamga", identifiant: "@skamga", systeme: "both", matieres: ["Informatique", "Computer Science"], statut: "online", experience: "Ingénieur / 6 ans", grade: "Ingénieur" },
+        { nom: "Pr. Alice Atangana", identifiant: "@aatangana", systeme: "both", matieres: ["Histoire", "History"], statut: "online", experience: "Enseignant / 20 ans", grade: "Professeur" }
     ];
 
-    function updateTheme() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+    function rafraichirApparence() {
+        const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
     }
 
-    function changeSystem(v) {
-        localStorage.setItem('appLang', v);
-        render();
+    function changerSysteme(valeur) {
+        localStorage.setItem('langueApp', valeur);
+        afficherExperts();
     }
 
-    function render() {
-        updateTheme();
-        const urlParams = new URLSearchParams(window.location.search);
-        // On récupère la matière filtrée si elle existe, sinon "all"
-        const subjectFilter = urlParams.get('subject') || "all";
-        const lang = localStorage.getItem('appLang') || 'fr';
+    function afficherExperts() {
+        rafraichirApparence();
         
-        document.getElementById('langSelector').value = lang;
-        document.getElementById('currentSubject').innerText = subjectFilter === "all" ? (lang === 'fr' ? 'Général' : 'General') : subjectFilter;
+        // Gestion des paramètres de l'URL pour le filtrage par matière
+        const parametresUrl = new URLSearchParams(window.location.search);
+        const filtreMatiere = parametresUrl.get('subject') || "all";
+        const langueSelectionnee = localStorage.getItem('langueApp') || 'fr';
+        
+        // Mise à jour de l'interface
+        document.getElementById('selecteurLangue').value = langueSelectionnee;
+        document.getElementById('matiereActuelle').innerText = filtreMatiere === "all" ? (langueSelectionnee === 'fr' ? 'Général' : 'General') : filtreMatiere;
 
-        const grid = document.getElementById('tutorGrid');
-        grid.innerHTML = "";
+        const conteneurGrille = document.getElementById('grilleTuteurs');
+        conteneurGrille.innerHTML = "";
 
-        // FILTRAGE : Langue du système OU prof bilingue
-        const filtered = tutors.filter(t => {
-            const matchLang = (t.sys === lang || t.sys === "both");
-            const matchSub = (subjectFilter === "all" || t.subjects.some(s => s.toLowerCase().includes(subjectFilter.toLowerCase())));
-            return matchLang && matchSub;
+        // Filtrage des experts selon la langue et la matière
+        const expertsFiltres = experts.filter(exp => {
+            const correspondanceLangue = (exp.systeme === langueSelectionnee || exp.systeme === "both");
+            const correspondanceMatiere = (filtreMatiere === "all" || exp.matieres.some(m => m.toLowerCase().includes(filtreMatiere.toLowerCase())));
+            return correspondanceLangue && correspondanceMatiere;
         });
 
-        if (filtered.length === 0) {
-            grid.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">Aucun expert trouvé pour cette sélection.</p></div>`;
+        // Cas où aucun expert ne correspond
+        if (expertsFiltres.length === 0) {
+            conteneurGrille.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">Aucun expert trouvé pour cette sélection.</p></div>`;
             return;
         }
 
-        filtered.forEach(t => {
-            const isOnline = t.status === 'online';
-            grid.innerHTML += `
+        // Génération dynamique des cartes
+        expertsFiltres.forEach(tuteur => {
+            const estEnLigne = tuteur.statut === 'online';
+            const initialeNom = tuteur.nom.split(' ').pop().charAt(0);
+            
+            conteneurGrille.innerHTML += `
                 <div class="col-12 col-md-6 col-xl-4">
-                    <div class="tutor-card d-flex flex-column">
+                    <div class="carte-expert d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-4">
-                            <div class="avatar-box shadow-sm">${t.name.split(' ').pop().charAt(0)}</div>
-                            <span class="status-badge ${isOnline ? 'online' : 'offline'}">
+                            <div class="boite-initiale shadow-sm">${initialeNom}</div>
+                            <span class="pastille-statut ${estEnLigne ? 'en-ligne' : 'hors-ligne'}">
                                 <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>
-                                ${isOnline ? (lang === 'fr' ? 'Disponible' : 'Online') : (lang === 'fr' ? 'Absent' : 'Offline')}
+                                ${estEnLigne ? (langueSelectionnee === 'fr' ? 'Disponible' : 'Online') : (langueSelectionnee === 'fr' ? 'Absent' : 'Offline')}
                             </span>
                         </div>
                         <div class="mb-3">
-                            <h5 class="fw-bold mb-0">${t.name}</h5>
-                            <span class="text-success small fw-bold">${t.username}</span>
+                            <h5 class="fw-bold mb-0">${tuteur.nom}</h5>
+                            <span class="text-success small fw-bold">${tuteur.identifiant}</span>
                         </div>
                         
                         <p class="text-muted small mb-3">
-                            <i class="bi bi-patch-check-fill text-primary me-2"></i><strong>${t.diplome}</strong> • ${t.exp}
+                            <i class="bi bi-patch-check-fill text-primary me-2"></i><strong>${tuteur.grade}</strong> • ${tuteur.experience}
                         </p>
                         
                         <div class="d-flex flex-wrap gap-2 mb-4">
-                            ${t.subjects.map(s => `<span class="subject-pill">${s}</span>`).join('')}
+                            ${tuteur.matieres.map(m => `<span class="badge-matiere">${m}</span>`).join('')}
                         </div>
                         
-                        <button class="btn-call mt-auto" ${!isOnline ? 'disabled style="opacity:0.3"' : ''}>
-                            <i class="bi bi-camera-video me-2"></i>
-                            ${lang === 'fr' ? 'Démarrer la session' : 'Start Session'}
+                        <button class="bouton-appel mt-auto" 
+                         onclick="window.location.href='discussionPeerToPeer.html?tutor=${encodeURIComponent(tuteur.nom)}'" 
+                             ${!estEnLigne ? 'disabled style="opacity:0.3"' : ''}>
+                        <i class="bi bi-camera-video me-2"></i>
+                         ${langueSelectionnee === 'fr' ? 'Démarrer la session' : 'Start Session'}
                         </button>
                     </div>
                 </div>
@@ -267,8 +267,11 @@
         });
     }
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
-    window.onload = render;
+    // Écouteur pour le changement automatique de thème système
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', afficherExperts);
+    
+    // Initialisation au chargement
+    window.onload = afficherExperts;
 </script>
 </body>
 </html>

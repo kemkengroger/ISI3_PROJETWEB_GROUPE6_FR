@@ -1,115 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Première - Ressources</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <title>Document</title>
+
+    <style>
+        :root {
+            --bleu-tuto: #0d6efd;
+            --fond-degrade: linear-gradient(135deg, #e9f0ff, #f8fbff);
+        }
+
+        [data-bs-theme="dark"] {
+            --fond-degrade: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        body {
+            background: var(--fond-degrade);
+            min-height: 100vh;
+            padding: 40px 15px;
+            font-family: "Segoe UI", sans-serif;
+            transition: 0.3s;
+        }
+
+        .conteneur-etroit { max-width: 850px; margin: auto; }
+
+        .btn-retour-style {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            color: var(--bleu-tuto);
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 10px 20px;
+            margin-bottom: 25px;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-retour-style:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-weight: 800;
+            color: var(--bleu-tuto);
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .separateur {
+            width: 100px;
+            height: 4px;
+            background: var(--bleu-tuto);
+            margin: 0 auto 40px auto;
+            border-radius: 10px;
+        }
+
+        details {
+            background: #ffffff;
+            border: none !important;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+        [data-bs-theme="dark"] details { background: #1e293b; }
+
+        details:hover { transform: translateY(-2px); }
+
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::marker, summary::-webkit-details-marker { display: none; }
+
+        .btn-pdf {
+            background: var(--bleu-tuto);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: 600;
+            margin: 5px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .btn-pdf:hover {
+            background: #0a58ca;
+            transform: scale(1.02);
+        }
+
+        .selecteur-lang { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+    </style>
 </head>
 <body>
-    <button class="btn btn-primary" onclick="window.location.href='epreuve.html'">Retour</button>
-    <h1>
-       RESSOURCES/PREMIERE
-    </h1>
-    <article id = math>
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Mathématiques
-                </p>
+
+<div class="selecteur-lang">
+    <select class="form-select form-select-sm shadow-sm" id="choixLangue" onchange="basculerInterface(this.value)">
+        <option value="fr">🇨🇲 FR</option>
+        <option value="en">🇬🇧 EN</option>
+    </select>
+</div>
+
+<div class="conteneur-etroit">
+    <a href="epreuve.html" class="btn-retour-style">
+        <i class="bi bi-arrow-left-circle"></i>
+        <span data-fr="Retour" data-en="Back">Retour</span>
+    </a>
+
+    <h1 data-fr="RESSOURCES / PREMIÈRE" data-en="RESOURCES / GRADE 11">RESSOURCES / PREMIÈRE</h1>
+    <div class="separateur"></div>
+
+    <article id="math">
+        <details>
+            <summary>
+                <span data-fr="Mathématiques" data-en="Mathematics">Mathématiques</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-               <button class="btn btn-primary" onclick="window.location.href='1ere/Mathématiques/Examen/Probatoire C MATH 2021.pdf'"> 
+            <div class="p-3 border-top">
+                <button class="btn btn-primary btn-pdf" onclick="window.location.href='1ere/Mathématiques/Examen/Probatoire C MATH 2021.pdf'"> 
                     <i class="bi bi-file-earmark-pdf-fill me-2"></i> Probatoire C MATH 2021
                 </button>
-            </p>
-
+            </div>
         </details>
     </article>
+
     <article id="chimie">
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    chimie
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Chimie" data-en="Chemistry">Chimie</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-                <button class="btn btn-primary" onclick="window.location.href='1ere/Chimie/Examen/coll_vogt_chimie_seq1_PC-PD-PTI_2020.pdf'"> 
+            <div class="p-3 border-top">
+                <button class="btn btn-primary btn-pdf" onclick="window.location.href='1ere/Chimie/Examen/coll_vogt_chimie_seq1_PC-PD-PTI_2020.pdf'"> 
                     <i class="bi bi-file-earmark-pdf-fill me-2"></i> coll_vogt_chimie_seq1_PC-PD-PTI_2020
                 </button>
-            </p>
+            </div>
         </details>
     </article>
+
     <article id="Anglais">
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Anglais
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Anglais" data-en="English">Anglais</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-                <button class="btn btn-primary" onclick="window.location.href='1ere/Anglais/Examen/PB-2021-ANGLAIS-C-D-TI-A.pdf'"> 
+            <div class="p-3 border-top">
+                <button class="btn btn-primary btn-pdf" onclick="window.location.href='1ere/Anglais/Examen/PB-2021-ANGLAIS-C-D-TI-A.pdf'"> 
                     <i class="bi bi-file-earmark-pdf-fill me-2"></i> PB-2021-ANGLAIS-C-D-TI-A
                 </button>
-                <button class="btn btn-primary" onclick="window.location.href='1ere/Anglais/Examen/MOCK-PROBATOIRE-EXAMINATION-FOR-2020pdf.pdf'"> 
-                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> MOCK-PROBATOIRE-EXAMINATION-FOR-2020pdf
+                <button class="btn btn-primary btn-pdf" onclick="window.location.href='1ere/Anglais/Examen/MOCK-PROBATOIRE-EXAMINATION-FOR-2020pdf.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> MOCK-PROBATOIRE-EXAMINATION-FOR-2020
                 </button>
-            </p>
+            </div>
         </details>
     </article>
+
     <article id="Francais">
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Français
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Français" data-en="French">Français</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-                
-            </p>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucun fichier disponible" data-en="No files available">Aucun fichier disponible</span>
+            </div>
         </details>
     </article>
+
     <article id="Physique">
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Physique
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Physique" data-en="Physics">Physique</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-                
-            </p>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucun fichier disponible" data-en="No files available">Aucun fichier disponible</span>
+            </div>
         </details>
     </article>
+
     <article id="Informatique">
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    Informatique
-                </p>
+        <details>
+            <summary>
+                <span data-fr="Informatique" data-en="Computer Science">Informatique</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-                
-            </p>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucun fichier disponible" data-en="No files available">Aucun fichier disponible</span>
+            </div>
         </details>
     </article>
+
     <article id="SVTEEHB">
-        <details class="border rounded p-3 mb-3">
-            <summary class="h5 mb-0 cursor-pointer">
-                <p>
-                    SVTEEHB
-                </p>
+        <details>
+            <summary>
+                <span>SVTEEHB</span>
+                <i class="bi bi-plus-lg"></i>
             </summary>
-            <p class="mt-3">
-                <button class="btn btn-primary" onclick="window.location.href='1ere/SVTEEHB/Examen/Probatoire D SVTEEHB 2023.pdf'"> 
+            <div class="p-3 border-top">
+                <button class="btn btn-primary btn-pdf" onclick="window.location.href='1ere/SVTEEHB/Examen/Probatoire D SVTEEHB 2023.pdf'"> 
                     <i class="bi bi-file-earmark-pdf-fill me-2"></i> Probatoire D SVTEEHB 2023
                 </button>
-                
-            </p>
+            </div>
         </details>
     </article>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function basculerInterface(langue) {
+        localStorage.setItem('langueSelectionnee', langue);
+        $('[data-en]').each(function() {
+            $(this).text($(this).data(langue));
+        });
+    }
+
+    $(document).ready(function() {
+        const prefLangue = localStorage.getItem('langueSelectionnee') || 'fr';
+        $('#choixLangue').val(prefLangue);
+        basculerInterface(prefLangue);
+
+        const rafraichirAspectTheme = () => {
+            const nuitActive = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-bs-theme', nuitActive ? 'dark' : 'light');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', rafraichirAspectTheme);
+        rafraichirAspectTheme();
+    });
+</script>
+
 </body>
 </html>

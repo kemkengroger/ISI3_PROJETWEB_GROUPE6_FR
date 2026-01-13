@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+=======
+ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+>>>>>>> e8a1ecac6309d15372259abeb296c0cac7cc4d67
 import { auth } from './firebase/config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
