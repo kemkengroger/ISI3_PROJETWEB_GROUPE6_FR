@@ -1,0 +1,30 @@
+[build]
+  command = "cd tp && npm run build"
+  publish = "dist"
+
+# REDIRECTION CRITIQUE POUR SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Routes spécifiques si tu as plusieurs fichiers HTML
+[[redirects]]
+  from = "/connexion"
+  to = "/connexion.html"
+  status = 200
+
+[[redirects]]
+  from = "/connexion"
+  to = "/connexionEnseignant.html"
+  status = 200
+
+[[redirects]]
+  from = "/inscription"
+  to = "/inscriptionEnseignant.html"
+  status = 200
+
+[[redirects]]
+from = "/inscription"
+to = "/inscriptionEtudiant.html"
+status = 200
