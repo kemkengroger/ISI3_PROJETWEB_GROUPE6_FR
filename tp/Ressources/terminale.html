@@ -1,164 +1,254 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminale - Ressources</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-    <title>Ressources Terminale</title>
-
     <style>
-        body {
-            background: linear-gradient(135deg, #eef3ff, #f9fbff);
-            min-height: 100vh;
-            padding: 30px 15px;
-            font-family: "Segoe UI", sans-serif;
+        :root {
+            --bleu-terminale: #0d6efd;
+            --fond-degrade: linear-gradient(135deg, #eef3ff, #f9fbff);
         }
 
-        .container-custom {
-            max-width: 900px;
-            margin: auto;
+        [data-bs-theme="dark"] {
+            --fond-degrade: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        body {
+            background: var(--fond-degrade);
+            min-height: 100vh;
+            padding: 40px 15px;
+            font-family: "Segoe UI", sans-serif;
+            transition: 0.3s ease;
+        }
+
+        .cadre-terminale { max-width: 900px; margin: auto; }
+
+        .bouton-retour-lien {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            color: var(--bleu-terminale);
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 10px 20px;
+            margin-bottom: 25px;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .bouton-retour-lien:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            color: var(--bleu-terminale);
         }
 
         h1 {
+            font-weight: 800;
+            color: var(--bleu-terminale);
             text-align: center;
-            font-weight: 700;
-            margin: 15px 0 25px;
-            color: #0d6efd;
-            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .btn-retour {
-            border-radius: 25px;
-            padding: 8px 18px;
-            font-weight: 500;
+        .ligne-accent {
+            width: 100px;
+            height: 4px;
+            background: var(--bleu-terminale);
+            margin: 0 auto 40px auto;
+            border-radius: 10px;
         }
 
         details {
             background: #ffffff;
             border: none !important;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: all 0.25s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+            transition: 0.2s;
         }
-
-        details:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-        }
+        [data-bs-theme="dark"] details { background: #1e293b; }
 
         summary {
-            list-style: none;
+            padding: 20px;
             cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        summary::marker, summary::-webkit-details-marker { display: none; }
 
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary p {
-            margin: 0;
-            font-size: 1.1rem;
+        .btn-telechargement-final {
+            background: transparent;
+            border: 1px solid var(--bleu-terminale);
+            color: var(--bleu-terminale);
+            border-radius: 10px;
+            padding: 12px 18px;
             font-weight: 600;
-            color: #212529;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            display: block;
+            width: 100%;
+            text-align: left;
+            text-decoration: none;
+        }
+        .btn-telechargement-final:hover {
+            background: var(--bleu-terminale);
+            color: #ffffff;
         }
 
-        .files button {
-            margin: 6px 6px 0 0;
-            border-radius: 20px;
-            padding: 7px 16px;
-            font-size: 0.9rem;
-        }
+        .selecteur-langue-flottant { position: fixed; top: 20px; right: 20px; z-index: 1000; }
     </style>
 </head>
 <body>
 
-    <div class="container-custom">
+<div class="selecteur-langue-flottant">
+    <select class="form-select form-select-sm shadow-sm" id="selectLangue" onchange="mettreAJourLangue(this.value)">
+        <option value="fr">🇨🇲 FR</option>
+        <option value="en">🇬🇧 EN</option>
+    </select>
+</div>
 
-        <button class="btn btn-primary btn-retour mb-3" onclick="window.location.href='epreuve.html'">
-            <i class="bi bi-arrow-left me-2"></i> Retour
-        </button>
+<div class="cadre-terminale">
+    <a href="./epreuve.html" class="bouton-retour-lien">
+        <i class="bi bi-arrow-left-circle"></i>
+        <span data-fr="Retour aux Ressources" data-en="Back to Resources">Retour</span>
+    </a>
 
-        <h1>RESSOURCES / TERMINALE</h1>
+    <h1 data-fr="RESSOURCES / TERMINALE" data-en="RESOURCES / GRADE 12">RESSOURCES / TERMINALE</h1>
+    <div class="ligne-accent"></div>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>Mathématiques</p></summary>
-                <div class="mt-3 files">
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/MATHS BAC D 2025 CAMEROUN.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> MATHS BAC D 2025 CAMEROUN
-                    </button>
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/Vogt Maths Tle D N1 2023-2024.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> Vogt Maths Tle D N°1 2023-2024
-                    </button>
-                </div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Mathématiques" data-en="Mathematics">Mathématiques</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top">
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/MATHS BAC D 2025 CAMEROUN.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> MATHS BAC D 2025 CAMEROUN
+                </button>
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/Vogt Maths Tle D N1 2023-2024.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Vogt Maths Tle D N°1 2023-2024
+                </button>
+            </div>
+        </details>
+    </article>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>Chimie</p></summary>
-                <div class="mt-3 files">
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/Chimie-TleTI-Mini-Session3-College-Retraite-Janvier-2022.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> Chimie-TleTI Mini Session 3
-                    </button>
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/Chimie-TleCD-Mini-Session3-College-Retraite-Janvier-2022.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> Chimie-TleCD Mini Session 3
-                    </button>
-                </div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Chimie" data-en="Chemistry">Chimie</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top">
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/Chimie-TleTI-Mini-Session3-College-Retraite-Janvier-2022.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Chimie-TleTI Mini Session 3 (Retraite)
+                </button>
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/Chimie-TleCD-Mini-Session3-College-Retraite-Janvier-2022.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Chimie-TleCD Mini Session 3 (Retraite)
+                </button>
+            </div>
+        </details>
+    </article>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>Anglais</p></summary>
-                <div class="mt-3 files"></div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Anglais" data-en="English">Anglais</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucun document." data-en="No documents.">Aucun document.</span>
+            </div>
+        </details>
+    </article>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>Français</p></summary>
-                <div class="mt-3 files"></div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Français" data-en="French">Français</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucun document." data-en="No documents.">Aucun document.</span>
+            </div>
+        </details>
+    </article>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>Physique</p></summary>
-                <div class="mt-3 files">
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/mini session nov TD.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> Mini session nov TD
-                    </button>
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/RECUIEL15 Sujet type sequence1physiqueTleCD.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> Sujet type séquence 1 Physique
-                    </button>
-                </div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Physique" data-en="Physics">Physique</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top">
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/mini session nov TD.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Mini session nov TD
+                </button>
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/RECUIEL15 Sujet type sequence1physiqueTleCD.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Sujet type séquence 1 Physique
+                </button>
+            </div>
+        </details>
+    </article>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>Informatique</p></summary>
-                <div class="mt-3 files"></div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span data-fr="Informatique" data-en="Computer Science">Informatique</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top text-muted small">
+                <span data-fr="Aucun document." data-en="No documents.">Aucun document.</span>
+            </div>
+        </details>
+    </article>
 
-        <article>
-            <details class="p-3 mb-4">
-                <summary><p>SVTEEHB</p></summary>
-                <div class="mt-3 files">
-                    <button class="btn btn-outline-primary" onclick="window.location.href='terminale/BAC D SVTEEHB 2022.pdf'">
-                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> BAC D SVTEEHB 2022
-                    </button>
-                </div>
-            </details>
-        </article>
+    <article>
+        <details>
+            <summary>
+                <span>SVTEEHB</span>
+                <i class="bi bi-chevron-right"></i>
+            </summary>
+            <div class="p-3 border-top">
+                <button class="btn-telechargement-final" onclick="window.location.href='terminale/BAC D SVTEEHB 2022.pdf'"> 
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> BAC D SVTEEHB 2022
+                </button>
+            </div>
+        </details>
+    </article>
+</div>
 
-    </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function mettreAJourLangue(langue) {
+        localStorage.setItem('langueTerminale', langue);
+        $('[data-en]').each(function() {
+            $(this).text($(this).data(langue));
+        });
+    }
+
+    $(document).ready(function() {
+        const memoireLangue = localStorage.getItem('langueTerminale') || 'fr';
+        $('#selectLangue').val(memoireLangue);
+        mettreAJourLangue(memoireLangue);
+
+        const detecterTheme = () => {
+            const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', detecterTheme);
+        detecterTheme();
+    });
+</script>
 
 </body>
 </html>
