@@ -1,10 +1,29 @@
+// FICHIER : vite.config.js
+// EMPLACEMENT : À LA RACINE DE TON DÉPÔT
 import { defineConfig } from 'vite'
-import path from 'path'
 
 export default defineConfig({
-  root: 'tp', // Indique que la racine est le dossier 'tp'
+  // Racine du projet = dossier 'tp'
+  root: 'tp',
+  
+  // Configuration du build
   build: {
-    outDir: '../dist', // Génère le build à la racine
+    // Où mettre les fichiers générés
+    outDir: '../dist',
+    
+    // Vider le dossier dist avant build
     emptyOutDir: true,
+    
+    // Configuration supplémentaire pour éviter les erreurs
+    rollupOptions: {
+      input: {
+        main: 'tp/index.html'
+      }
+    }
+  },
+  
+  // Serveur de dev (optionnel)
+  server: {
+    open: '/tp/index.html'
   }
 })
