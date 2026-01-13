@@ -14,8 +14,8 @@ export default defineConfig({
         inscriptionEnseignant: resolve(__dirname, 'inscriptionEnseignant.html'),
         boardEnseignant : resolve (__dirname, 'boardEnseignant.html'),
         boardEtudiant : resolve (__dirname, 'boardEtudiant.html'),
-        tuteurIA : resolve(__dirname, 'tuteur.html'),
-        tuteurD : resolve(__dirname, 'tuteurD.html'),
+        tuteurIA : resolve(__dirname, 'tuteurIA.html'),
+      
         epreuve : resolve(__dirname, 'Ressouces/epreuve.html'),
         c6e : resolve(__dirname, 'Ressouces/6e.html'),
         c5e : resolve(__dirname, 'Ressouces/5e.html'),
