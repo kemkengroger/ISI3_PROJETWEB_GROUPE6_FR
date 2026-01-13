@@ -167,171 +167,46 @@ body {
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* Variables locales pour l'accueil */
-:root {
-    --couleur-primaire: #2a8168; /* Harmonisé avec votre bouton-inscription */
-    --couleur-secondaire: #1e293b;
-    --fond-principal: #ffffff;
-    --fond-alternatif: #f8fafc;
-    --rayon-bordure: 12px;
+        /* Styles spécifiques pour l'espace enseignant */
+
+/* Cartes statistiques enseignant */
+.carte-statistique-prof {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins-Regular', sans-serif;
-    color: var(--couleur-secondaire);
-    background: var(--fond-principal);
+.carte-statistique-prof:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.zone-limitee {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 25px;
-}
-
-/* --- NAVIGATION --- */
-.entete-navigation {
-    height: 80px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #edf2f7;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-}
-
-.barre-outils {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.identite-plateforme {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--couleur-primaire);
-}
-
-.navigation-centrale {
-    display: flex;
-    gap: 40px;
-}
-
-.lien-navigation {
-    text-decoration: none;
-    color: #64748b;
-    font-weight: 500;
-    transition: 0.2s;
-}
-
-.lien-navigation:hover {
-    color: var(--couleur-primaire);
-}
-
-.bouton-accentue {
-    background: var(--couleur-primaire);
-    color: white;
-    padding: 12px 24px;
-    border-radius: var(--rayon-bordure);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* --- SECTION HERO --- */
-.vitrine-principale {
-    padding: 100px 0;
-    background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-}
-
-.grille-hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 60px;
-}
-
-.titre-majeur {
-    font-size: 3.5rem;
-    line-height: 1.1;
-    margin-bottom: 25px;
-    color: #0f172a;
-}
-
-.paragraphe-hero {
-    font-size: 1.25rem;
-    color: #475569;
-    margin-bottom: 40px;
-}
-
-.bouton-majeur {
-    display: inline-block;
-    background: #2563eb;
-    color: white;
-    padding: 18px 36px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-}
-
-.image-arrondie {
-    width: 100%;
-    border-radius: 30px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-}
-
-/* --- SERVICES --- */
-.exposition-outils {
-    padding: 120px 0;
-    text-align: center;
-}
-
-.grille-services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    margin-top: 60px;
-}
-
-.bloc-service {
-    padding: 50px;
-    background: white;
-    border-radius: 20px;
-    border: 1px solid #f1f5f9;
-    transition: transform 0.3s ease;
-}
-
-.bloc-service:hover {
-    transform: translateY(-10px);
-    border-color: #e2e8f0;
-}
-
-.pastille-icone {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 30px;
-    border-radius: 18px;
+/* Icônes de statistiques */
+.icone-stat {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
 }
 
-.fond-emeraude { background: #ecfdf5; color: #059669; }
-.fond-cobalt { background: #eff6ff; color: #2563eb; }
+/* Icône de session */
+.icone-session {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
 
-/* --- PIED DE PAGE --- */
-.zone-bas-page {
-    padding: 40px 0;
-    border-top: 1px solid #eee;
-    text-align: center;
-    color: #94a3b8;
+/* Badge personnalisé */
+.badge {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+/* Bouton de réponse */
+.btn-sm.bouton-primaire {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
 }
