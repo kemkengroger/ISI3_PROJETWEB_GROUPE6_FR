@@ -165,12 +165,36 @@
 </main>
 
 <script>
-    const tutors = [
-        { name: "Pr. Jean Kamga", sys: "fr", subjects: ["Mathématiques", "Physique"], status: "online", exp: "12 ans" },
-        { name: "Dr. Sarah Sunjo", sys: "both", subjects: ["Mathematics", "Biology"], status: "online", exp: "9 ans" },
-        { name: "Mr. Elvis Teke", sys: "en", subjects: ["English", "History"], status: "online", exp: "10 ans" },
-        { name: "Mme Clarisse Njé", sys: "fr", subjects: ["Français", "Littérature"], status: "offline", exp: "6 ans" },
-        { name: "Ing. Steve Kamga", sys: "fr", subjects: ["Informatique", "Mathématiques"], status: "online", exp: "4 ans" }
+   const tutors = [
+        // --- SYSTÈME FRANCOPHONE ---
+        // MATHÉMATIQUES
+        { name: "Dr. André Mbarga", username: "@ambarga", sys: "fr", subjects: ["Mathématiques"], status: "online", exp: "Ingénieur / 10 ans", diplome: "Docteur" },
+        { name: "Mme Carine Tagne", username: "@ctagne", sys: "fr", subjects: ["Mathématiques"], status: "online", exp: "Professeur / 8 ans", diplome: "Professeur" },
+        
+        // PHYSIQUE / CHIMIE
+        { name: "Ing. Marcelle Zoa", username: "@mzoa", sys: "fr", subjects: ["Physique", "Chimie"], status: "online", exp: "Ingénieur / 5 ans", diplome: "Ingénieur" },
+        { name: "Mr. Lucas Eteki", username: "@leteki", sys: "fr", subjects: ["Physique"], status: "offline", exp: "Enseignant / 12 ans", diplome: "Professeur" },
+
+        // FRANÇAIS / LITTÉRATURE
+        { name: "Pr. Guy Ngassa", username: "@gngassa", sys: "fr", subjects: ["Français", "Littérature"], status: "online", exp: "Expert / 15 ans", diplome: "Professeur" },
+        { name: "Mme Sophie Belibi", username: "@sbelibi", sys: "fr", subjects: ["Français"], status: "online", exp: "Enseignant / 7 ans", diplome: "Autres" },
+
+        // --- SYSTÈME ANGLOPHONE (Subsidiary/Advanced Level) ---
+        // MATHEMATICS
+        { name: "Dr. Kelvin Chenwi", username: "@kchenwi", sys: "en", subjects: ["Mathematics", "Further Maths"], status: "online", exp: "PhD / 9 years", diplome: "Docteur" },
+        { name: "Mr. Divine Ndum", username: "@dndum", sys: "en", subjects: ["Mathematics"], status: "online", exp: "Teacher / 6 years", diplome: "Professeur" },
+
+        // PHYSICS
+        { name: "Ing. Blessing Enow", username: "@benow", sys: "en", subjects: ["Physics"], status: "online", exp: "Engineer / 4 years", diplome: "Ingénieur" },
+        { name: "Mr. Samuel Tanda", username: "@standa", sys: "en", subjects: ["Physics"], status: "offline", exp: "Teacher / 11 years", diplome: "Professeur" },
+
+        // ENGLISH / LITERATURE
+        { name: "Mrs. Janet Fobi", username: "@jfobi", sys: "en", subjects: ["English Language", "Literature"], status: "online", exp: "Specialist / 13 years", diplome: "Professeur" },
+        { name: "Dr. Emily Bakia", username: "@ebakia", sys: "en", subjects: ["English Language"], status: "online", exp: "Expert / 8 years", diplome: "Docteur" },
+
+        // --- BILINGUES (FRANÇAIS & ANGLAIS) ---
+        { name: "Ing. Steve Kamga", username: "@skamga", sys: "both", subjects: ["Informatique", "Computer Science"], status: "online", exp: "Ingénieur / 6 ans", diplome: "Ingénieur" },
+        { name: "Pr. Alice Atangana", username: "@aatangana", sys: "both", subjects: ["Histoire", "History"], status: "online", exp: "Enseignant / 20 ans", diplome: "Professeur" }
     ];
 
     function updateTheme() {
@@ -186,20 +210,27 @@
     function render() {
         updateTheme();
         const urlParams = new URLSearchParams(window.location.search);
-        const subject = urlParams.get('subject') || "Toutes les matières";
+        // On récupère la matière filtrée si elle existe, sinon "all"
+        const subjectFilter = urlParams.get('subject') || "all";
         const lang = localStorage.getItem('appLang') || 'fr';
         
         document.getElementById('langSelector').value = lang;
-        document.getElementById('currentSubject').innerText = subject;
+        document.getElementById('currentSubject').innerText = subjectFilter === "all" ? (lang === 'fr' ? 'Général' : 'General') : subjectFilter;
 
         const grid = document.getElementById('tutorGrid');
         grid.innerHTML = "";
 
+        // FILTRAGE : Langue du système OU prof bilingue
         const filtered = tutors.filter(t => {
             const matchLang = (t.sys === lang || t.sys === "both");
-            const matchSub = (subject === "all" || subject === "Toutes les matières" || t.subjects.includes(subject));
+            const matchSub = (subjectFilter === "all" || t.subjects.some(s => s.toLowerCase().includes(subjectFilter.toLowerCase())));
             return matchLang && matchSub;
         });
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">Aucun expert trouvé pour cette sélection.</p></div>`;
+            return;
+        }
 
         filtered.forEach(t => {
             const isOnline = t.status === 'online';
@@ -213,12 +244,21 @@
                                 ${isOnline ? (lang === 'fr' ? 'Disponible' : 'Online') : (lang === 'fr' ? 'Absent' : 'Offline')}
                             </span>
                         </div>
-                        <h5 class="fw-bold mb-1">${t.name}</h5>
-                        <p class="text-muted small mb-4"><i class="bi bi-mortarboard me-2"></i>${t.exp} d'expérience</p>
+                        <div class="mb-3">
+                            <h5 class="fw-bold mb-0">${t.name}</h5>
+                            <span class="text-success small fw-bold">${t.username}</span>
+                        </div>
+                        
+                        <p class="text-muted small mb-3">
+                            <i class="bi bi-patch-check-fill text-primary me-2"></i><strong>${t.diplome}</strong> • ${t.exp}
+                        </p>
+                        
                         <div class="d-flex flex-wrap gap-2 mb-4">
                             ${t.subjects.map(s => `<span class="subject-pill">${s}</span>`).join('')}
                         </div>
+                        
                         <button class="btn-call mt-auto" ${!isOnline ? 'disabled style="opacity:0.3"' : ''}>
+                            <i class="bi bi-camera-video me-2"></i>
                             ${lang === 'fr' ? 'Démarrer la session' : 'Start Session'}
                         </button>
                     </div>

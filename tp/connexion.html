@@ -1,77 +1,209 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - TutoAfrica</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #2D7D62;
+            --transition: all 0.3s ease;
+        }
+
+        [data-bs-theme="light"] {
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --input-bg: #f8fafc;
+        }
+
+        [data-bs-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --input-bg: #0f172a;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .carte-inscription {
+            background: var(--bg-card);
+            border: 1px solid rgba(125,125,125,0.1);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-inscription {
+            border-radius: 40px;
+            max-height: 550px;
+            object-fit: cover;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control {
+            background-color: var(--input-bg);
+            border: 1px solid rgba(125,125,125,0.2);
+            color: var(--text-main);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .btn-inscription {
+            background-color: var(--primary-green);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn-inscription:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .separateur-ou {
+            text-align: center; margin: 25px 0; position: relative;
+        }
+        .separateur-ou::before {
+            content: ""; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1px; background: rgba(125,125,125,0.2);
+        }
+        .separateur-ou span {
+            background: var(--bg-card); padding: 0 15px; position: relative;
+            color: #94a3b8; font-size: 0.8rem; font-weight: 700;
+        }
+
+        .lang-switch {
+            position: fixed; top: 20px; right: 20px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="row align-items-center justify-content-center">
-        <div class="col-md-5 d-none d-md-block text-center">
-            <img src="assets/image/PhotoInscription_124457.jpg"
-                 alt="Image connexion"
-                 class="img-fluid image-inscription shadow">
+
+<div class="lang-switch">
+    <select class="form-select form-select-sm" onchange="changeLang(this.value)" id="langSelect">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+    </select>
+</div>
+
+<div class="container my-5">
+    <div class="row align-items-center justify-content-center g-5">
+        <div class="col-md-6 d-none d-lg-block text-center">
+            <img src="/assets/image/PhotoInscription_124457.jpg" alt="Login" class="img-fluid image-inscription">
         </div>
 
-        <div class="col-md-5 col-lg-4">
+        <div class="col-md-10 col-lg-5">
             <div class="card carte-inscription">
                 <div class="text-center mb-4">
-                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="#2a8168" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                        </svg>
-                        <span class="fw-bold text-secondary">TutoAfrica</span>
+                    <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+                        <i class="bi bi-mortarboard-fill fs-3 text-success"></i>
+                        <span class="fw-bold fs-4">TutoAfrica</span>
                     </div>
-                    <h2 class="fw-bold h3 mb-1">Connexion</h2>
-                    <p class="text-muted small">Connectez-vous à votre compte</p>
+                    <h2 class="fw-800 h3 mb-1" data-fr="Connexion" data-en="Login">Connexion</h2>
+                    <p class="text-muted small" data-fr="Connectez-vous à votre compte" data-en="Sign in to your account">Connectez-vous à votre compte</p>
                 </div>
 
                 <form id="form-connexion">
                     <div class="mb-3">
-                        <label for="email-connexion" class="etiquette-formulaire">Adresse Email</label>
-                        <input type="email" id="email-connexion" class="form-control champ-formulaire" required>
+                        <label class="small fw-bold mb-2" data-fr="Adresse Email" data-en="Email Address">Adresse Email</label>
+                        <input type="email" class="form-control" placeholder="exemple@mail.com" required>
                     </div>
 
                     <div class="mb-4">
-                        <label for="password-connexion" class="etiquette-formulaire">Mot de passe</label>
-                        <input type="password" id="password-connexion" class="form-control champ-formulaire" required>
+                        <label class="small fw-bold mb-2" data-fr="Mot de passe" data-en="Password">Mot de passe</label>
+                        <input type="password" class="form-control" placeholder="••••••••" required>
                     </div>
 
-                    <button type="submit" class="btn btn-inscription w-100 text-white mb-3">
+                    <button type="submit" class="btn btn-inscription w-100 text-white mb-3" data-fr="Se connecter" data-en="Sign In">
                         Se connecter
                     </button>
 
                     <div class="separateur-ou">
-                        <span>OU</span>
+                        <span data-fr="OU" data-en="OR">OU</span>
                     </div>
 
-                    <button type="button" id="bouton-google" class="btn bouton-google w-100">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="me-2">
-                            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
-                            <path d="M9.003 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9.003 18z" fill="#34A853"/>
-                            <path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.96H.957C.347 6.175 0 7.55 0 9.002c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
-                            <path d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.426 0 9.003 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill="#EA4335"/>
-                        </svg>
-                        Continuer avec Google
-                    </button>
+                    <button type="button" class="btn btn-google-custom w-100 d-flex align-items-center justify-content-center gap-2 mb-4">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+        <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
+        <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
+        <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
+        <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+    </svg>
+    <span class="fw-bold" style="color: #5f6368;" data-fr="Continuer avec Google" data-en="Continue with Google">Continuer avec Google</span>
+</button>
                 </form>
 
-                <div class="text-center mt-4">
-                    <p class="small text-muted">
-                        Pas encore de compte ?
-                        <a href="inscriptionEtudiant.html" class="text-dark fw-bold text-decoration-none">S'inscrire</a>
-                    </p>
+                <div class="text-center mt-2">
+                    <p class="small text-muted mb-3" data-fr="Pas encore de compte ?" data-en="Don't have an account?">Pas encore de compte ?</p>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="inscriptionEtudiant.html" class="btn btn-outline-custom w-100" data-fr="Je suis étudiant" data-en="I am a Student">
+                            Je suis étudiant
+                        </a>
+                        <a href="inscriptionEnseignant.html" class="btn btn-outline-custom w-100" data-fr="Je suis enseignant" data-en="I am a Teacher">
+                            Je suis enseignant
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script type="module" src="/src/connexion.js"></script>
+<script>
+    // THEME DETECTION
+    const updateTheme = () => {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+    };
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+    updateTheme();
+
+    // BILINGUALISM LOGIC
+    function changeLang(lang) {
+        localStorage.setItem('appLang', lang);
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const text = el.getAttribute(`data-${lang}`);
+            if (text) el.textContent = text;
+        });
+    }
+
+    window.onload = () => {
+        const savedLang = localStorage.getItem('appLang') || 'fr';
+        document.getElementById('langSelect').value = savedLang;
+        changeLang(savedLang);
+    }
+</script>
+
 </body>
 </html>
