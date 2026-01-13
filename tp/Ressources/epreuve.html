@@ -169,9 +169,15 @@
 
 <div class="conteneur-interieur">
 
+<<<<<<< HEAD
     <button class="btn-retour-flottant" id="backButton">
         <i class="bi bi-arrow-left-circle-fill"></i>
         <span data-fr="Retour au menu" data-en="Back to menu" id="backButton">Retour au menu</span>
+=======
+    <button class="btn-retour-flottant" id="smartBackButton">
+        <i class="bi bi-arrow-left-circle-fill"></i>
+        <span data-fr="Retour au menu" data-en="Back to menu">Retour au menu</span>
+>>>>>>> 9766618a8a008e49e416cf4e199c0b119c3e881f
     </button>
     
     <h1 data-fr="RESSOURCES" data-en="RESOURCES">RESSOURCES</h1>
@@ -292,7 +298,7 @@
         </div>
     </details>
 </div>
-
+<div id ="originPage"></div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function redirectionClasse(url) {
@@ -319,6 +325,7 @@
         ajusterThemeAutomatique();
     });
 </script>
+<<<<<<< HEAD
       <script>
         // Récupérer les infos de localStorage
         const returnPath = localStorage.getItem('returnPath');
@@ -344,6 +351,82 @@
             } else {
                 // Par défaut, aller à pageA
                 window.location.href = '../boardEtudiant.html';
+=======
+<script>
+        document.getElementById('smartBackButton').addEventListener('click', function() {
+            // 1. Vérifier les paramètres d'URL en premier
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromParam = urlParams.get('from');
+            
+            if (fromParam === 'boardEtudiant') {
+                window.location.href = '../boardEtudiant.html';
+                return;
+            }
+            if (fromParam === 'boardEnseignant') {
+                window.location.href = '../boardEnseignant.html';
+                return;
+            }
+            
+            // 2. Vérifier document.referrer
+            const referrer = document.referrer;
+            if (referrer) {
+                try {
+                    const referrerUrl = new URL(referrer);
+                    const path = referrerUrl.pathname;
+                    
+                    // Détecter la page d'origine par son nom
+                    if (path.includes('boardEtudiant') || 
+                        path.endsWith('boardEtudiant') || 
+                        path.endsWith('boardEtudiant.html') ||
+                        referrer.includes('boardEtudiant')) {
+                        window.location.href = '../boardEtudiant.html';
+                        return;
+                    }
+                    
+                    if (path.includes('boardEnseignant') || 
+                        path.endsWith('boardEnseignant') || 
+                        path.endsWith('boardEnseignant.html') ||
+                        referrer.includes('boardEnseignant')) {
+                        window.location.href = '../boardEnseignant.html';
+                        return;
+                    }
+                } catch (e) {
+                    console.log("Erreur d'analyse de l'URL :", e);
+                }
+            }
+            
+            // 3. Vérifier sessionStorage/localStorage
+            const storedOrigin = sessionStorage.getItem('lastOrigin') || 
+                                localStorage.getItem('lastOrigin');
+            
+            if (storedOrigin === 'boardEtudiant') {
+                window.location.href = '../boardEtudiant.html';
+                return;
+            }
+            if (storedOrigin === 'boardEnseignant') {
+                window.location.href = '../boardEnseignant.html';
+                return;
+            }
+            
+            // 4. Dernier recours
+            if (history.length > 1) {
+                window.history.back();
+            } else {
+                // Page par défaut
+                window.location.href = '../index.html'; // ou pageA.html
+            }
+        });
+        
+        // Stocker l'origine au chargement de la page
+        window.addEventListener('load', function() {
+            const referrer = document.referrer;
+            if (referrer) {
+                if (referrer.includes('boardEtudiant')) {
+                    sessionStorage.setItem('lastOrigin', 'boardEtudiant');
+                } else if (referrer.includes('boardEnseignant')) {
+                    sessionStorage.setItem('lastOrigin', 'boardEnseignant');
+                }
+>>>>>>> 9766618a8a008e49e416cf4e199c0b119c3e881f
             }
             
             // Nettoyer le localStorage (optionnel)
@@ -357,6 +440,5 @@
             localStorage.removeItem('originPage');
         });
     </script>
-
 </body>
 </html>
