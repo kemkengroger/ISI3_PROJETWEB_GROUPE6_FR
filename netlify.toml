@@ -10,21 +10,21 @@
 
 # Routes spécifiques si tu as plusieurs fichiers HTML
 [[redirects]]
-  from = "/connexion"
+  from = "/index.html"
   to = "/connexion.html"
   status = 200
 
 [[redirects]]
-  from = "/connexion"
+  from = "/index.html"
   to = "/connexionEnseignant.html"
   status = 200
 
 [[redirects]]
-  from = "/inscription"
+  from = "/index.html"
   to = "/inscriptionEnseignant.html"
   status = 200
 
 [[redirects]]
-from = "/inscription"
+from = "/index.html"
 to = "/inscriptionEtudiant.html"
 status = 200
