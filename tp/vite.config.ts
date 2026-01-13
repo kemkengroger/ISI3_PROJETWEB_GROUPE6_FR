@@ -24,7 +24,7 @@ export default defineConfig({
         c2nde : resolve(__dirname, 'Ressources/2nde.html'),
         c1ere : resolve(__dirname, 'Ressources/1ere.html'),
         terminale : resolve(__dirname, 'Ressources/terminale.html'),
-        discussionPeerToPeer : resolve(__dirname, 'Ressouces/discussionPeerToPeer.html'),
+        discussionPeerToPeer : resolve(__dirname, 'discussionPeerToPeer.html'),
 
 
 
