@@ -1,15 +1,19 @@
+// src/auth.js
 import { auth } from './firebase-config.js';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged 
+} from 'firebase/auth';
 import { createTutorProfile, createStudentProfile } from './firestore-service.js';
 
 // Inscription d'un tuteur
 async function registerTutor(email, password, name, subject) {
   try {
-    // Créer le compte Firebase Auth
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Créer le profil dans Firestore
     await createTutorProfile(user.uid, {
       name: name,
       email: email,
@@ -17,9 +21,10 @@ async function registerTutor(email, password, name, subject) {
     });
 
     alert('Inscription réussie !');
+    return user;
   } catch (error) {
     console.error('Erreur inscription:', error);
-    alert('Erreur: ' + error.message);
+    throw error;
   }
 }
 
@@ -35,8 +40,45 @@ async function registerStudent(email, password, name) {
     });
 
     alert('Inscription réussie !');
+    return user;
   } catch (error) {
     console.error('Erreur inscription:', error);
-    alert('Erreur: ' + error.message);
+    throw error;
   }
 }
+
+// Connexion
+async function loginUser(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    console.error('Erreur connexion:', error);
+    throw error;
+  }
+}
+
+// Déconnexion
+async function logoutUser() {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error('Erreur déconnexion:', error);
+    throw error;
+  }
+}
+
+// Observer l'état d'authentification
+function onAuthChange(callback) {
+  return onAuthStateChanged(auth, callback);
+}
+
+// Exporter
+export { 
+  registerTutor, 
+  registerStudent, 
+  loginUser, 
+  logoutUser,
+  onAuthChange,
+  auth 
+};
