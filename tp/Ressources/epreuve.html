@@ -168,11 +168,11 @@
 </div>
 
 <div class="conteneur-interieur">
-<<<<<<< HEAD
-    <a class="btn-retour-flottant">
+
+    <button class="btn-retour-flottant" id="backButton">
         <i class="bi bi-arrow-left-circle-fill"></i>
         <span data-fr="Retour au menu" data-en="Back to menu" id="backButton">Retour au menu</span>
-    </a>
+    </button>
     
     <h1 data-fr="RESSOURCES" data-en="RESOURCES">RESSOURCES</h1>
     <hr class="barre-separation">
@@ -319,34 +319,42 @@
         ajusterThemeAutomatique();
     });
 </script>
- <script>
+      <script>
+        // Récupérer les infos de localStorage
+        const returnPath = localStorage.getItem('returnPath');
+        const originPage = localStorage.getItem('originPage');
+        
+        // Mettre à jour l'interface
+        const originInfo = document.getElementById('originInfo');
+        const pageNameSpan = document.getElementById('pageName');
+        
+        if (originPage) {
+            originInfo.textContent = `Vous venez de la page ${originPage}`;
+            pageNameSpan.textContent = originPage;
+        } else {
+            originInfo.textContent = 'Origine inconnue';
+        }
+        
+        // Gestion du bouton retour
         document.getElementById('backButton').addEventListener('click', function() {
-            const referrer = document.referrer;
-            
-            // Analyser l'URL de référence
-            if (referrer && referrer !== '') {
-                // Extraire le nom de fichier de l'URL
-                const referrerUrl = new URL(referrer);
-                const pathname = referrerUrl.pathname;
-                
-                // Détecter si on vient de pageA ou pageB
-                if (pathname.includes('boardEtudiant.html') || 
-                    pathname.endsWith('/boardEtudiant') ||
-                    referrer.includes('boardEtudiant.html')) {
-                    // Remonter d'un dossier pour atteindre pageA
-                    window.location.href = '../boardEtudiant.html';
-                } else if (pathname.includes('boardEnseignant.html') ||
-                          pathname.endsWith('/boardEnseignant') ||
-                          referrer.includes('boardEnseignant.html')) {
-                    window.location.href = '../boardEnseignant.html';
-                } else {
-                    // Si on ne reconnaît pas, utiliser history
-                    window.history.back();
-                }
-            } else {
-                // Fallback
+            if (returnPath) {
+                window.location.href = returnPath;
+            } else if (history.length > 1) {
                 window.history.back();
+            } else {
+                // Par défaut, aller à pageA
+                window.location.href = '../boardEtudiant.html';
             }
+            
+            // Nettoyer le localStorage (optionnel)
+            localStorage.removeItem('returnPath');
+            localStorage.removeItem('originPage');
+        });
+        
+        // Nettoyer le localStorage si l'utilisateur quitte autrement
+        window.addEventListener('beforeunload', function() {
+            localStorage.removeItem('returnPath');
+            localStorage.removeItem('originPage');
         });
     </script>
 
