@@ -16,7 +16,7 @@
 
 [[redirects]]
   from = "/index.html"
-  to = "/connexionEnseignant.html"
+  to = "/connexionEtudiant.html"
   status = 200
 
 [[redirects]]
@@ -28,3 +28,80 @@
 from = "/index.html"
 to = "/inscriptionEtudiant.html"
 status = 200
+
+[[redirects]]
+from = "/inscriptionEtudiant.html"
+to = "/boardEtudiant.html"
+status = 200
+
+[[redirects]]
+from = "/inscriptionEnseignant.html"
+to = "/boardEnseignant.html"
+status = 200
+
+[[redirects]]
+from = "/boardEtudiant.html"
+to = "/tuteurIA.html"
+status = 200
+
+[[redirects]]
+from = "/boardEtudiant.html"
+to = "/tuteurD.html"
+status = 200
+
+[[redirects]]
+from = "/boardEtudiant.html"
+to = "/Ressources/epreuve.html"
+status = 200
+
+[[redirects]]
+from = "/Ressources/epreuve.html"
+to = "/Ressources/6e.html"
+status = 200
+
+[[redirects]]
+from = "/Ressources/epreuve.html"
+to = "/Ressource5e.html"
+status = 200
+
+[[redirects]]
+from = "/Ressources/epreuve.html"
+to = "/Ressources/4e.html"
+status = 200
+
+[[redirects]]
+from = "/Ressource/epreuve.html"
+to = "/Ressources/3e.html"
+status = 200
+
+[[redirects]]
+from = "/Ressource/epreuve.html"
+to = "/Ressources/2nde.html"
+status = 200
+
+[[redirects]]
+from = "/Ressources/epreuve.html"
+to = "/Ressource/1ere.html"
+status = 200
+
+[[redirects]]
+from = "/Ressource/epreuve.html"
+to = "/Ressource/terminale.html"
+status = 200
+
+[[redirects]]
+from = "/boardEnseignant.html"
+to = "/sessionTutorat.html"
+status = 200
+
+[[redirects]]
+from = "/boardEnseignant.html"
+to = "/sessiontutorat.html"
+status = 200
+
+[[redirects]]
+from = "/boardEnseignant.html"
+to = "/discussionPeerToPeer.html"
+status = 200
+
+
