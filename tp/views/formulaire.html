@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav style="background-color: #f2f2f2;font-family: Arial, Helvetica, sans-serif;">
+    <ul>
+      <li> <a href="">Accueil</a></li>
+      <li><a href="music.html">Musique</a></li>     
+      <li><a href="favoris.html">Favoris</a></li>
+      <li><a href="devoir.html">Devoirs</a></li>      
+      <li><a href="Apropos.html">A Propos</a></li>      
+    </ul>
+  </nav>
+    <section>
+      <h1>Informations de base</h1>
+        <p style="text-align: right;">Étape 1 sur 3</p>
+        <p><strong>NB : Les informations concernent l'étudiant.</strong></p>
+
+    <form action="">
+        
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <td style="width: 50%;">
+                    <label for="ecole"><strong>*École</strong> (Sélectionnez votre école)</label><br><br>
+                    <input type="text"required >
+                </td>
+                <td style="width: 50%; padding-left: 10px;">
+                    <label for="filiere"><strong>*Filière</strong> (Sélectionnez votre filière)</label><br><br>
+                    <input type="text" required>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; padding-right: 10px; padding-top: 15px;">
+                    <label for="nom_complet"><strong>*Nom complet</strong> (Sélectionnez ou recherchez un nom)</label><br><br>
+                    <input type="text" required>
+                </td>
+                <td style="width: 50%; padding-left: 10px; padding-top: 15px;">
+                    <label for="email"><strong>*Email</strong> (Entrez votre adresse mail)</label><br><br>
+                    <input type="email" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width: 50%; padding-right: 10px; padding-top: 15px;">
+                    <label for="sexe"><strong>*Sexe</strong> (Sélectionnez votre sexe)</label><br><br>
+                    <select name="sexe">
+                      <option value=""></option>
+                      <option value="">Homme</option>
+                      <option value="">Femme</option>
+                    </select>
+                    </td>
+                <td style="width: 50%; padding-left: 10px; padding-top: 15px;">
+                    <label for="whatsapp_etudiant"><strong>*N° WhatsApp de l'étudiant</strong> (Entrez votre numéro)</label><br><br>
+                    <input type="tel" required >
+                </td>
+            </tr>
+        </table>
+        
+        <div style="margin-top: 15px; width: 50%;">
+            <label for="whatsapp_parent"><strong>*N° WhatsApp du Parent</strong> (Entrez votre numéro)</label><br><br>
+            <input type="tel" required >
+        </div>
+
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="#" style="color: red; text-decoration: none;">Effacer formulaire</a>
+            <button type="submit" style="padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer; float: right;">Suivant</button>
+        </div>
+
+    </form>
+
+    </section>
+</body>
+</html>

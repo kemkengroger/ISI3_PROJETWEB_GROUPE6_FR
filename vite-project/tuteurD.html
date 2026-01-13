@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Trouver un Tuteur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+ 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* ====== VARIABLES ====== */
+        :root {
+            --primary-green: #1f8f5f;
+            --light-gray: #f5f6f7;
+            --carre-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            background-color: var(--light-gray);
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        /* ====== entete ====== */
+        .app-header {
+            background: #fff;
+            padding: 16px 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-retour {
+            color: var(--primary-green);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .carre-filter {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: var(--carre-shadow);
+            padding: 20px;
+        }
+
+     
+        .info-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+       
+        .tuteur-carre {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: var(--carre-shadow);
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .status-badge.active {
+            background-color: #d1f2e3;
+            color: var(--primary-green);
+        }
+
+        .status-badge.absent {
+            background-color: #e0e0e0;
+            color: #6c757d;
+        }
+
+        .subject-badge {
+            background-color: #e6f0ff;
+            color: #0d6efd;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .btn-session {
+            background-color: var(--primary-green);
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-session:hover {
+            background-color: #176f4a;
+        }
+
+        .btn-absent {
+            background-color: #ccc;
+            color: #666;
+            border-radius: 10px;
+            padding: 10px;
+            border: none;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ======entete ====== -->
+<header class="app-header d-flex align-items-center gap-3">
+    >
+    <span    >
+        <a href="boardEtudiant.html" >← Retour</a>
+        </span>
+    <h4 class="mb-0">Trouver un Tuteur</h4>
+</header>
+
+<!-- ====== menu principal ====== -->
+<main class="container my-4">
+
+    <!-- listes des matieres -->
+    <div class="carre-filter mb-4">
+        <label for="subjectFilter" class="form-label fw-semibold">Filtrer par matière</label>
+        <select id="subjectFilter" class="form-select">
+            <option value="all">Toutes les matières</option>
+            <option value="Mathématiques">Mathématiques</option>
+            <option value="Physique">Physique</option>
+            <option value="Informatique">Informatique</option>
+            <option value="Littérature camerounaise">Littérature camerounaise</option>
+            <option value="Français">Français</option>
+            <option value="Anglais">Anglais</option>
+            <option value="Histoire-Géographie">Histoire-Géographie</option>
+        </select>
+    </div>
+
+    
+    <p class="info-text mb-3" id="nbre_enseignant"></p>
+
+    
+    <div class="row g-4" id="listestuteur"></div>
+
+</main>
+
+<script>
+    // ====== donnees======
+    const tuteurs = [
+        {
+            name: "Prof. Jean Kamga",
+            status: "Actif",
+            sessions: 87,
+            description: "Enseignant en mathématiques, 10 ans d'expérience",
+            subjects: ["Mathématiques", "Physique"]
+        },
+        {
+            name: "Mme Clarisse Ndzié",
+            status: "Absent",
+            sessions: 42,
+            description: "Professeure de français et littérature",
+            subjects: ["Français", "Littérature camerounaise"]
+        },
+        {
+            name: "Prof. Alain Tchami",
+            status: "Actif",
+            sessions: 65,
+            description: "Spécialiste en informatique et algorithmique",
+            subjects: ["Informatique"]
+        },
+        {
+            name: "M. Daniel Mbah",
+            status: "Actif",
+            sessions: 53,
+            description: "Professeur d'anglais bilingue",
+            subjects: ["Anglais"]
+        },
+        {
+            name: "Mme Rose Ndzi",
+            status: "Absent",
+            sessions: 31,
+            description: "Enseignante en histoire-géographie",
+            subjects: ["Histoire-Géographie"]
+        },
+        {
+            name: "Prof. Eric Fouda",
+            status: "Actif",
+            sessions: 91,
+            description: "Physicien, ancien préparateur concours",
+            subjects: ["Physique"]
+        }
+    ];
+
+    const listestuteur = document.getElementById("listestuteur");
+    const nbre_enseignant = document.getElementById("nbre_enseignant");
+    const sujetFiltrer= document.getElementById("subjectFilter");
+
+    
+    function rendertuteurs(filter) {
+        listestuteur.innerHTML = "";
+
+        const filteredtuteurs = tuteurs.filter(tuteur =>
+            filter === "all" || tuteur.subjects.includes(filter)
+        );
+
+        nbre_enseignant.textContent = `${filteredtuteurs.length} enseignants disponibles`;
+
+        filteredtuteurs.forEach(tuteur => {
+            const estActive = tuteur.status === "Actif";
+
+            listestuteur.innerHTML += `
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="tuteur-carre">
+                        <div>
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="avatar">👤</div>
+                                <div>
+                                    <div class="fw-bold">${tuteur.name}</div>
+                                    <span class="badge status-badge ${estActive ? "active" : "absent"}">
+                                        ${tuteur.status}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p class="mb-1"><strong>${tuteur.sessions}</strong> sessions</p>
+                            <p class="text-muted">${tuteur.description}</p>
+
+                            <div class="mb-3">
+                                ${tuteur.subjects.map(s => `<span class="subject-badge">${s}</span>`).join("")}
+                            </div>
+                        </div>
+
+                        ${
+                            estActive
+                                ? `<button class="btn-session">🎥 Lancer la Session</button>`
+                                : `<button class="btn-absent" disabled>Non disponible</button>`
+                        }
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    
+   sujetFiltrer.addEventListener("change", e => {
+        rendertuteurs(e.target.value);
+    });
+
+    
+    rendertuteurs("all");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('font/Poppins/Poppins-Regular.ttf');
+}
+
+* {
+    font-family: 'Poppins-Regular';
+}
+
+ body {
+            background-color: #f0f7f9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .carte-inscription {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: none;
+            padding: 40px;
+        }
+
+        .image-inscription {
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        .btn-inscription {
+            background-color: #2a8168;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        .btn-inscription:hover {
+            background-color: #216652;
+        }
+
+        .etiquette-formulaire {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+
+        .champ-formulaire,
+        .liste-deroulante {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+body {
+    background-color: #f8fafc;
+}
+
+/* Barre latérale */
+#sidebar {
+    width: 280px;
+    min-height: 100vh;
+}
+
+/* Liens du menu */
+.lien-menu {
+    color: #64748b;
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.lien-menu:hover,
+.lien-menu.actif {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Avatar utilisateur */
+.avatar-rond {
+    width: 48px;
+    height: 48px;
+    background-color: #2a8168;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Fonds personnalisés */
+.fond-bleu-clair {
+    background-color: #eef7ff;
+}
+
+.fond-vert-clair {
+    background-color: #f0fdf4;
+}
+
+/* Icônes */
+.icone-carree {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone-ronde {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bouton principal */
+.btn-valider {
+    background-color: #2a8168;
+    border: none;
+    color: white;
+}
+
+/* Ombre légère */
+.ombre-legere {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    #sidebar {
+        display: none;
+    }
+}

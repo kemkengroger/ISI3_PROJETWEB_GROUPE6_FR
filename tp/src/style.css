@@ -1,0 +1,230 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #f7df1eaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Styles pour la page de connexion */
+
+/* Séparateur OU */
+.separateur-ou {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.separateur-ou::before,
+.separateur-ou::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.separateur-ou span {
+    padding: 0 1rem;
+    color: #6c757d;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Bouton Google */
+.bouton-google {
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    color: #3c4043;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bouton-google:hover {
+    background-color: #f8f9fa;
+    border-color: #dadce0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #3c4043;
+}
+
+.bouton-google:active {
+    background-color: #f1f3f4;
+}
+
+.bouton-google:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Styles communs pour les cartes */
+.carte-inscription {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.image-inscription {
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styles pour les champs de formulaire */
+.champ-formulaire {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.champ-formulaire:focus {
+    border-color: #2a8168;
+    box-shadow: 0 0 0 0.2rem rgba(42, 129, 104, 0.15);
+}
+
+.etiquette-formulaire {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.liste-deroulante {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+}
+
+.liste-deroulante:focus {
+    border-color: #2a8168;
+    box-shadow: 0 0 0 0.2rem rgba(42, 129, 104, 0.15);
+}
+
+/* Bouton d'inscription/connexion */
+.btn-inscription {
+    background-color: #2a8168;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-inscription:hover {
+    background-color: #236b56;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(42, 129, 104, 0.3);
+}
+
+.btn-inscription:active {
+    transform: translateY(0);
+}
+
+.btn-inscription:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carte-inscription {
+        padding: 1.5rem;
+    }
+}

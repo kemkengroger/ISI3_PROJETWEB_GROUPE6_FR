@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../themes/style.css">
+   
+    <title>Musique</title>
+</head>
+<body>
+    <nav style="background-color: beige;">
+    <ul>
+      <li> <a href="">Accueil</a></li>      
+      <li><a href="views/favoris.html">Favoris</a></li>
+      <li><a href="views/devoir.html">Devoirs</a></li>       
+      <li><a href="views/Apropos.html">A Propos</a></li>      
+    </ul>
+    <div class="badge">
+    </div>
+  </nav>
+    <dl>
+        <dt>Makossa</dt>
+        <dd> Musique d'inspiration africaine profondement ancrée dans la culture africaine </dd>
+    </dl>
+    <dl>
+        <dt>RNB</dt>
+        <dd> Genre musicale generalement liée a l'ame </dd>
+    </dl>
+<section>
+    <h3> Mes vidéos favoris</h3>
+    <video controls height="450">
+        <source src="../assets/video/WIN_20251113_15_06_49_Pro.mp4" type="">
+    </video>
+</section>
+>
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>Lundi</th>
+                <th>Mardi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <strong>8h-10h</strong><br>
+                    <span>Algorithme</span>
+                </td>
+                <td>
+                    <strong>13h-17h</strong><br>
+                    <span>POO</span>
+                </td>
+            </tr>
+             <tr>
+                <td colspan="2">
+                    <strong>8h-10h</strong><br>
+                    <span>ARCHI WEB</span>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</section>
+<section>
+    <h3>Sign Up</h3>
+    <form action="">
+        <fieldset>
+            <legend>Infos: Personnelles</legend>
+            <div>
+                <label for="name">Nom</label>
+                <input type="text" name="name">
+            </div>
+            <div>
+                <label for="birthday">Date de naissance</label>
+                <input type="date" name="birthday">
+            </div>
+             <div>
+                <label for="classe">Libelle Classe</label>
+                <select name="classe">
+                    <option value="">ISI 3 </option>
+                    <option value="">SRT</option>
+                    <option value="">GENIE CIVIL</option>
+                    <option value="">GENIE ELECTRIQUE</option>
+                </select>
+               
+            </div>
+
+
+        </fieldset>
+         <div>
+                    <input type="submit" value="Enregistrer">
+                </div>
+                <fieldset>
+                    <legend>Votre Profil</legend>
+                    <div>
+                        <textarea rows="5"></textarea>
+                    </div>
+                </fieldset>
+    </form>
+</section>
+</body>
+</html>

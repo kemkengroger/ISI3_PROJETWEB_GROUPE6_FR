@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family:"Poppins-Regular";
+    src: url(../font/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face{
+    font-family: "Poppins-Italic";
+    src: url(../font/Poppins/Poppins-Italic.ttf);
+}
+
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url(../font/Poppins/Poppins-Bold.ttf);
+}
+
+*{
+    font-family: 'Poppins-Regular';
+}
+
+.one{
+    display: flex;
+    background-color: cornflowerblue;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+}
+
+.one a{
+    font-family: 'Poppins-Regular';
+    color: white;
+    padding-left: 25px;
+}
+
+
+.big {
+    padding: 20px;
+}
+
+
+.big {
+    display: flex;  
+    overflow: auto;        
+    gap: 20px;                
+}
+
+.two {
+    width: 320px;           
+    display: flex;
+    flex-direction: column;  
+    gap: 8px;
+}
+
+.two video {
+    width: auto;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #000;
+}
+
+.big2{
+    padding: 20px;
+}
+
+.big2 {
+    display: flex;  
+    overflow: auto;        
+    gap: 20px;                
+}
+
+.tree {
+    width: 320px;           
+    display: flex;
+    flex-direction: column;  
+    gap: 8px;
+}
+
+.tree video {
+    width: auto;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #000;
+}
+
+.big3{
+    padding: 20px;
+}
+
+.big3{
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    overflow: auto;
+}
+.big4{
+    padding: 8px;
+}
+
+.big4{
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+}
+
+.last{
+    display: flex;
+    border-radius: 50%;
+    background-color: cornflowerblue;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    right: 20px;
+    justify-content: center;
+    align-items: center;
+}
+

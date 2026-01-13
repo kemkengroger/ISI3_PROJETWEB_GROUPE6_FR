@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutoAfrica - Nos Experts</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #2D7D62;
+            --sidebar-width: 280px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-bs-theme="light"] {
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --sidebar-bg: #ffffff;
+            --text-main: #1e293b;
+            --border-color: rgba(0,0,0,0.05);
+        }
+
+        [data-bs-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --sidebar-bg: #111827;
+            --text-main: #f8fafc;
+            --border-color: rgba(255,255,255,0.1);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        /* SIDEBAR SYNC */
+        .sidebar-wrapper { padding: 20px; height: 100vh; position: fixed; width: var(--sidebar-width); z-index: 1000; }
+        .sidebar { 
+            background: var(--sidebar-bg); border: 1px solid var(--border-color); border-radius: 24px; 
+            height: 100%; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .logo-area { padding: 30px 20px; text-align: center; }
+        .logo-area a { text-decoration: none; color: var(--primary-green); font-weight: 800; font-size: 1.4rem; }
+        
+        .profile-card-sidebar {
+            margin: 0 15px 25px; padding: 15px; background: var(--bg-body); border-radius: 18px;
+            display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;
+            transition: var(--transition); border: 1px solid var(--border-color);
+        }
+        .avatar-sidebar { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
+
+        .nav-link {
+            margin: 4px 15px; padding: 12px 18px; border-radius: 14px;
+            color: #94a3b8; font-weight: 600; transition: 0.3s;
+        }
+        .nav-link:hover { background: rgba(45, 125, 98, 0.1); color: var(--primary-green); }
+        .nav-link.active { background: var(--primary-green) !important; color: white !important; }
+
+        /* MAIN CONTENT */
+        .main-content { margin-left: var(--sidebar-width); padding: 40px; }
+
+        /* CARDS EXPERTS */
+        .tutor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 25px;
+            height: 100%;
+            transition: var(--transition);
+        }
+        .tutor-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--primary-green); }
+
+        .avatar-box {
+            width: 60px; height: 60px; border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary-green), #57cc99);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem; font-weight: 800;
+        }
+
+        .status-badge {
+            font-size: 0.65rem; font-weight: 800; padding: 6px 12px; border-radius: 10px; text-transform: uppercase;
+        }
+        .online { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .offline { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
+
+        .subject-pill {
+            background: var(--bg-body); color: var(--primary-green);
+            padding: 6px 14px; border-radius: 10px; font-size: 0.75rem; font-weight: 700;
+        }
+
+        .btn-call {
+            background: var(--primary-green); color: white; border: none;
+            border-radius: 15px; padding: 12px; width: 100%; font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-call:hover:not(:disabled) { transform: scale(1.02); filter: brightness(1.1); }
+
+        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); margin-top: auto; }
+        .lang-select { 
+            background: var(--bg-body); border: 1px solid var(--border-color); 
+            color: inherit; border-radius: 12px; padding: 8px; width: 100%; font-size: 0.8rem; font-weight: 700;
+        }
+
+        @media (max-width: 991px) {
+            .sidebar-wrapper { display: none; }
+            .main-content { margin-left: 0; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar-wrapper">
+    <aside class="sidebar">
+        <div class="logo-area">
+            <a href="index.html">TutoAfrica</a>
+        </div>
+
+        <a href="profil.html" class="profile-card-sidebar">
+            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="avatar-sidebar" alt="Profil">
+            <div>
+                <div class="fw-bold text-truncate small">Étudiant Demo</div>
+                <div class="text-muted" style="font-size: 0.7rem;">Voir profil</div>
+            </div>
+        </a>
+        
+        <nav class="nav nav-pills flex-column">
+            <a href="Ressources/epreuve.html" class="nav-link"><i class="bi bi-file-earmark-text me-3"></i> <span>Épreuves</span></a>
+            <a href="tuteuriA.html" class="nav-link"><i class="bi bi-robot me-3"></i> <span>Tuteur IA</span></a>
+            <a href="tuteurD.html" class="nav-link active"><i class="bi bi-people me-3"></i> <span>Experts Tuteurs</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="mb-3">
+                <select class="lang-select" id="langSelector" onchange="changeSystem(this.value)">
+                    <option value="fr">🇨🇲 Francophone</option>
+                    <option value="en">🇬🇧 Anglophone</option>
+                </select>
+            </div>
+            <a href="index.html" class="text-danger text-decoration-none fw-bold small ps-2">
+                <i class="bi bi-power me-2"></i> Déconnexion
+            </a>
+        </div>
+    </aside>
+</div>
+
+<main class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <a href="boardEtudiant.html" class="btn btn-light rounded-circle shadow-sm" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+        <div class="text-end">
+            <h2 class="fw-800 mb-0">Experts Tuteurs</h2>
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3" id="currentSubject">Général</span>
+        </div>
+    </div>
+
+    <div class="row g-4" id="tutorGrid">
+        </div>
+</main>
+
+<script>
+   const tutors = [
+        // --- SYSTÈME FRANCOPHONE ---
+        // MATHÉMATIQUES
+        { name: "Dr. André Mbarga", username: "@ambarga", sys: "fr", subjects: ["Mathématiques"], status: "online", exp: "Ingénieur / 10 ans", diplome: "Docteur" },
+        { name: "Mme Carine Tagne", username: "@ctagne", sys: "fr", subjects: ["Mathématiques"], status: "online", exp: "Professeur / 8 ans", diplome: "Professeur" },
+        
+        // PHYSIQUE / CHIMIE
+        { name: "Ing. Marcelle Zoa", username: "@mzoa", sys: "fr", subjects: ["Physique", "Chimie"], status: "online", exp: "Ingénieur / 5 ans", diplome: "Ingénieur" },
+        { name: "Mr. Lucas Eteki", username: "@leteki", sys: "fr", subjects: ["Physique"], status: "offline", exp: "Enseignant / 12 ans", diplome: "Professeur" },
+
+        // FRANÇAIS / LITTÉRATURE
+        { name: "Pr. Guy Ngassa", username: "@gngassa", sys: "fr", subjects: ["Français", "Littérature"], status: "online", exp: "Expert / 15 ans", diplome: "Professeur" },
+        { name: "Mme Sophie Belibi", username: "@sbelibi", sys: "fr", subjects: ["Français"], status: "online", exp: "Enseignant / 7 ans", diplome: "Autres" },
+
+        // --- SYSTÈME ANGLOPHONE (Subsidiary/Advanced Level) ---
+        // MATHEMATICS
+        { name: "Dr. Kelvin Chenwi", username: "@kchenwi", sys: "en", subjects: ["Mathematics", "Further Maths"], status: "online", exp: "PhD / 9 years", diplome: "Docteur" },
+        { name: "Mr. Divine Ndum", username: "@dndum", sys: "en", subjects: ["Mathematics"], status: "online", exp: "Teacher / 6 years", diplome: "Professeur" },
+
+        // PHYSICS
+        { name: "Ing. Blessing Enow", username: "@benow", sys: "en", subjects: ["Physics"], status: "online", exp: "Engineer / 4 years", diplome: "Ingénieur" },
+        { name: "Mr. Samuel Tanda", username: "@standa", sys: "en", subjects: ["Physics"], status: "offline", exp: "Teacher / 11 years", diplome: "Professeur" },
+
+        // ENGLISH / LITERATURE
+        { name: "Mrs. Janet Fobi", username: "@jfobi", sys: "en", subjects: ["English Language", "Literature"], status: "online", exp: "Specialist / 13 years", diplome: "Professeur" },
+        { name: "Dr. Emily Bakia", username: "@ebakia", sys: "en", subjects: ["English Language"], status: "online", exp: "Expert / 8 years", diplome: "Docteur" },
+
+        // --- BILINGUES (FRANÇAIS & ANGLAIS) ---
+        { name: "Ing. Steve Kamga", username: "@skamga", sys: "both", subjects: ["Informatique", "Computer Science"], status: "online", exp: "Ingénieur / 6 ans", diplome: "Ingénieur" },
+        { name: "Pr. Alice Atangana", username: "@aatangana", sys: "both", subjects: ["Histoire", "History"], status: "online", exp: "Enseignant / 20 ans", diplome: "Professeur" }
+    ];
+
+    function updateTheme() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+    }
+
+    function changeSystem(v) {
+        localStorage.setItem('appLang', v);
+        render();
+    }
+
+    function render() {
+        updateTheme();
+        const urlParams = new URLSearchParams(window.location.search);
+        // On récupère la matière filtrée si elle existe, sinon "all"
+        const subjectFilter = urlParams.get('subject') || "all";
+        const lang = localStorage.getItem('appLang') || 'fr';
+        
+        document.getElementById('langSelector').value = lang;
+        document.getElementById('currentSubject').innerText = subjectFilter === "all" ? (lang === 'fr' ? 'Général' : 'General') : subjectFilter;
+
+        const grid = document.getElementById('tutorGrid');
+        grid.innerHTML = "";
+
+        // FILTRAGE : Langue du système OU prof bilingue
+        const filtered = tutors.filter(t => {
+            const matchLang = (t.sys === lang || t.sys === "both");
+            const matchSub = (subjectFilter === "all" || t.subjects.some(s => s.toLowerCase().includes(subjectFilter.toLowerCase())));
+            return matchLang && matchSub;
+        });
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">Aucun expert trouvé pour cette sélection.</p></div>`;
+            return;
+        }
+
+        filtered.forEach(t => {
+            const isOnline = t.status === 'online';
+            grid.innerHTML += `
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="tutor-card d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div class="avatar-box shadow-sm">${t.name.split(' ').pop().charAt(0)}</div>
+                            <span class="status-badge ${isOnline ? 'online' : 'offline'}">
+                                <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>
+                                ${isOnline ? (lang === 'fr' ? 'Disponible' : 'Online') : (lang === 'fr' ? 'Absent' : 'Offline')}
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <h5 class="fw-bold mb-0">${t.name}</h5>
+                            <span class="text-success small fw-bold">${t.username}</span>
+                        </div>
+                        
+                        <p class="text-muted small mb-3">
+                            <i class="bi bi-patch-check-fill text-primary me-2"></i><strong>${t.diplome}</strong> • ${t.exp}
+                        </p>
+                        
+                        <div class="d-flex flex-wrap gap-2 mb-4">
+                            ${t.subjects.map(s => `<span class="subject-pill">${s}</span>`).join('')}
+                        </div>
+                        
+                        <button class="btn-call mt-auto" ${!isOnline ? 'disabled style="opacity:0.3"' : ''}>
+                            <i class="bi bi-camera-video me-2"></i>
+                            ${lang === 'fr' ? 'Démarrer la session' : 'Start Session'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+    window.onload = render;
+</script>
+</body>
+</html>

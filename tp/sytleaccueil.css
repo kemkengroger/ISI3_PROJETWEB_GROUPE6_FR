@@ -1,0 +1,248 @@
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url('font/Poppins/Poppins-Regular.ttf');
+}
+
+* {
+    font-family: 'Poppins-Regular';
+}
+
+/* Navigation */
+.texte-principal {
+    color: #2a8168;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Boutons */
+.bouton-primaire {
+    background-color: #2a8168;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.bouton-primaire:hover {
+    background-color: #236b56;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(42, 129, 104, 0.3);
+}
+
+.bouton-secondaire {
+    background-color: transparent;
+    border: 2px solid #2a8168;
+    color: #2a8168;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.bouton-secondaire:hover {
+    background-color: #2a8168;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Section héro */
+.section-hero {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+    min-height: 90vh;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.bloc-contenu-hero {
+    animation: apparitionGauche 0.8s ease-out;
+}
+
+@keyframes apparitionGauche {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.titre-principal {
+    font-size: 3rem;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.texte-descriptif {
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Statistiques */
+.statistiques-hero {
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.carte-statistique {
+    text-align: center;
+}
+
+.chiffre-stat {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2a8168;
+    margin-bottom: 0.5rem;
+}
+
+.label-stat {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Illustration */
+.illustration-hero {
+    position: relative;
+    animation: apparitionDroite 0.8s ease-out;
+}
+
+@keyframes apparitionDroite {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.illustration-svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.cercle-decoration {
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.cercle-vert {
+    width: 200px;
+    height: 200px;
+    background: rgba(42, 129, 104, 0.1);
+    top: -50px;
+    right: 50px;
+}
+
+.cercle-bleu {
+    width: 150px;
+    height: 150px;
+    background: rgba(59, 130, 246, 0.1);
+    bottom: -30px;
+    left: 30px;
+}
+
+/* Sections */
+.section-apropos,
+.section-fonctionnalites,
+.section-appel-action {
+    padding: 5rem 0;
+}
+
+.titre-section {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.texte-section {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Cartes de fonctionnalités */
+.carte-fonctionnalite {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.carte-fonctionnalite:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: #2a8168;
+}
+
+.icone-fonctionnalite {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titre-carte {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.description-carte {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Pied de page */
+.pied-page {
+    background-color: #f8f9fa;
+}
+
+.lien-pied {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.lien-pied:hover {
+    color: #2a8168;
+}
+
+/* Cercle avatar */
+.cercle-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2a8168;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .titre-principal {
+        font-size: 2rem;
+    }
+    
+    .titre-section {
+        font-size: 1.8rem;
+    }
+    
+    .section-hero {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+}
