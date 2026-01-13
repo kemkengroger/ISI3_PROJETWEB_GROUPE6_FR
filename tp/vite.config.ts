@@ -8,8 +8,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        connexion: resolve(__dirname, 'connexion.html'),
-        inscription: resolve(__dirname, 'inscription.html'),
+        connexion: resolve(__dirname, 'connexionEnseignant.html'),
+        inscription: resolve(__dirname, 'inscriptionEtudiant.html'),
+        
         // Ajoute TOUS tes fichiers HTML
       }
     }
