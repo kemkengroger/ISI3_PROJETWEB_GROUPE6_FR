@@ -257,9 +257,11 @@
                             ${t.subjects.map(s => `<span class="subject-pill">${s}</span>`).join('')}
                         </div>
                         
-                        <button class="btn-call mt-auto" ${!isOnline ? 'disabled style="opacity:0.3"' : ''}>
-                            <i class="bi bi-camera-video me-2"></i>
-                            ${lang === 'fr' ? 'Démarrer la session' : 'Start Session'}
+                        <button class="btn-call mt-auto" 
+                         onclick="window.location.href='discussionPeerToPeer.html?tutor=${encodeURIComponent(t.name)}'" 
+                             ${!isOnline ? 'disabled style="opacity:0.3"' : ''}>
+                        <i class="bi bi-camera-video me-2"></i>
+                         ${lang === 'fr' ? 'Démarrer la session' : 'Start Session'}
                         </button>
                     </div>
                 </div>

@@ -11,78 +11,79 @@
     
     <style>
         :root {
-            --primary-green: #2D7D62;
-            --primary-glow: rgba(45, 125, 98, 0.2);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --vert-principal: #2D7D62;
+            --lueur-principale: rgba(45, 125, 98, 0.2);
+            --transition-douce: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Thèmes clair et sombre */
         [data-bs-theme="light"] {
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --nav-bg: rgba(255, 255, 255, 0.9);
+            --fond-page: #f1f5f9;
+            --fond-carte: #ffffff;
+            --texte-principal: #1e293b;
+            --fond-navigation: rgba(255, 255, 255, 0.9);
         }
 
         [data-bs-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --nav-bg: rgba(15, 23, 42, 0.9);
+            --fond-page: #0f172a;
+            --fond-carte: #1e293b;
+            --texte-principal: #f8fafc;
+            --fond-navigation: rgba(15, 23, 42, 0.9);
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
-            transition: var(--transition);
+            background-color: var(--fond-page); 
+            color: var(--texte-principal);
+            transition: var(--transition-douce);
         }
 
-        /* NAVBAR */
-        .navbar { 
-            background: var(--nav-bg) !important; 
+        /* BARRE DE NAVIGATION */
+        .barre-navigation { 
+            background: var(--fond-navigation) !important; 
             backdrop-filter: blur(10px);
             height: 85px;
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .navbar-brand { color: var(--primary-green) !important; font-weight: 800; font-size: 1.5rem; }
+        .logo-site { color: var(--vert-principal) !important; font-weight: 800; font-size: 1.5rem; }
 
-        /* BUTTONS */
-
-        .btn-login { 
-            background: var(--primary-green); 
+        /* BOUTONS */
+        .bouton-connexion { 
+            background: var(--vert-principal); 
             color: white !important; 
             border-radius: 14px; 
             padding: 12px 24px; 
             font-weight: 700;
-            box-shadow: 0 4px 15px var(--primary-glow);
-            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--lueur-principale);
+            transition: var(--transition-douce);
+            text-decoration: none;
         }
-        .btn-signup:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .bouton-connexion:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* HERO & CARDS */
-        .hero-section { padding: 100px 0; }
-        .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
+        /* SECTION ACCUEIL & CARTES */
+        .section-hero { padding: 100px 0; }
+        .titre-hero { font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
         
-        .img-hero { 
+        .image-hero { 
             border-radius: 40px; 
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); 
-            transition: var(--transition);
+            transition: var(--transition-douce);
         }
 
-        .btn-start { 
+        .bouton-demarrer { 
             background: #3498DB; color: white; border-radius: 14px; 
             padding: 16px 35px; font-weight: 700; border: none;
-            transition: var(--transition);
+            transition: var(--transition-douce);
         }
-        .btn-start:hover { background: #2980b9; transform: translateY(-3px); }
+        .bouton-demarrer:hover { background: #2980b9; transform: translateY(-3px); }
 
-        .card-feat {
-            background: var(--bg-card); border-radius: 30px; padding: 40px;
-            height: 100%; transition: var(--transition); border: 1px solid rgba(0,0,0,0.05);
+        .carte-fonctionnalite {
+            background: var(--fond-carte); border-radius: 30px; padding: 40px;
+            height: 100%; transition: var(--transition-douce); border: 1px solid rgba(0,0,0,0.05);
         }
-        .card-feat:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .carte-fonctionnalite:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
-        .icon-circle {
+        .cercle-icone {
             width: 60px; height: 60px; border-radius: 18px;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.5rem; margin-bottom: 25px;
@@ -90,7 +91,7 @@
 
         footer { background: #070b14; color: #94a3b8; padding: 80px 0 30px; }
 
-        .lang-select-nav {
+        .selecteur-langue {
             background: transparent; border: 1px solid rgba(125,125,125,0.2);
             border-radius: 10px; padding: 5px 10px; font-size: 0.8rem; font-weight: 700; color: inherit;
         }
@@ -98,45 +99,43 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top barre-navigation">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand logo-site" href="index.html">
                 <i class="bi bi-mortarboard-fill me-2"></i>TutoAfrica
             </a>
 
             <div class="d-flex align-items-center gap-2 gap-md-4">
-                <select class="lang-select-nav d-none d-sm-block" onchange="changeLang(this.value)">
+                <select class="selecteur-langue d-none d-sm-block" onchange="changerLangue(this.value)">
                     <option value="fr">FR</option>
                     <option value="en">EN</option>
                 </select>
                 
-                <a href="connexion.html" class="btn-login small" data-fr="Se connecter" data-en="Login">
+                <a href="connexion.html" class="bouton-connexion small" data-fr="Se connecter" data-en="Login">
                     Se connecter
                 </a>
-                
-                
             </div>
         </div>
     </nav>
 
-    <section class="hero-section">
+    <section class="section-hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
-                    <h1 class="hero-title mb-4" data-fr="L'éducation de qualité, accessible à tous." data-en="Quality education, accessible to all.">
-                        L'éducation de qualité,<br><span style="color: var(--primary-green)">accessible à tous.</span>
+                    <h1 class="titre-hero mb-4" data-fr="L'éducation de qualité, accessible à tous." data-en="Quality education, accessible to all.">
+                        L'éducation de qualité,<br><span style="color: var(--vert-principal)">accessible à tous.</span>
                     </h1>
                     <p class="text-muted mb-5 fs-5" data-fr="La plateforme de tutorat n°1 en Afrique. Connectez-vous avec des experts ou progressez avec notre IA." data-en="The #1 tutoring platform in Africa. Connect with experts or progress with our AI.">
                         La plateforme de tutorat n°1 en Afrique. Connectez-vous avec des experts ou progressez avec notre IA.
                     </p>
                     <div class="d-flex flex-column flex-md-row gap-3 justify-content-center justify-content-lg-start">
-                        <button onclick="window.location.href='boardEtudiant.html'" class="btn-start" data-fr="Commencer l'aventure" data-en="Start Adventure">
+                        <button onclick="window.location.href='boardEnseignant.html'" class="bouton-demarrer" data-fr="Commencer l'aventure" data-en="Start Adventure">
                             Commencer l'aventure
                         </button>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <img src="/assets/image/img1accueil.jpeg" class="img-fluid img-hero" alt="Apprentissage">
+                    <img src="/assets/image/img1accueil.jpeg" class="img-fluid image-hero" alt="Apprentissage">
                 </div>
             </div>
         </div>
@@ -151,8 +150,8 @@
             
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
-                    <div class="card-feat shadow-sm">
-                        <div class="icon-circle" style="background: rgba(45, 125, 98, 0.1); color: var(--primary-green);">
+                    <div class="carte-fonctionnalite shadow-sm">
+                        <div class="cercle-icone" style="background: rgba(45, 125, 98, 0.1); color: var(--vert-principal);">
                             <i class="bi bi-robot"></i>
                         </div>
                         <h4 class="fw-bold" data-fr="Tuteur IA 24h/7" data-en="24/7 AI Tutor">Tuteur IA 24h/7</h4>
@@ -161,8 +160,8 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4">
-                    <div class="card-feat shadow-sm">
-                        <div class="icon-circle" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">
+                    <div class="carte-fonctionnalite shadow-sm">
+                        <div class="cercle-icone" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">
                             <i class="bi bi-people"></i>
                         </div>
                         <h4 class="fw-bold" data-fr="Experts Bénévoles" data-en="Volunteer Experts">Experts Bénévoles</h4>
@@ -171,8 +170,8 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4">
-                    <div class="card-feat shadow-sm">
-                        <div class="icon-circle" style="background: rgba(243, 156, 18, 0.1); color: #f39c12;">
+                    <div class="carte-fonctionnalite shadow-sm">
+                        <div class="cercle-icone" style="background: rgba(243, 156, 18, 0.1); color: #f39c12;">
                             <i class="bi bi-journal-check"></i>
                         </div>
                         <h4 class="fw-bold" data-fr="Épreuves & Examens" data-en="Tests & Exams">Épreuves & Examens</h4>
@@ -204,26 +203,30 @@
     </footer>
 
     <script>
-        const updateTheme = () => {
-            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
+        // Met à jour le thème selon les préférences du système
+        const mettreAJourTheme = () => {
+            const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
         };
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
-        updateTheme();
 
-        function changeLang(lang) {
-            localStorage.setItem('appLang', lang);
-            document.querySelectorAll('[data-en]').forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if (text) el.textContent = text;
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', mettreAJourTheme);
+        mettreAJourTheme();
+
+        // Gère le changement de langue
+        function changerLangue(langueChoisie) {
+            localStorage.setItem('langueAppli', langueChoisie);
+            document.querySelectorAll('[data-en]').forEach(element => {
+                const traduction = element.getAttribute(`data-${langueChoisie}`);
+                if (traduction) element.textContent = traduction;
             });
         }
 
+        // Au chargement de la page
         window.onload = () => {
-            const savedLang = localStorage.getItem('appLang') || 'fr';
-            const select = document.querySelector('.lang-select-nav');
-            if(select) select.value = savedLang;
-            changeLang(savedLang);
+            const langueSauvegardee = localStorage.getItem('langueAppli') || 'fr';
+            const selecteur = document.querySelector('.selecteur-langue');
+            if(selecteur) selecteur.value = langueSauvegardee;
+            changerLangue(langueSauvegardee);
         }
     </script>
 </body>

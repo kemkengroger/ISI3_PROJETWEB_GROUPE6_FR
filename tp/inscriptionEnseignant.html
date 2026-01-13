@@ -11,43 +11,43 @@
     
     <style>
         :root {
-            --primary-green: #2D7D62;
-            --transition: all 0.3s ease;
+            --vert-enseignant: #2D7D62;
+            --transition-fluide: all 0.3s ease;
         }
 
         [data-bs-theme="light"] {
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --input-bg: #f8fafc;
+            --fond-global: #f1f5f9;
+            --fond-carte: #ffffff;
+            --texte-principal: #1e293b;
+            --fond-saisie: #f8fafc;
         }
 
         [data-bs-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --input-bg: #0f172a;
+            --fond-global: #0f172a;
+            --fond-carte: #1e293b;
+            --texte-principal: #f8fafc;
+            --fond-saisie: #0f172a;
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
+            background-color: var(--fond-global); 
+            color: var(--texte-principal);
             min-height: 100vh;
             display: flex;
             align-items: center;
-            transition: var(--transition);
+            transition: var(--transition-fluide);
         }
 
-        .carte-inscription {
-            background: var(--bg-card);
+        .carte-enseignant {
+            background: var(--fond-carte);
             border: 1px solid rgba(125,125,125,0.1);
             border-radius: 28px;
             padding: 35px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .image-inscription {
+        .image-decorative {
             border-radius: 40px;
             max-height: 650px;
             object-fit: cover;
@@ -55,27 +55,39 @@
         }
 
         .form-control, .form-select {
-            background-color: var(--input-bg);
+            background-color: var(--fond-saisie);
             border: 1px solid rgba(125,125,125,0.2);
-            color: var(--text-main);
+            color: var(--texte-principal);
             border-radius: 12px;
             padding: 10px 15px;
         }
 
-        .btn-teacher {
-            background-color: var(--primary-green);
+        .btn-inscription-prof {
+            background-color: var(--vert-enseignant);
             border: none;
             border-radius: 12px;
             padding: 14px;
             font-weight: 700;
             color: white;
-            transition: var(--transition);
+            transition: var(--transition-fluide);
         }
 
-        .btn-teacher:hover {
+        .btn-inscription-prof:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
             box-shadow: 0 10px 20px rgba(45, 125, 98, 0.3);
+        }
+
+        .ligne-separation {
+            text-align: center; margin: 20px 0; position: relative;
+        }
+        .ligne-separation::before {
+            content: ""; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1px; background: rgba(125,125,125,0.2);
+        }
+        .ligne-separation span {
+            background: var(--fond-carte); padding: 0 15px; position: relative;
+            color: #94a3b8; font-size: 0.8rem; font-weight: 700;
         }
 
         .lang-switch {
@@ -86,7 +98,7 @@
 <body>
 
 <div class="lang-switch">
-    <select class="form-select form-select-sm" onchange="changeLang(this.value)" id="langSelect">
+    <select class="form-select form-select-sm" onchange="changerLangue(this.value)" id="selectLangue">
         <option value="fr">FR</option>
         <option value="en">EN</option>
     </select>
@@ -96,16 +108,16 @@
     <div class="row align-items-center justify-content-center g-5">
         
         <div class="col-md-5 d-none d-lg-block text-center">
-            <img src="/assets/image/PhotoInscription_124457.jpg" alt="Teacher Join" class="img-fluid image-inscription">
+            <img src="/assets/image/PhotoInscription_124457.jpg" alt="Teacher Join" class="img-fluid image-decorative">
         </div>
 
         <div class="col-md-11 col-lg-6">
-            <div class="card carte-inscription">
+            <div class="card carte-enseignant">
                 <div class="text-center mb-4">
                     <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                    <i class="bi bi-mortarboard-fill fs-3 text-success"></i>
-                    <span class="fw-bold fs-4">TutoAfrica</span>
-                </div>
+                        <i class="bi bi-mortarboard-fill fs-3 text-success"></i>
+                        <span class="fw-bold fs-4">TutoAfrica</span>
+                    </div>
                     <h2 class="fw-800 h3 mb-1" data-fr="Inscription Enseignant" data-en="Teacher Registration">Inscription Enseignant</h2>
                     <p class="text-muted small" data-fr="Partagez votre savoir avec l'Afrique" data-en="Share your knowledge with Africa">Partagez votre savoir avec l'Afrique</p>
                 </div>
@@ -113,49 +125,58 @@
                 <form id="form-enseignant">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="small fw-bold mb-2" data-fr="Nom d'utilisateur" data-en="Username">Nom d'utilisateur</label>
-                            <input type="text" class="form-control" placeholder="@username" required>
+                            <label class="small fw-bold mb-2" data-fr="Email professionnel" data-en="Professional Email">Email</label>
+                            <input type="email" id="email-prof" class="form-control" placeholder="nom@exemple.com" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="small fw-bold mb-2" data-fr="Nom complet" data-en="Full Name">Nom complet</label>
-                            <input type="text" class="form-control" placeholder="Dr. John Doe" required>
+                            <input type="text" id="nom-prof" class="form-control" placeholder="Dr. John Doe" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="small fw-bold mb-2" data-fr="Matière enseignée" data-en="Subject Taught">Matière enseignée</label>
-                        <input type="text" class="form-control" placeholder="Ex: Mathématiques, Physique..." required>
+                        <input type="text" id="matiere-prof" class="form-control" placeholder="Ex: Mathématiques, Physique..." required>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="small fw-bold mb-2" data-fr="Langue d'enseignement" data-en="Teaching Language">Langue d'enseignement</label>
-                            <select class="form-select" required>
+                            <select class="form-select" id="langue-prof" required>
                                 <option value="" disabled selected data-fr="Choisir..." data-en="Choose...">Choisir...</option>
-                                <option value="fr" data-fr="Français" data-en="French">Français</option>
-                                <option value="en" data-fr="Anglais" data-en="English">Anglais</option>
-                                <option value="both" data-fr="Français & Anglais" data-en="French & English">Français & Anglais</option>
+                                <option value="fr">Français</option>
+                                <option value="en">Anglais</option>
+                                <option value="both">Français & Anglais</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="small fw-bold mb-2" data-fr="Niveau d'étude" data-en="Education Level">Niveau d'étude</label>
-                            <select class="form-select" required>
+                            <label class="small fw-bold mb-2" data-fr="Diplôme / Niveau" data-en="Degree / Level">Diplôme / Niveau</label>
+                            <select class="form-select" id="diplome-prof" required>
                                 <option value="" disabled selected data-fr="Diplôme..." data-en="Degree...">Diplôme...</option>
-                                <option value="ingenieur" data-fr="Ingénieur" data-en="Engineer">Ingénieur</option>
-                                <option value="professeur" data-fr="Professeur" data-en="Professor">Professeur</option>
-                                <option value="docteur" data-fr="Docteur" data-en="Doctor (PhD)">Docteur</option>
-                                <option value="autres" data-fr="Autres" data-en="Others">Autres</option>
+                                <option value="ingenieur">Ingénieur</option>
+                                <option value="professeur">Professeur</option>
+                                <option value="docteur">Docteur (PhD)</option>
+                                <option value="autres">Autres</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="small fw-bold mb-2" data-fr="Mot de passe" data-en="Password">Mot de passe</label>
-                        <input type="password" class="form-control" placeholder="••••••••" required>
+                        <input type="password" id="passe-prof" class="form-control" placeholder="••••••••" required>
                     </div>
 
-                    <button type="submit" class="btn btn-teacher w-100 mb-4" data-fr="Devenir Tuteur" data-en="Become a Tutor">
+                    <button type="submit" class="btn btn-inscription-prof w-100 mb-3" data-fr="Devenir Tuteur" data-en="Become a Tutor">
                         Devenir Tuteur
+                    </button>
+
+                    <div class="ligne-separation">
+                        <span data-fr="OU" data-en="OR">OU</span>
+                    </div>
+
+                    <button type="button" id="btn-google" class="btn border w-100 d-flex align-items-center justify-content-center gap-2 mb-4 py-2">
+                        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
+                        <span class="fw-bold text-secondary" data-fr="S'inscrire avec Google" data-en="Sign up with Google">S'inscrire avec Google</span>
                     </button>
                 </form>
 
@@ -170,29 +191,89 @@
     </div>
 </div>
 
-<script>
-    // THEME AUTO
-    const updateTheme = () => {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
-    };
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
-    updateTheme();
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // LANGUE
-    function changeLang(lang) {
-        localStorage.setItem('appLang', lang);
-        document.querySelectorAll('[data-en]').forEach(el => {
-            const text = el.getAttribute(`data-${lang}`);
-            if (text) el.textContent = text;
+    const configurationFirebase = {
+        apiKey: "AIzaSyAvjQaWPrA7M5b0XmDrrBwTKDlv5q-nXDM",
+        authDomain: "isi3projetwebgroupe6fr.firebaseapp.com",
+        projectId: "isi3projetwebgroupe6fr",
+        storageBucket: "isi3projetwebgroupe6fr.firebasestorage.app",
+        messagingSenderId: "1024122923638",
+        appId: "1:1024122923638:web:f1a367d84a567449494d57"
+    };
+
+    const application = initializeApp(configurationFirebase);
+    const auth = getAuth(application);
+    const baseDonnees = getFirestore(application);
+    const fournisseurGoogle = new GoogleAuthProvider();
+
+    async function finaliserProfilEnseignant(utilisateur, infosComplementaires) {
+        await setDoc(doc(baseDonnees, "utilisateurs", utilisateur.uid), {
+            nom: infosComplementaires.nom || utilisateur.displayName,
+            email: utilisateur.email,
+            matiere: infosComplementaires.matiere || "Non spécifiée",
+            diplome: infosComplementaires.diplome || "Non spécifié",
+            langue: infosComplementaires.langue || "fr",
+            role: "enseignant",
+            inscription: new Date().toISOString()
         });
+        window.location.href = "boardEnseignant.html";
     }
+
+    // Inscription Email
+    document.getElementById('form-enseignant').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email-prof').value;
+        const passe = document.getElementById('passe-prof').value;
+        
+        const details = {
+            nom: document.getElementById('nom-prof').value,
+            matiere: document.getElementById('matiere-prof').value,
+            langue: document.getElementById('langue-prof').value,
+            diplome: document.getElementById('diplome-prof').value
+        };
+
+        try {
+            const resultat = await createUserWithEmailAndPassword(auth, email, passe);
+            await finaliserProfilEnseignant(resultat.user, details);
+        } catch (erreur) {
+            alert("Erreur lors de la création : " + erreur.message);
+        }
+    });
+
+    // Inscription Google
+    document.getElementById('btn-google').addEventListener('click', async () => {
+        try {
+            const resultat = await signInWithPopup(auth, fournisseurGoogle);
+            await finaliserProfilEnseignant(resultat.user, { role: "enseignant" });
+        } catch (erreur) {
+            console.error("Erreur Google :", erreur);
+        }
+    });
+
+    // Thème et Langue
+    window.changerLangue = (lang) => {
+        localStorage.setItem('languePreferee', lang);
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const texte = el.getAttribute(`data-${lang}`);
+            if (texte) el.textContent = texte;
+        });
+    };
+
+    const appliquerThemeAuto = () => {
+        const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
+    };
 
     window.onload = () => {
-        const savedLang = localStorage.getItem('appLang') || 'fr';
-        document.getElementById('langSelect').value = savedLang;
-        changeLang(savedLang);
-    }
+        appliquerThemeAuto();
+        const langueSauvee = localStorage.getItem('languePreferee') || 'fr';
+        document.getElementById('selectLangue').value = langueSauvee;
+        window.changerLangue(langueSauvee);
+    };
 </script>
 </body>
 </html>

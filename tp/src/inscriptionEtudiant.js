@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from './firebase/config.js';
 
 document.addEventListener('DOMContentLoaded', () => {

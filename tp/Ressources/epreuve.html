@@ -1,203 +1,295 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressources - TutoAfrica</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-    <title>Ressources</title>
-
     <style>
+        :root {
+            --bleu-principal: #0d6efd;
+            --fond-degrade: linear-gradient(135deg, #e9f0ff, #f8fbff);
+            --transition-rapide: 0.2s ease;
+        }
+
+        [data-bs-theme="dark"] {
+            --fond-degrade: linear-gradient(135deg, #0f172a, #1e293b);
+            --bleu-principal: #3b82f6;
+        }
+
         body {
-            background: linear-gradient(135deg, #e9f0ff, #f8fbff);
+            background: var(--fond-degrade);
             min-height: 100vh;
             padding: 40px 15px;
             font-family: "Segoe UI", sans-serif;
+            transition: background 0.3s ease;
+        }
+
+        .btn-retour-flottant {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--bleu-principal);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: rgba(13, 110, 253, 0.05);
+            transition: var(--transition-rapide);
+        }
+        .btn-retour-flottant:hover {
+            background: rgba(13, 110, 253, 0.1);
+            transform: translateX(-5px);
         }
 
         h1 {
             text-align: center;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 10px;
-            color: #0d6efd;
+            color: var(--bleu-principal);
+            text-transform: uppercase;
         }
 
-        hr {
+        .barre-separation {
             width: 120px;
-            margin: 0 auto 30px auto;
-            border: 3px solid #0d6efd;
+            margin: 0 auto 40px auto;
+            border: 3px solid var(--bleu-principal);
             border-radius: 10px;
+            opacity: 1;
         }
 
-        .container-custom {
+        .conteneur-interieur {
             max-width: 900px;
             margin: auto;
         }
 
         details {
             background: #ffffff;
-            border: none !important;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        [data-bs-theme="dark"] details {
+            background: #1e293b;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         details:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
         summary {
             list-style: none;
+            cursor: pointer;
         }
+        summary::-webkit-details-marker { display: none; }
 
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .btn-folder {
+        .bouton-dossier {
             width: 100%;
-            font-size: 1.1rem;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 600;
+            font-size: 1.15rem;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border: none;
         }
 
-        .subjects button {
-            margin: 6px 6px 0 0;
-            border-radius: 20px;
-            padding: 6px 14px;
-            font-size: 0.9rem;
+        .zone-matieres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 15px 20px 20px 20px;
         }
+
+        .badge-matiere {
+            border-radius: 20px;
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--bleu-principal);
+            background: transparent;
+            color: var(--bleu-principal);
+            transition: 0.2s;
+        }
+        .badge-matiere:hover {
+            background: var(--bleu-principal);
+            color: #ffffff;
+        }
+
+        .selecteur-langue-haut { position: fixed; top: 20px; right: 20px; z-index: 1000; }
     </style>
 </head>
 <body>
 
-    <h1>RESSOURCES</h1>
-    <hr>
+<div class="selecteur-langue-haut">
+    <select class="form-select form-select-sm" id="langueApp" onchange="changerLangue(this.value)">
+        <option value="fr">🇨🇲 FR</option>
+        <option value="en">🇬🇧 EN</option>
+    </select>
+</div>
 
-    <div class="container-custom">
+<div class="conteneur-interieur">
+    <a href="board.html" class="btn-retour-flottant">
+        <i class="bi bi-arrow-left-circle-fill"></i>
+        <span data-fr="Retour au menu" data-en="Back to menu">Retour au menu</span>
+    </a>
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='6e.html'">
-                    <i class="bi bi-folder me-2"></i> 6ème
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-                <button class="btn btn-outline-primary">physique</button>
-                <button class="btn btn-outline-primary">chimie</button>
-            </div>
-        </details>
+    <h1 data-fr="RESSOURCES" data-en="RESOURCES">RESSOURCES</h1>
+    <hr class="barre-separation">
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='5e.html'">
-                    <i class="bi bi-folder me-2"></i> 5ème
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-            </div>
-        </details>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('6e.html')">
+                <i class="bi bi-folder-fill"></i> 6<sup>ème</sup>
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+            <button class="badge-matiere">Physique</button>
+            <button class="badge-matiere">Chimie</button>
+        </div>
+    </details>
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='4e.html'">
-                    <i class="bi bi-folder me-2"></i> 4ème
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-                <button class="btn btn-outline-primary">physique-chimie</button>
-            </div>
-        </details>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('5e.html')">
+                <i class="bi bi-folder-fill"></i> 5<sup>ème</sup>
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+        </div>
+    </details>
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='3e.html'">
-                    <i class="bi bi-folder me-2"></i> 3ème
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-                <button class="btn btn-outline-primary">physique-chimie</button>
-            </div>
-        </details>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('4e.html')">
+                <i class="bi bi-folder-fill"></i> 4<sup>ème</sup>
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+            <button class="badge-matiere">Physique-Chimie</button>
+        </div>
+    </details>
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='2nde.html'">
-                    <i class="bi bi-folder me-2"></i> 2nde
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-                <button class="btn btn-outline-primary">physique</button>
-                <button class="btn btn-outline-primary">chimie</button>
-            </div>
-        </details>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('3e.html')">
+                <i class="bi bi-folder-fill"></i> 3<sup>ème</sup>
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+            <button class="badge-matiere">Physique-Chimie</button>
+        </div>
+    </details>
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='1ere.html'">
-                    <i class="bi bi-folder me-2"></i> 1ère
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-                <button class="btn btn-outline-primary">physique</button>
-                <button class="btn btn-outline-primary">chimie</button>
-            </div>
-        </details>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('2nde.html')">
+                <i class="bi bi-folder-fill"></i> 2<sup>nde</sup>
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+            <button class="badge-matiere">Physique</button>
+            <button class="badge-matiere">Chimie</button>
+        </div>
+    </details>
 
-        <details class="p-3 mb-4">
-            <summary>
-                <button class="btn btn-primary btn-folder" onclick="window.location.href='terminale.html'">
-                    <i class="bi bi-folder me-2"></i> Terminale
-                </button>
-            </summary>
-            <div class="mt-3 subjects">
-                <button class="btn btn-outline-primary">Mathematiques</button>
-                <button class="btn btn-outline-primary">Informatique</button>
-                <button class="btn btn-outline-primary">SVTEEHB</button>
-                <button class="btn btn-outline-primary">Francais</button>
-                <button class="btn btn-outline-primary">Anglais</button>
-                <button class="btn btn-outline-primary">physique</button>
-                <button class="btn btn-outline-primary">chimie</button>
-            </div>
-        </details>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('1ere.html')">
+                <i class="bi bi-folder-fill"></i> 1<sup>ère</sup>
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+            <button class="badge-matiere">Physique</button>
+            <button class="badge-matiere">Chimie</button>
+        </div>
+    </details>
 
-    </div>
+    <details class="p-2 mb-4">
+        <summary>
+            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('terminale.html')">
+                <i class="bi bi-folder-fill"></i> Terminale
+            </button>
+        </summary>
+        <div class="zone-matieres">
+            <button class="badge-matiere">Mathématiques</button>
+            <button class="badge-matiere">Informatique</button>
+            <button class="badge-matiere">SVTEEHB</button>
+            <button class="badge-matiere">Français</button>
+            <button class="badge-matiere">Anglais</button>
+            <button class="badge-matiere">Physique</button>
+            <button class="badge-matiere">Chimie</button>
+        </div>
+    </details>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function redirectionClasse(url) {
+        window.location.href = url;
+    }
+
+    function changerLangue(langue) {
+        localStorage.setItem('langueAppli', langue);
+        $('[data-en]').each(function() {
+            $(this).text($(this).data(langue));
+        });
+    }
+
+    $(document).ready(function() {
+        const languePreferee = localStorage.getItem('langueAppli') || 'fr';
+        $('#langueApp').val(languePreferee);
+        changerLangue(languePreferee);
+
+        const ajusterThemeAutomatique = () => {
+            const modeSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-bs-theme', modeSombre ? 'dark' : 'light');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ajusterThemeAutomatique);
+        ajusterThemeAutomatique();
+    });
+</script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TutoAfrica - Dashboard</title>
+    <title>TutoAfrica - Espace Étudiant</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -11,41 +11,39 @@
     
     <style>
         :root {
-            --primary-green: #2D7D62;
-            --sidebar-width: 280px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --vert-tuto: #2D7D62;
+            --largeur-sidebar: 280px;
+            --vitesse: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* THEME LIGHT - BLEU PALE */
         [data-bs-theme="light"] {
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
-            --sidebar-bg: #ffffff;
-            --text-main: #1e293b;
-            --border-color: rgba(0,0,0,0.05);
+            --fond-page: #f1f5f9;
+            --fond-carte: #ffffff;
+            --fond-menu: #ffffff;
+            --couleur-texte: #1e293b;
+            --bordure: rgba(0,0,0,0.05);
         }
 
-        /* THEME DARK - BLEU NUIT IA */
         [data-bs-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --sidebar-bg: #111827;
-            --text-main: #f8fafc;
-            --border-color: rgba(255,255,255,0.1);
+            --fond-page: #0f172a;
+            --fond-carte: #1e293b;
+            --fond-menu: #111827;
+            --couleur-texte: #f8fafc;
+            --bordure: rgba(255,255,255,0.1);
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
-            transition: var(--transition);
+            background-color: var(--fond-page); 
+            color: var(--couleur-texte);
+            transition: var(--vitesse);
         }
 
-        /* SIDEBAR SYNC */
-        .sidebar-wrapper { padding: 20px; height: 100vh; position: fixed; width: var(--sidebar-width); z-index: 1000; }
-        .sidebar { 
-            background: var(--sidebar-bg); 
-            border: 1px solid var(--border-color); 
+        /* Menu Latéral */
+        .wrapper-menu { padding: 20px; height: 100vh; position: fixed; width: var(--largeur-sidebar); z-index: 1000; }
+        .menu-lateral { 
+            background: var(--fond-menu); 
+            border: 1px solid var(--bordure); 
             border-radius: 24px; 
             height: 100%; 
             display: flex; 
@@ -53,81 +51,96 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .logo-area { padding: 30px 20px; text-align: center; }
-        .logo-area a { text-decoration: none; color: var(--primary-green); font-weight: 800; font-size: 1.4rem; }
+        .logo-tuto { padding: 30px 20px; text-align: center; }
+        .logo-tuto a { text-decoration: none; color: var(--vert-tuto); font-weight: 800; font-size: 1.4rem; }
 
-        /* PROFIL DANS SIDEBAR */
-        .profile-card-sidebar {
+        .carte-profil-menu {
             margin: 0 15px 25px;
             padding: 15px;
-            background: var(--bg-body);
+            background: var(--fond-page);
             border-radius: 18px;
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
             color: inherit;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
+            transition: var(--vitesse);
+            border: 1px solid var(--bordure);
         }
-        .profile-card-sidebar:hover { transform: translateY(-2px); border-color: var(--primary-green); }
-        .avatar-sidebar { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
+        .carte-profil-menu:hover { transform: translateY(-2px); border-color: var(--vert-tuto); }
+        .img-avatar { width: 45px; height: 45px; border-radius: 12px; object-fit: cover; }
 
         .nav-link {
             margin: 4px 15px; padding: 12px 18px; border-radius: 14px;
             color: #94a3b8; font-weight: 600; transition: 0.3s;
         }
-        .nav-link:hover { background: rgba(45, 125, 98, 0.1); color: var(--primary-green); }
-        .nav-link.active { background: var(--primary-green) !important; color: white !important; }
+        .nav-link:hover { background: rgba(45, 125, 98, 0.1); color: var(--vert-tuto); }
+        .nav-link.active { background: var(--vert-tuto) !important; color: white !important; }
 
-        /* MAIN CONTENT */
-        .main-content { margin-left: var(--sidebar-width); padding: 40px; }
+        /* Zone Principale */
+        .contenu-principal { margin-left: var(--largeur-sidebar); padding: 40px; }
 
-        /* DASHBOARD CARDS */
-        .card-dash {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        .carte-action {
+            background: var(--fond-carte);
+            border: 1px solid var(--bordure);
             border-radius: 28px;
             padding: 30px;
             height: 100%;
-            transition: var(--transition);
+            transition: var(--vitesse);
         }
-        .card-dash:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .carte-action:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
-        .icon-box {
+        .cercle-icone {
             width: 50px; height: 50px; border-radius: 15px;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem; margin-bottom: 20px;
         }
 
-        .btn-action-dash {
+        .btn-tuto {
             border-radius: 12px; padding: 10px; font-weight: 700; width: 100%; border: none; transition: 0.3s;
         }
 
-        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); margin-top: auto; }
-        .lang-select { 
-            background: var(--bg-body); border: 1px solid var(--border-color); 
-            color: inherit; border-radius: 12px; padding: 8px; width: 100%; font-size: 0.8rem; font-weight: 700;
-        }
-
         @media (max-width: 991px) {
-            .sidebar-wrapper { display: none; }
-            .main-content { margin-left: 0; padding: 20px; }
+            .wrapper-menu { display: none; }
+            .contenu-principal { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="sidebar-wrapper">
-    <aside class="sidebar">
-        <div class="logo-area">
+<div class="modal fade" id="modalProfil" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow" style="border-radius: 24px;">
+            <div class="modal-body p-4 text-center">
+                <i class="bi bi-person-check fs-1 text-success mb-3"></i>
+                <h4 class="fw-bold" data-fr="Presque fini !" data-en="Almost there!">Presque fini !</h4>
+                <p class="text-muted" data-fr="Pour personnaliser tes cours, dis-nous ton niveau." data-en="To personalize your courses, tell us your level.">Pour personnaliser tes cours, dis-nous ton niveau.</p>
+                
+                <select class="form-select mb-4 py-3" id="nouveau-niveau" style="border-radius: 12px;">
+                    <option value="" disabled selected data-fr="Ton niveau d'études..." data-en="Your education level...">Ton niveau d'études...</option>
+                    <option value="Primaire">Primaire</option>
+                    <option value="Secondaire">Secondaire</option>
+                    <option value="Universitaire">Universitaire</option>
+                </select>
+
+                <button id="btn-sauver-profil" class="btn btn-success w-100 py-3 fw-bold" style="background: var(--vert-tuto); border-radius: 12px;">
+                    C'est parti !
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper-menu">
+    <aside class="menu-lateral">
+        <div class="logo-tuto">
             <a href="index.html">TutoAfrica</a>
         </div>
 
-        <a href="profil.html" class="profile-card-sidebar">
-            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="avatar-sidebar" alt="Profil">
+        <a href="profil.html" class="carte-profil-menu">
+            <img src="https://ui-avatars.com/api/?name=User&background=2D7D62&color=fff" class="img-avatar" id="user-photo">
             <div class="overflow-hidden">
-                <div class="fw-bold text-truncate small">Étudiant Demo</div>
+                <div class="fw-bold text-truncate small" id="user-nom">Chargement...</div>
                 <div class="text-muted" style="font-size: 0.7rem;" data-fr="Voir profil" data-en="View profile">Voir profil</div>
             </div>
         </a>
@@ -138,112 +151,112 @@
             <a href="tuteurD.html" class="nav-link"><i class="bi bi-people me-3"></i> <span data-fr="Experts Tuteurs" data-en="Experts Tutors">Experts Tuteurs</span></a>
         </nav>
 
-        <div class="sidebar-footer">
-            <div class="mb-3">
-                <select class="lang-select" id="langSelector" onchange="changeSystem(this.value)">
-                    <option value="fr">🇨🇲 Francophone</option>
-                    <option value="en">🇬🇧 Anglophone</option>
-                </select>
-            </div>
-            <a href="index.html" class="text-danger text-decoration-none fw-bold small ps-2">
+        <div class="mt-auto p-3">
+            <button onclick="deconnexion()" class="btn btn-link text-danger text-decoration-none fw-bold small p-2">
                 <i class="bi bi-power me-2"></i> <span data-fr="Déconnexion" data-en="Logout">Déconnexion</span>
-            </a>
+            </button>
         </div>
     </aside>
 </div>
 
-<main class="main-content">
-    <header class="mb-5 d-flex justify-content-between align-items-center">
-        <div>
-            <h1 class="fw-800" data-fr="Bonjour !" data-en="Hello !">Bonjour ! 👋</h1>
-            <p class="text-muted" data-fr="Heureux de te revoir. Prêt à apprendre ?" data-en="Happy to see you again. Ready to learn?">Heureux de te revoir. Prêt à apprendre ?</p>
-        </div>
+<main class="contenu-principal">
+    <header class="mb-5">
+        <h1 class="fw-800"><span data-fr="Bonjour" data-en="Hello">Bonjour</span> <span id="salut-nom">...</span> ! 👋</h1>
+        <p class="text-muted" data-fr="Prêt pour tes révisions du jour ?" data-en="Ready for today's review?">Prêt pour tes révisions du jour ?</p>
     </header>
 
     <div class="row g-4 mb-5">
         <div class="col-md-6">
-            <div class="card-dash">
-                <div class="icon-box bg-success-subtle text-success">
+            <div class="carte-action">
+                <div class="cercle-icone bg-success-subtle text-success">
                     <i class="bi bi-robot"></i>
                 </div>
                 <h4 class="fw-bold" data-fr="Assistant IA" data-en="AI Assistant">Assistant IA</h4>
-                <p class="text-muted small mb-4" data-fr="Pose tes questions et obtiens des explications instantanées." data-en="Ask your questions and get instant explanations.">Pose tes questions et obtiens des explications instantanées.</p>
-                <button onclick="window.location.href='tuteuriA.html'" class="btn-action-dash btn-success text-white" style="background: var(--primary-green);">
+                <p class="text-muted small mb-4" data-fr="Pose tes questions et obtiens des explications instantanées." data-en="Ask questions and get instant explanations.">Pose tes questions et obtiens des explications instantanées.</p>
+                <button onclick="window.location.href='tuteuriA.html'" class="btn-tuto btn-success text-white" style="background: var(--vert-tuto);">
                     <span data-fr="Lancer le chat" data-en="Start Chat">Lancer le chat</span>
                 </button>
             </div>
         </div>
 
         <div class="col-md-6">
-            <div class="card-dash">
-                <div class="icon-box bg-primary-subtle text-primary">
+            <div class="carte-action">
+                <div class="cercle-icone bg-primary-subtle text-primary">
                     <i class="bi bi-people"></i>
                 </div>
                 <h4 class="fw-bold" data-fr="Session avec Expert" data-en="Expert Session">Session avec Expert</h4>
-                <div class="mb-4">
-                    <select class="lang-select py-2" id="subjectSelect">
-                        </select>
-                </div>
-                <button id="findTutorBtn" class="btn-action-dash btn-primary text-white opacity-50" disabled>
-                    <span data-fr="Rechercher" data-en="Find Tutors">Rechercher</span>
+                <p class="text-muted small mb-4" data-fr="Besoin d'un tuteur humain pour t'aider ?" data-en="Need a human tutor to help you?">Besoin d'un tuteur humain pour t'aider ?</p>
+                <button onclick="window.location.href='tuteurD.html'" class="btn-tuto btn-primary text-white">
+                    <span data-fr="Trouver un tuteur" data-en="Find a tutor">Trouver un tuteur</span>
                 </button>
             </div>
         </div>
     </div>
-
-    <div class="card-dash p-4">
-        <h5 class="fw-bold mb-4" data-fr="Activités récentes" data-en="Recent Activities">Activités récentes</h5>
-        <div class="text-center py-5">
-            <div class="spinner-border text-success opacity-25 mb-3" role="status"></div>
-            <p class="text-muted small" data-fr="Aucune activité pour le moment." data-en="No activity yet.">Aucune activité pour le moment.</p>
-        </div>
-    </div>
 </main>
 
-<script>
-    const systems = {
-        fr: { ph: "Quelle matière ?", cats: ["Mathématiques", "Physique", "SVT", "Français"] },
-        en: { ph: "Which subject ?", cats: ["Mathematics", "Physics", "Biology", "English"] }
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAvjQaWPrA7M5b0XmDrrBwTKDlv5q-nXDM",
+        authDomain: "isi3projetwebgroupe6fr.firebaseapp.com",
+        projectId: "isi3projetwebgroupe6fr",
+        storageBucket: "isi3projetwebgroupe6fr.firebasestorage.app",
+        messagingSenderId: "1024122923638",
+        appId: "1:1024122923638:web:f1a367d84a567449494d57"
     };
 
-    function updateTheme() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-bs-theme', isDark ? 'dark' : 'light');
-    }
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    function changeSystem(lang) {
-        localStorage.setItem('appLang', lang);
-        document.querySelectorAll('[data-en]').forEach(el => {
-            el.textContent = el.getAttribute(`data-${lang}`);
-        });
+    // 1. Vérification de l'utilisateur
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const docRef = doc(db, "utilisateurs", user.uid);
+            const docSnap = await getDoc(docRef);
 
-        const select = document.getElementById('subjectSelect');
-        const s = systems[lang];
-        select.innerHTML = `<option selected disabled>${s.ph}</option>`;
-        s.cats.forEach(c => {
-            let o = document.createElement('option'); o.value = c; o.textContent = c;
-            select.appendChild(o);
-        });
-    }
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                
+                // Affichage du nom
+                document.getElementById('user-nom').textContent = userData.nom;
+                document.getElementById('salut-nom').textContent = userData.nom;
+                if(user.photoURL) document.getElementById('user-photo').src = user.photoURL;
 
-    document.getElementById('subjectSelect').addEventListener('change', () => {
-        const btn = document.getElementById('findTutorBtn');
-        btn.disabled = false; btn.classList.remove('opacity-50');
+                
+                if (!userData.niveau || userData.niveau === "Non spécifié") {
+                    const maModal = new bootstrap.Modal(document.getElementById('modalProfil'));
+                    maModal.show();
+                }
+            }
+        } else {
+            window.location.href = "connexion.html";
+        }
     });
 
-    document.getElementById('findTutorBtn').addEventListener('click', () => {
-        const subj = document.getElementById('subjectSelect').value;
-        window.location.href = `tuteurD.html?subject=${encodeURIComponent(subj)}`;
+    // 3. Sauvegarder le niveau manquant
+    document.getElementById('btn-sauver-profil').addEventListener('click', async () => {
+        const niveauChoisi = document.getElementById('nouveau-niveau').value;
+        if (!niveauChoisi) return alert("Choisis ton niveau !");
+
+        const user = auth.currentUser;
+        await updateDoc(doc(db, "utilisateurs", user.uid), {
+            niveau: niveauChoisi
+        });
+        
+        location.reload(); // On rafraîchit pour enlever la modal
     });
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
-    
-    window.onload = () => {
-        updateTheme();
-        const lang = localStorage.getItem('appLang') || 'fr';
-        document.getElementById('langSelector').value = lang;
-        changeSystem(lang);
+    // Déconnexion
+    window.deconnexion = () => {
+        signOut(auth).then(() => window.location.href = "index.html");
     };
+
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
