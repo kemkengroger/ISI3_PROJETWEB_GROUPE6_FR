@@ -214,20 +214,41 @@
         try {
             const resultat = await createUserWithEmailAndPassword(auth, email, passe);
             await creerProfilUtilisateur(resultat.user, nom, niveau);
+            window.location.href = 'boardEtudiant.html';
         } catch (erreur) {
             alert("Erreur : " + erreur.message);
         }
     });
 
-    // Inscription Google
-    document.getElementById('btn-google').addEventListener('click', async () => {
-        try {
-            const resultat = await signInWithPopup(auth, googleProvider);
-            await creerProfilUtilisateur(resultat.user, resultat.user.displayName, "Universitaire");
-        } catch (erreur) {
-            console.error(erreur);
+   // Inscription ou Connexion avec Google
+document.getElementById('btn-google').addEventListener('click', async () => {
+    try {
+        // Lancement de la fenêtre Google
+        const resultat = await signInWithPopup(auth, googleProvider);
+        const utilisateur = resultat.user;
+
+        // On crée le profil (la fonction doit vérifier si l'utilisateur existe déjà)
+        // J'ajoute "await" pour être sûr que les données sont sauvées avant de partir
+        await creerProfilUtilisateur(utilisateur, utilisateur.displayName, "Universitaire");
+
+        
+        // Une fois que tout est fini, on envoie l'élève sur son tableau de bord
+        window.location.href = 'boardEtudiant.html';
+
+    } catch (erreur) {
+        // Affiche l'objet erreur complet pour le diagnostic
+        console.error("Détails de l'erreur Firebase :", erreur);
+        
+        // Alerte personnalisée selon la cause
+        if (erreur.code === 'auth/operation-not-allowed') {
+            alert("Erreur : Google n'est pas activé dans ta console Firebase.");
+        } else if (erreur.code === 'auth/network-request-failed') {
+            alert("Problème de connexion réseau.");
+        } else {
+            alert("Erreur : " + erreur.message);
         }
-    });
+    }
+});
 
     // Gestion Thème et Langue
     window.changerLangue = (lang) => {

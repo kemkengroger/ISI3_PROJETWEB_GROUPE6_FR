@@ -10,14 +10,15 @@
 
     <style>
         :root {
-            --bleu-principal: #0d6efd;
+            /* Mise à jour vers le vert TutoAfrica */
+            --vert-tuto: #2D7D62;
             --fond-degrade: linear-gradient(135deg, #e9f0ff, #f8fbff);
             --transition-rapide: 0.2s ease;
         }
 
         [data-bs-theme="dark"] {
             --fond-degrade: linear-gradient(135deg, #0f172a, #1e293b);
-            --bleu-principal: #3b82f6;
+            --vert-tuto: #2D7D62;
         }
 
         body {
@@ -28,21 +29,37 @@
             transition: background 0.3s ease;
         }
 
+        /* Style du Logo ajouté en haut */
+        .entete-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .entete-logo a {
+            text-decoration: none;
+            color: var(--vert-tuto);
+            font-weight: 800;
+            font-size: 2rem;
+            transition: var(--transition-rapide);
+        }
+        .entete-logo a:hover {
+            opacity: 0.8;
+        }
+
         .btn-retour-flottant {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: var(--bleu-principal);
+            color: var(--vert-tuto);
             text-decoration: none;
             font-weight: 700;
             margin-bottom: 20px;
             padding: 10px 15px;
             border-radius: 10px;
-            background: rgba(13, 110, 253, 0.05);
+            background: rgba(45, 125, 98, 0.05);
             transition: var(--transition-rapide);
         }
         .btn-retour-flottant:hover {
-            background: rgba(13, 110, 253, 0.1);
+            background: rgba(45, 125, 98, 0.1);
             transform: translateX(-5px);
         }
 
@@ -51,14 +68,14 @@
             font-weight: 800;
             letter-spacing: 2px;
             margin-bottom: 10px;
-            color: var(--bleu-principal);
+            color: var(--vert-tuto);
             text-transform: uppercase;
         }
 
         .barre-separation {
             width: 120px;
             margin: 0 auto 40px auto;
-            border: 3px solid var(--bleu-principal);
+            border: 3px solid var(--vert-tuto);
             border-radius: 10px;
             opacity: 1;
         }
@@ -92,6 +109,7 @@
         }
         summary::-webkit-details-marker { display: none; }
 
+        /* Couleur du bouton dossier en vert */
         .bouton-dossier {
             width: 100%;
             font-size: 1.15rem;
@@ -103,6 +121,11 @@
             justify-content: center;
             gap: 12px;
             border: none;
+            background-color: var(--vert-tuto) !important;
+            color: white !important;
+        }
+        .bouton-dossier:hover {
+            filter: brightness(1.1);
         }
 
         .zone-matieres {
@@ -112,18 +135,19 @@
             padding: 15px 20px 20px 20px;
         }
 
+        /* Couleur des badges en vert */
         .badge-matiere {
             border-radius: 20px;
             padding: 8px 18px;
             font-size: 0.9rem;
             font-weight: 600;
-            border: 1px solid var(--bleu-principal);
+            border: 1px solid var(--vert-tuto);
             background: transparent;
-            color: var(--bleu-principal);
+            color: var(--vert-tuto);
             transition: 0.2s;
         }
         .badge-matiere:hover {
-            background: var(--bleu-principal);
+            background: var(--vert-tuto);
             color: #ffffff;
         }
 
@@ -139,8 +163,12 @@
     </select>
 </div>
 
+<div class="entete-logo">
+    <a href="../index.html">TutoAfrica</a>
+</div>
+
 <div class="conteneur-interieur">
-    <a href="board.html" class="btn-retour-flottant">
+    <a href="boardEtudiant.html" class="btn-retour-flottant">
         <i class="bi bi-arrow-left-circle-fill"></i>
         <span data-fr="Retour au menu" data-en="Back to menu">Retour au menu</span>
     </a>
@@ -150,7 +178,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('6e.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('6e.html')">
                 <i class="bi bi-folder-fill"></i> 6<sup>ème</sup>
             </button>
         </summary>
@@ -167,7 +195,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('5e.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('5e.html')">
                 <i class="bi bi-folder-fill"></i> 5<sup>ème</sup>
             </button>
         </summary>
@@ -182,7 +210,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('4e.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('4e.html')">
                 <i class="bi bi-folder-fill"></i> 4<sup>ème</sup>
             </button>
         </summary>
@@ -198,7 +226,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('3e.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('3e.html')">
                 <i class="bi bi-folder-fill"></i> 3<sup>ème</sup>
             </button>
         </summary>
@@ -214,7 +242,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('2nde.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('2nde.html')">
                 <i class="bi bi-folder-fill"></i> 2<sup>nde</sup>
             </button>
         </summary>
@@ -231,7 +259,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('1ere.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('1ere.html')">
                 <i class="bi bi-folder-fill"></i> 1<sup>ère</sup>
             </button>
         </summary>
@@ -248,7 +276,7 @@
 
     <details class="p-2 mb-4">
         <summary>
-            <button class="btn btn-primary bouton-dossier" onclick="redirectionClasse('terminale.html')">
+            <button class="btn bouton-dossier" onclick="redirectionClasse('terminale.html')">
                 <i class="bi bi-folder-fill"></i> Terminale
             </button>
         </summary>
