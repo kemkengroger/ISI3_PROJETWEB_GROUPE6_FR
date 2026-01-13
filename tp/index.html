@@ -1,233 +1,201 @@
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="light">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="sytleaccueil.css">
+  <title>Accueil/title>
+</head>
+<body>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TutoAfrica - L'éducation de qualité pour tous</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    
+    <title>TutoAfrica - Accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --vert-principal: #2D7D62;
-            --lueur-principale: rgba(45, 125, 98, 0.2);
-            --transition-douce: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-green: #2D7D62;
+            --hero-bg: #E9F5F2;
+            --mission-bg: #FFF7EE;
+            --footer-bg: #0B1C17;
         }
 
-        /* Thèmes clair et sombre */
-        [data-bs-theme="light"] {
-            --fond-page: #f1f5f9;
-            --fond-carte: #ffffff;
-            --texte-principal: #1e293b;
-            --fond-navigation: rgba(255, 255, 255, 0.9);
-        }
+        /* NAVBAR HORIZONTALE */
+        .navbar { height: 80px; }
+        .nav-link { color: #444 !important; font-weight: 500; }
+        .btn-signup { background-color: var(--primary-green); color: white; border-radius: 8px; }
 
-        [data-bs-theme="dark"] {
-            --fond-page: #0f172a;
-            --fond-carte: #1e293b;
-            --texte-principal: #f8fafc;
-            --fond-navigation: rgba(15, 23, 42, 0.9);
-        }
+        /* HERO SECTION */
+        .hero-section { background-color: var(--hero-bg); padding: 60px 0; }
+        .img-rounded { border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .btn-start { background-color: #3498DB; color: white; border-radius: 8px; padding: 12px 25px; border: none; font-weight: bold; }
 
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--fond-page); 
-            color: var(--texte-principal);
-            transition: var(--transition-douce);
-        }
-
-        /* BARRE DE NAVIGATION */
-        .barre-navigation { 
-            background: var(--fond-navigation) !important; 
-            backdrop-filter: blur(10px);
-            height: 85px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .logo-site { color: var(--vert-principal) !important; font-weight: 800; font-size: 1.5rem; }
-
-        /* BOUTONS */
-        .bouton-connexion { 
-            background: var(--vert-principal); 
-            color: white !important; 
-            border-radius: 14px; 
-            padding: 12px 24px; 
-            font-weight: 700;
-            box-shadow: 0 4px 15px var(--lueur-principale);
-            transition: var(--transition-douce);
-            text-decoration: none;
-        }
-        .bouton-connexion:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
-        /* SECTION ACCUEIL & CARTES */
-        .section-hero { padding: 100px 0; }
-        .titre-hero { font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
+        /* CARTES SUR LA MÊME LIGNE */
+        .card-tutorat { background-color: #E9F5F2; border: none; border-radius: 20px; padding: 30px; height: 100%; }
+        .card-ia { background-color: #EBF2FF; border: none; border-radius: 20px; padding: 30px; height: 100%; }
         
-        .image-hero { 
-            border-radius: 40px; 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); 
-            transition: var(--transition-douce);
+        .subject-tag {
+            background: white; border: 1px solid #eee; border-radius: 8px;
+            padding: 8px 15px; margin-bottom: 8px; font-size: 0.9rem;
         }
 
-        .bouton-demarrer { 
-            background: #3498DB; color: white; border-radius: 14px; 
-            padding: 16px 35px; font-weight: 700; border: none;
-            transition: var(--transition-douce);
-        }
-        .bouton-demarrer:hover { background: #2980b9; transform: translateY(-3px); }
+        /* MISSION */
+        .mission-section { background-color: var(--mission-bg); padding: 80px 0; }
 
-        .carte-fonctionnalite {
-            background: var(--fond-carte); border-radius: 30px; padding: 40px;
-            height: 100%; transition: var(--transition-douce); border: 1px solid rgba(0,0,0,0.05);
-        }
-        .carte-fonctionnalite:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-
-        .cercle-icone {
-            width: 60px; height: 60px; border-radius: 18px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; margin-bottom: 25px;
-        }
-
-        footer { background: #070b14; color: #94a3b8; padding: 80px 0 30px; }
-
-        .selecteur-langue {
-            background: transparent; border: 1px solid rgba(125,125,125,0.2);
-            border-radius: 10px; padding: 5px 10px; font-size: 0.8rem; font-weight: 700; color: inherit;
-        }
+        /* FOOTER PETIT */
+        footer { background-color: var(--footer-bg); color: #888; padding: 30px 0; font-size: 0.85rem; }
+        footer h6 { color: white; font-size: 0.9rem; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg sticky-top barre-navigation">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
         <div class="container">
-            <a class="navbar-brand logo-site" href="index.html">
-                <i class="bi bi-mortarboard-fill me-2"></i>TutoAfrica
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#" style="color: var(--primary-green);">
+                <span class="me-2">🎓</span> TutoAfrica
             </a>
 
-            <div class="d-flex align-items-center gap-2 gap-md-4">
-                <select class="selecteur-langue d-none d-sm-block" onchange="changerLangue(this.value)">
-                    <option value="fr">FR</option>
-                    <option value="en">EN</option>
-                </select>
-                
-                <a href="connexion.html" class="bouton-connexion small" data-fr="Se connecter" data-en="Login">
-                    Se connecter
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#accueil">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fonctionnalites">Fonctionnalités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#apropos">À Propos</a></li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="dropdown">
+    <button class="btn border-0 fw-bold dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Se connecter
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="dropdownMenuButton" style="border-radius: 12px;">
+        <li>
+            <a class="dropdown-item py-2" href="connexion.html">
+                <i class="bi bi-person-badge me-2 text-success"></i>Espace Étudiant
+            </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+            <a class="dropdown-item py-2" href="connexionEnseignant.html">
+                <i class="bi bi-person-workspace me-2 text-success"></i>Espace Enseignant
+            </a>
+        </li>
+    </ul>
+</div>
+                <div class="dropdown">
+        <button class="btn btn-signup fw-bold btn-sm px-3 dropdown-toggle" 
+                type="button" 
+                id="menuInscription" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false">
+            Créer un Compte
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="menuInscription">
+            <li>
+                <a class="dropdown-item" href="/inscriptionEtudiant.html">
+                    📚 Compte Étudiant
                 </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="/inscriptionEnseignant.html">
+                    👨‍🏫 Compte Enseignant
+                </a>
+            </li>
+        </ul>
+    </div>
             </div>
         </div>
     </nav>
 
-    <section class="section-hero">
+    <section  id="accueil" class="hero-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
-                    <h1 class="titre-hero mb-4" data-fr="L'éducation de qualité, accessible à tous." data-en="Quality education, accessible to all.">
-                        L'éducation de qualité,<br><span style="color: var(--vert-principal)">accessible à tous.</span>
-                    </h1>
-                    <p class="text-muted mb-5 fs-5" data-fr="La plateforme de tutorat n°1 en Afrique. Connectez-vous avec des experts ou progressez avec notre IA." data-en="The #1 tutoring platform in Africa. Connect with experts or progress with our AI.">
-                        La plateforme de tutorat n°1 en Afrique. Connectez-vous avec des experts ou progressez avec notre IA.
-                    </p>
-                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center justify-content-lg-start">
-                        <button onclick="window.location.href='boardEtudiant.html'" class="bouton-demarrer" data-fr="Commencer l'aventure" data-en="Start Adventure">
-                            Commencer l'aventure
-                        </button>
-                    </div>
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h1 class="fw-bold mb-4" style="font-size: 2.5rem;">L'éducation de qualité,<br>accessible à tous.</h1>
+                    <p class="text-muted mb-4">Plateforme collaborative de tutorat pour étudiants africains, connectant avec des tuteurs bénévoles et un assistant IA intelligent.</p>
                 </div>
-                <div class="col-lg-6">
-                    <img src="assets/image/img1accueil.jpeg" class="img-fluid image-hero" alt="Apprentissage">
+                <div class="col-lg-7">
+                    <img src="assets/image/photoaccueil.jpg" class="img-fluid img-rounded w-100" alt="Apprentissage">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5">
-        <div class="container py-5">
+    <section id="fonctionnalites" class="py-5 bg-white">
+        <div class="container py-4">
             <div class="text-center mb-5">
-                <h2 class="fw-800 display-5 mb-3" data-fr="Pourquoi choisir TutoAfrica ?" data-en="Why choose TutoAfrica?">Pourquoi choisir TutoAfrica ?</h2>
-                <p class="text-muted">Une approche hybride unique combinant humain et technologie.</p>
+                <h2 class="fw-bold">Fonctionnalités Clés</h2>
+                <p class="text-muted">Découvrez nos deux piliers pour une expérience d'apprentissage complète</p>
             </div>
             
             <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="carte-fonctionnalite shadow-sm">
-                        <div class="cercle-icone" style="background: rgba(45, 125, 98, 0.1); color: var(--vert-principal);">
-                            <i class="bi bi-robot"></i>
+                <div class="col-md-6">
+                    <div class="card-tutorat shadow-sm">
+                        <div class="bg-white rounded-3 d-inline-block p-2 mb-3 shadow-sm">👥</div>
+                        <h5 class="fw-bold">Tutorat en Temps Réel (Pair-à-Pair)</h5>
+                        <p class="small text-muted mb-4">Connectez-vous avec des enseignants bénévoles pour des sessions personnalisées.</p>
+                        <div class="row g-2">
+                            <div class="col-6 small text-muted">📹 Vidéo HD</div>
+                            <div class="col-6 small text-muted">💬 Chat en direct</div>
+                            <div class="col-6 small text-muted">📋 Tableau blanc</div>
+                            <div class="col-6 small text-muted">🔊 Audio clair</div>
                         </div>
-                        <h4 class="fw-bold" data-fr="Tuteur IA 24h/7" data-en="24/7 AI Tutor">Tuteur IA 24h/7</h4>
-                        <p class="text-muted" data-fr="Une intelligence artificielle entraînée sur les programmes africains." data-en="An AI trained on African curricula.">Une intelligence artificielle entraînée sur les programmes africains.</p>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="carte-fonctionnalite shadow-sm">
-                        <div class="cercle-icone" style="background: rgba(52, 152, 219, 0.1); color: #3498db;">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <h4 class="fw-bold" data-fr="Experts Bénévoles" data-en="Volunteer Experts">Experts Bénévoles</h4>
-                        <p class="text-muted" data-fr="Des enseignants passionnés pour des sessions en direct." data-en="Passionate teachers for live sessions.">Des enseignants passionnés pour des sessions en direct.</p>
+                <div class="col-md-6">
+                    <div class="card-ia shadow-sm">
+                        <div class="bg-white rounded-3 d-inline-block p-2 mb-3 shadow-sm">🤖</div>
+                        <h5 class="fw-bold">Assistant Pédagogique IA</h5>
+                        <p class="small text-muted mb-4">Tuteur virtuel disponible 24/7 pour vous accompagner.</p>
+                        <div class="subject-tag shadow-sm">📐 Mathématiques</div>
+                        <div class="subject-tag shadow-sm">⚛️ Physique</div>
+                        <div class="subject-tag shadow-sm">💻 Informatique</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="carte-fonctionnalite shadow-sm">
-                        <div class="cercle-icone" style="background: rgba(243, 156, 18, 0.1); color: #f39c12;">
-                            <i class="bi bi-journal-check"></i>
-                        </div>
-                        <h4 class="fw-bold" data-fr="Épreuves & Examens" data-en="Tests & Exams">Épreuves & Examens</h4>
-                        <p class="text-muted" data-fr="Vaste bibliothèque d'anciennes épreuves corrigées." data-en="Vast library of past corrected exam papers.">Vaste bibliothèque d'anciennes épreuves corrigées.</p>
-                    </div>
+    <section id="apropos" class="mission-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 mb-4 mb-md-0">
+                    <img src="assets/image/photoaccueil2.jpg" class="img-fluid img-rounded" alt="Mission">
+                </div>
+                <div class="col-md-7 ps-md-5">
+                    <h2 class="fw-bold mb-3">Notre Mission</h2>
+                    <p class="text-muted small">TutoAfrica est née de la conviction que chaque étudiant africain mérite un accès équitable à une éducation de qualité.</p>
+                    <p class="text-muted small">Nous mettons en relation des étudiants avec des enseignants bénévoles passionnés et un assistant IA avancé.</p>
+                    <p class="fw-bold mt-3" style="color: var(--primary-green);">Ensemble, construisons l'avenir de l'éducation en Afrique.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container text-center text-md-start">
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <h5 class="text-white fw-800 mb-4">TutoAfrica</h5>
-                    <p class="small">L'excellence académique à portée de main, partout sur le continent.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h6 class="fw-bold">🎓 TutoAfrica</h6>
+                    <p class="small">L'éducation accessible à tous.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <h6 data-fr="Suivez-nous" data-en="Follow us">Suivez-nous</h6>
-                    <div class="d-flex gap-3 justify-content-md-end justify-content-center">
-                        <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="bi bi-whatsapp"></i></a>
-                    </div>
+                <div class="col-md-4 mb-3">
+                    <h6>Liens Rapides</h6>
+                    <ul class="list-unstyled small">
+                        <li>Accueil</li>
+                        <li>Fonctionnalités</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6>Contact: 690889297</h6>
+                    <p class="small">Rejoignez notre communauté.</p>
                 </div>
             </div>
-            <hr class="my-5 opacity-10">
-            <div class="text-center small">© 2026 TutoAfrica. Fait avec passion pour l'Afrique.</div>
+            <hr class="border-secondary opacity-25">
+            <div class="text-center x-small">© 2026 TutoAfrica. Fait avec passion pour l'Afrique</div>
         </div>
     </footer>
 
-    <script>
-        // Met à jour le thème selon les préférences du système
-        const mettreAJourTheme = () => {
-            const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
-        };
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', mettreAJourTheme);
-        mettreAJourTheme();
-
-        // Gère le changement de langue
-        function changerLangue(langueChoisie) {
-            localStorage.setItem('langueAppli', langueChoisie);
-            document.querySelectorAll('[data-en]').forEach(element => {
-                const traduction = element.getAttribute(`data-${langueChoisie}`);
-                if (traduction) element.textContent = traduction;
-            });
-        }
-
-        // Au chargement de la page
-        window.onload = () => {
-            const langueSauvegardee = localStorage.getItem('langueAppli') || 'fr';
-            const selecteur = document.querySelector('.selecteur-langue');
-            if(selecteur) selecteur.value = langueSauvegardee;
-            changerLangue(langueSauvegardee);
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

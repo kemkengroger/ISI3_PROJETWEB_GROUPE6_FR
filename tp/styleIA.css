@@ -1,0 +1,71 @@
+/* Styles pour le Tuteur IA */
+
+/* Zone de messages */
+#zone-messages {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+#zone-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+#zone-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#zone-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#zone-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Messages utilisateur */
+.bg-primary {
+    background-color: #2a8168 !important;
+}
+
+/* Animation pour les nouveaux messages */
+@keyframes apparitionMessage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#zone-messages > div {
+    animation: apparitionMessage 0.3s ease-out;
+}
+
+/* Style du champ de saisie */
+#champ-message {
+    border-radius: 20px;
+    padding: 12px 20px;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease;
+}
+
+#champ-message:focus {
+    border-color: #2a8168;
+    box-shadow: 0 0 0 0.2rem rgba(42, 129, 104, 0.15);
+}
+
+/* Bouton envoyer */
+#formulaire-message button {
+    border-radius: 20px;
+    background-color: #2a8168;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+#formulaire-message button:hover {
+    background-color: #236b56;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(42, 129, 104, 0.3);
+}
