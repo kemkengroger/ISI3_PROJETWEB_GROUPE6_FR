@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --vert-afrique: #2D7D62;
@@ -107,11 +106,20 @@
             width: 48px; height: 48px; border-radius: 16px; transition: 0.3s;
         }
         .bouton-envoi:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .bouton-envoi:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .pied-menu { padding: 20px; border-top: 1px solid var(--bordure); margin-top: auto; }
         .choix-langue { 
             background: var(--fond-ecran); border: 1px solid var(--bordure); 
             color: inherit; border-radius: 12px; padding: 8px; width: 100%; font-size: 0.8rem; font-weight: 700;
+        }
+
+        .message-erreur {
+            background: #fee2e2; color: #991b1b; border: 1px solid #fecaca;
+        }
+
+        [data-bs-theme="dark"] .message-erreur {
+            background: #7f1d1d; color: #fecaca; border: 1px solid #991b1b;
         }
 
         @media (max-width: 991px) {
@@ -182,14 +190,92 @@
     <form id="formulaire-chat" class="barre-saisie">
         <button type="button" class="btn text-muted"><i class="bi bi-paperclip fs-5"></i></button>
         <input type="text" id="entree-utilisateur" placeholder="Pose ta question..." autocomplete="off" required>
-        <button class="bouton-envoi shadow-sm" type="submit">
+        <button class="bouton-envoi shadow-sm" type="submit" id="bouton-envoi">
             <i class="bi bi-send-fill"></i>
         </button>
     </form>
 </main>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script >
+       class TuteurIA {
+        constructor(apiKey) {
+            this.apiKey = apiKey;
+            this.contexte = {
+                subjects: ['Mathématiques', 'Physique', 'Français'],
+                level: 'Lycée'
+            };
+        }
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
+        async callAI(prompt, langue = 'fr') {
+            try {
+                const systemPrompt = langue === 'fr' 
+                    ? `Tu es un assistant pédagogique intelligent pour la plateforme TutoAfrica.
+                       Ton rôle est d'aider les étudiants africains dans leur apprentissage.
+                       
+                       Contexte utilisateur:
+                       - Matières suivies: ${this.contexte.subjects.join(", ")}
+                       - Niveau: ${this.contexte.level}
+                       
+                       Règles de réponse:
+                       1. Sois pédagogique et encourageant
+                       2. Explique les concepts de manière simple et claire
+                       3. Propose des exemples concrets adaptés au contexte africain
+                       4. Reste dans le domaine éducatif
+                       5. Réponds en français de manière structurée`
+                    : `You are an intelligent educational assistant for the TutoAfrica platform.
+                       Your role is to help African students in their learning.
+                       
+                       User context:
+                       - Subjects: ${this.contexte.subjects.join(", ")}
+                       - Level: ${this.contexte.level}
+                       
+                       Response rules:
+                       1. Be educational and encouraging
+                       2. Explain concepts in a simple and clear way
+                       3. Provide concrete examples adapted to the African context
+                       4. Stay within the educational domain
+                       5. Respond in English in a structured manner`;
+
+                const response = await fetch(
+                    "https://api.groq.com/openai/v1/chat/completions",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${this.apiKey}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            model: "llama-3.3-70b-versatile",
+                            messages: [
+                                { role: "system", content: systemPrompt },
+                                { role: "user", content: prompt },
+                            ],
+                            temperature: 0.7,
+                            max_tokens: 1000,
+                        }),
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.choices[0].message.content;
+            } catch (error) {
+                console.error("Erreur API Groq:", error);
+                const messageErreur = langue === 'fr' 
+                    ? "Désolé, je rencontre des difficultés techniques. Réessayez dans quelques instants."
+                    : "Sorry, I'm experiencing technical difficulties. Please try again in a few moments.";
+                throw new Error(messageErreur);
+            }
+        }
+    }
+
+    // IMPORTANT: Remplacez 'VOTRE_CLE_API_GROQ' par votre vraie clé API
+    const tuteur = new TuteurIA('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');
+
+    // Fonctions de thème et traduction
     function rafraichirTheme() {
         const estSombre = window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.setAttribute('data-bs-theme', estSombre ? 'dark' : 'light');
@@ -204,36 +290,79 @@
         $('[data-en]').each(function() {
             $(this).text($(this).data(langue));
         });
-        const placeholder = langue === 'fr' ? 'Pose ta question (ex: Explique-moi Pythagore)...' : 'Ask your question (e.g. Explain Pythagoras)...';
+        const placeholder = langue === 'fr' 
+            ? 'Pose ta question (ex: Explique-moi le théorème de Pythagore)...' 
+            : 'Ask your question (e.g. Explain Pythagoras theorem)...';
         document.getElementById('entree-utilisateur').placeholder = placeholder;
     }
 
+    // Gestion du chat
     const formulaire = document.getElementById('formulaire-chat');
     const boiteMsg = document.getElementById('boite-discussion');
     const saisie = document.getElementById('entree-utilisateur');
+    const boutonEnvoi = document.getElementById('bouton-envoi');
 
-    formulaire.addEventListener('submit', (evenement) => {
+    function ajouterMessage(texte, estUtilisateur = false, estErreur = false) {
+        const bulle = document.createElement('div');
+        bulle.className = `message ${estUtilisateur ? 'message-utilisateur' : 'message-ia'} ${estErreur ? 'message-erreur' : ''} shadow-sm`;
+        bulle.textContent = texte;
+        boiteMsg.appendChild(bulle);
+        boiteMsg.scrollTop = boiteMsg.scrollHeight;
+        return bulle;
+    }
+
+    function afficherChargement() {
+        const bulle = document.createElement('div');
+        bulle.className = 'message message-ia shadow-sm';
+        bulle.innerHTML = `<div class="spinner-border spinner-border-sm text-success" role="status"></div>`;
+        boiteMsg.appendChild(bulle);
+        boiteMsg.scrollTop = boiteMsg.scrollHeight;
+        return bulle;
+    }
+
+    formulaire.addEventListener('submit', async (evenement) => {
         evenement.preventDefault();
         const texte = saisie.value.trim();
         if(!texte) return;
 
-        const bulleUser = document.createElement('div');
-        bulleUser.className = 'message message-utilisateur';
-        bulleUser.textContent = texte;
-        boiteMsg.appendChild(bulleUser);
-        
-        saisie.value = '';
-        boiteMsg.scrollTop = boiteMsg.scrollHeight;
+        // Désactiver le bouton pendant le traitement
+        boutonEnvoi.disabled = true;
+        saisie.disabled = true;
 
-        setTimeout(() => {
-            const bulleIA = document.createElement('div');
-            bulleIA.className = 'message message-ia shadow-sm';
-            bulleIA.innerHTML = `<div class="spinner-border spinner-border-sm text-success" role="status"></div>`;
-            boiteMsg.appendChild(bulleIA);
-            boiteMsg.scrollTop = boiteMsg.scrollHeight;
-        }, 600);
+        // Ajouter le message de l'utilisateur
+        ajouterMessage(texte, true);
+        saisie.value = '';
+
+        // Afficher le loader
+        const bulleChargement = afficherChargement();
+
+        try {
+            // Obtenir la langue actuelle
+            const langue = localStorage.getItem('langueApp') || 'fr';
+            
+            // Appeler l'API Groq
+            const reponse = await tuteur.callAI(texte, langue);
+            
+            // Supprimer le loader
+            bulleChargement.remove();
+            
+            // Afficher la réponse
+            ajouterMessage(reponse, false);
+        } catch (error) {
+            // Supprimer le loader
+            bulleChargement.remove();
+            
+            // Afficher le message d'erreur
+            ajouterMessage(error.message, false, true);
+        } finally {
+            // Réactiver le bouton
+            boutonEnvoi.disabled = false;
+            saisie.disabled = false;
+            saisie.focus();
+        }
     });
 
+    // Initialisation
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', rafraichirTheme);
     
     window.onload = () => {
@@ -243,6 +372,5 @@
         appliquerTraduction(languePreferee);
     };
 </script>
-
 </body>
 </html>
