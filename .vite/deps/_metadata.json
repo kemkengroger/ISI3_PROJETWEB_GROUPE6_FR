@@ -1,0 +1,15 @@
+{
+  "hash": "975334ba",
+  "configHash": "c371b38d",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "7c0c33c5",
+  "optimized": {
+    "firebase/auth": {
+      "src": "../../tp/node_modules/firebase/auth/dist/esm/index.esm.js",
+      "file": "firebase_auth.js",
+      "fileHash": "51285481",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
